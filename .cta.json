@@ -1,6 +1,6 @@
 {
   "framework": "react",
-  "projectName": ".",
+  "projectName": "icygodota",
   "typescript": true,
   "tailwind": true,
   "packageManager": "bun",

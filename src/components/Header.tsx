@@ -6,6 +6,7 @@ export default function Header() {
       <nav className="flex flex-row">
         <div className="px-2 font-bold">
           <Link to="/">Home</Link>
+          <Link to="/page">Page</Link>
         </div>
       </nav>
     </header>

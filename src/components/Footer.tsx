@@ -3,7 +3,7 @@ export default function Header() {
     <footer className="border-y-2 border-b-0">
       <nav className="flex flex-row">
         <div className="px-2 font-bold">
-          <p>Hello world!</p>
+          <p className="bg-green-300">Hello world!</p>
         </div>
       </nav>
     </footer>

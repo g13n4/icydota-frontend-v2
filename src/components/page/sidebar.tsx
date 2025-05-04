@@ -13,10 +13,6 @@ import {
   SquareTerminal,
 } from "lucide-react"
 
-import { NavMain } from "@/components/nav-main"
-import { NavProjects } from "@/components/nav-projects"
-import { NavUser } from "@/components/nav-user"
-import { TeamSwitcher } from "@/components/team-switcher"
 import {
   Sidebar,
   SidebarContent,
@@ -24,6 +20,10 @@ import {
   SidebarHeader,
   SidebarRail,
 } from "@/components/ui/sidebar"
+import { TeamSwitcher } from "./switcher"
+import { NavMain } from "./navbar/mian"
+import { NavProjects } from "./navbar/projects"
+import { NavUser } from "./navbar/user"
 
 // This is sample data.
 const data = {
