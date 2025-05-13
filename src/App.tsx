@@ -1,37 +1,40 @@
-import { Button } from "@/components/ui/button"
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import { HelperProvider } from "./components/context/HelperProvider"
+import { CardBottom, CardTop, PseudoCard } from "./components/Templates/Cards/Cards";
+import { HelperProvider } from "./components/context/HelperProvider";
+import LeftSidebar from "./components/page/LeftSidebar/LeftSidebar";
+import { Card } from "./components/ui/card";
+import { SidebarProvider } from "./components/ui/sidebar";
 
 function App() {
-
   return (
-    <HelperProvider>
-      <div className="">
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="flex flex-col items-center justify-center min-h-svh">
-      <Button>Click me</Button>
-    </div>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </HelperProvider>
-  )
+    <SidebarProvider>
+      <HelperProvider>
+        <div className="bg-red-200">
+          <div className="max-w-7xl h-screen mx-auto flex flex-row items-center justify-center">
+            <div className="basis-1/7">
+              <LeftSidebar />
+            </div>
+            <div className="basis-6/7">
+              <PseudoCard className="h-20">
+                <Card>
+                  Hello
+                </Card>
+                <Card>
+                  Hello
+                </Card>
+                <Card>
+                  Hello
+                </Card>
+                <Card>
+                  Hello
+                </Card>
+              </PseudoCard>
+              <CardBottom>Base data</CardBottom>
+            </div>
+          </div>
+        </div>
+      </HelperProvider>
+    </SidebarProvider>
+  );
 }
 
-export default App
+export default App;

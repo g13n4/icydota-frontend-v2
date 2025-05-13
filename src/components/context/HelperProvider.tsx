@@ -42,12 +42,14 @@ function HelperProvider(props: PropsWithChildren) {
   useEffect(() => {
     if (isDarkMode) {
       document.documentElement.classList.add("dark");
+      // localStorage.theme = "dark";
     } else {
       document.documentElement.classList.remove("dark");
+      // localStorage.theme = "light";
     }
 
-    // Save preference to localStorage
     localStorage.setItem("darkMode", JSON.stringify(isDarkMode));
+    // localStorage.removeItem("theme");
   }, [isDarkMode]);
 
   const toggleDarkMode = () => {

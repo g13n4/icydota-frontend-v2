@@ -6,4 +6,9 @@ interface SelectorItem {
   dateEnd: string | null;
 }
 
+interface LeaguePatchSelectorType {
+  leagues: SelectorItem[]
+  patches: SelectorItem[]
+}
+
 export type { SelectorItem };
