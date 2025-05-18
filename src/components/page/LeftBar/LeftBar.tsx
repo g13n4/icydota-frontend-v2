@@ -4,7 +4,7 @@ import ComputationSelector from "./ComputationSelector/ComputationSelector";
 
 export default function LeftSidebar() {
   return (
-    <Sidebar side="left" variant="inset" collapsible="offcanvas" className="min-h-0">
+    <Sidebar>
       <LeaguePatchSelector />
       <ComputationSelector />
     </Sidebar>

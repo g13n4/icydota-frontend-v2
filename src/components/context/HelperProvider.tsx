@@ -52,21 +52,13 @@ function HelperProvider(props: PropsWithChildren) {
     // localStorage.removeItem("theme");
   }, [isDarkMode]);
 
-  const toggleDarkMode = () => {
-    setIsDarkMode((prev) => !prev);
-  };
+  const toggleDarkMode = () => setIsDarkMode((prev) => !prev);
 
-  const setDarkMode = (mode: boolean) => {
-    setIsDarkMode(mode);
-  };
+  const setDarkMode = (mode: boolean) => setIsDarkMode(mode);
 
-  const toggleSidebarHidden = () => {
-    setIsSidebarHidden((prev) => !prev);
-  };
+  const toggleSidebarHidden = () => setIsSidebarHidden((prev) => !prev);
 
-  const setSidebarHidden = (mode: boolean) => {
-    setIsSidebarHidden(mode);
-  };
+  const setSidebarHidden = (mode: boolean) => setIsSidebarHidden(mode);
 
   return (
     <HelperContext

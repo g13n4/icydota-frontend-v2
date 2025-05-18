@@ -1,4 +1,4 @@
-import { Card } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
 
 interface CardInterface {
@@ -6,31 +6,43 @@ interface CardInterface {
   className?: string;
 }
 
-const baseStyles = "m-4 p-2"
 function CardBase({ children, className }: CardInterface) {
-  return <Card className={cn(baseStyles, className)}>{children}</Card>;
+  return <Card className={cn("", className)}>{children}</Card>;
 }
 
 function CardBottom({ children, className }: CardInterface) {
   return (
-    <CardBase
-      className={cn(
-        "h-120 overflow-auto",
-        className,
-      )}
-    >
+    <CardBase className={cn("h-120 overflow-auto", className)}>
       {children}
     </CardBase>
   );
 }
 
-
 function CardTop({ children, className }: CardInterface) {
-  return <CardBase className={cn("flex-none h-20 shrink-0", className)}>{children}</CardBase>;
+  return (
+    <CardBase className={cn("flex-none h-26 shrink-0", className)}>
+      {children}
+    </CardBase>
+  );
 }
 
-function PseudoCard({ children, className }: CardInterface) {
-  return <div className={cn("h-20 grid grid-cols-4 m-4", className)}>{children}</div>;
+interface CardSelectorInterface {
+  header?: string;
+  children?: React.ReactNode;
+  className?: string;
 }
 
-export { CardBottom, CardTop, PseudoCard };
+function SelectorCard({ header, children, className }: CardSelectorInterface) {
+  return (
+    <Card className={cn("flex flex-col", className)}>
+      {header && (
+        <CardHeader className="text-justify">
+          <CardTitle>{header}</CardTitle>
+        </CardHeader>
+      )}
+      <CardContent>{children}</CardContent>
+    </Card>
+  );
+}
+
+export { CardBottom, CardTop, SelectorCard };
