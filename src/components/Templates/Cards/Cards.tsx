@@ -20,7 +20,7 @@ function CardBottom({ children, className }: CardInterface) {
 
 function CardTop({ children, className }: CardInterface) {
   return (
-    <CardBase className={cn("flex-none h-26 shrink-0", className)}>
+    <CardBase className={cn("shrink-0", className)}>
       {children}
     </CardBase>
   );

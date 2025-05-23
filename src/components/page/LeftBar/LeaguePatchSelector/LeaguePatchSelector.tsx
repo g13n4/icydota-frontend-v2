@@ -25,6 +25,8 @@ import {
   SidebarMenuItem,
   useSidebar,
 } from "@/components/ui/sidebar";
+import { useInitialDataContext } from "@/components/context/InitialDataProvider";
+import LeaguePatchSelectorMenu from "./LeaguePatchSelectorMenu";
 
 const teams = [
   {
@@ -45,6 +47,7 @@ const teams = [
 ];
 
 export default function LeaguePatchSelector() {
+  const { patch, league } = useInitialDataContext()  
   const { isMobile } = useSidebar();
   const [activeTeam, setActiveTeam] = React.useState(teams[0]);
 
@@ -63,10 +66,8 @@ export default function LeaguePatchSelector() {
                   size="lg"
                   className="data-[state=open]:bg-main data-[state=open]:text-main-foreground data-[state=open]:outline-border data-[state=open]:outline-2"
                 >
-                  <div className="flex aspect-square size-8 items-center justify-center rounded-base">
-                    <activeTeam.logo className="size-4" />
-                  </div>
-                  <div className="grid flex-1 text-left text-sm leading-tight">
+
+                  <div className="grid flex-1 text-center text-xl leading-tight">
                     <span className="truncate font-heading">
                       {activeTeam.name}
                     </span>
@@ -81,29 +82,9 @@ export default function LeaguePatchSelector() {
                 side={isMobile ? "bottom" : "right"}
                 sideOffset={4}
               >
-                <DropdownMenuLabel className="text-sm font-heading">
-                  Teams
-                </DropdownMenuLabel>
-                {teams.map((team, index) => (
-                  <DropdownMenuItem
-                    key={team.name}
-                    onClick={() => setActiveTeam(team)}
-                    className="gap-2 p-1.5"
-                  >
-                    <div className="flex size-6 items-center justify-center">
-                      <team.logo className="size-4 shrink-0" />
-                    </div>
-                    {team.name}
-                    <DropdownMenuShortcut>⌘{index + 1}</DropdownMenuShortcut>
-                  </DropdownMenuItem>
-                ))}
+                <LeaguePatchSelectorMenu title="League" data={league}/>
                 <DropdownMenuSeparator />
-                <DropdownMenuItem className="gap-2 p-1.5">
-                  <div className="flex size-6 items-center justify-center">
-                    <Plus className="size-4" />
-                  </div>
-                  <div className="font-base">Add team</div>
-                </DropdownMenuItem>
+                <LeaguePatchSelectorMenu title="Patch" data={patch}/>
               </DropdownMenuContent>
             </DropdownMenu>
           </SidebarMenuItem>

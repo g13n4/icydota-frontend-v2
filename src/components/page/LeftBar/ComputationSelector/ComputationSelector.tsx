@@ -11,13 +11,12 @@ import ComputiationItem from "./ComputationSelectorItem";
 
 export default function ComputationSelector() {
   const { computations } = useInitialDataContext();
-  console.log(computations)
 
   return (
     <CardBottom>
       <SidebarContent>
         <SidebarGroup>
-          <SidebarGroupLabel className="text-center">
+          <SidebarGroupLabel>
             Calculation Types
           </SidebarGroupLabel>
           <SidebarMenu>

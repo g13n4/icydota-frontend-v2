@@ -1,30 +1,34 @@
+import { usePageTypeContext } from "@/components/context/DataTypeChoiceProvider";
+import SelectorSelector from "@/components/Templates/Selectors/SelectorSelector";
 import {
-    Select,
-    SelectContent,
-    SelectGroup,
-    SelectItem,
-    SelectLabel,
-    SelectTrigger,
-    SelectValue,
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectTrigger,
+  SelectValue,
 } from "@/components/ui/select";
+import { cn } from "@/lib/utils";
+import type { ItemStringType } from "@/types/types";
+import { leagueMatchesUrl } from "@/urls";
+import type { Trigger } from "@radix-ui/react-select";
+import type { ComponentProps } from "react";
+import useSWR from "swr";
 
-export default function MatchSelector() {
+export default function MatchSelector({
+  ...className
+}: ComponentProps<typeof Trigger>) {
+  const { selectedLeagueId, selectedMatchId } = usePageTypeContext();
+
+  const { data, isLoading } = useSWR<ItemStringType[], Error>(
+    leagueMatchesUrl(selectedLeagueId),
+  );
+
+  if (!data || isLoading) return <Select disabled={isLoading} />;
+
   return (
-    <Select defaultValue="apple">
-      <SelectTrigger className="w-full">
-        <SelectValue placeholder="Select a match" />
-      </SelectTrigger>
-      <SelectContent>
-        <SelectGroup>
-          <SelectLabel>Fruits</SelectLabel>
-          <SelectItem value="apple">Apple</SelectItem>
-          <SelectItem value="banana">Banana</SelectItem>
-          <SelectItem value="blueberry">Blueberry</SelectItem>
-          <SelectItem value="grapes">Grapes</SelectItem>
-          <SelectItem value="pineapple">Pineapple</SelectItem>
-        </SelectGroup>
-      </SelectContent>
-    </Select>
+    <SelectorSelector title="Select match" label="" value={`${selectedMatchId}`} />
   );
 }
   

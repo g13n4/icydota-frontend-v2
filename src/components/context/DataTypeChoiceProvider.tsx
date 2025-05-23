@@ -1,5 +1,7 @@
 import { createContext, useContext } from "react";
-import type { PageTypeType } from "./types";
+import type { leaguePachTypeType, PageTypeType, selectedDataFormatType, selectedPTType } from "./types";
+
+
 
 const PageTypeDefaultState = {
   isMatchOne: false,
@@ -7,25 +9,26 @@ const PageTypeDefaultState = {
   isAggregation: false,
   isCrossComparison: false,
 
-  isLP: true, // if False patch is selected if True League 
+  isLP: true, // if False patch is selected if True League
+  leaguePachType: "league" as leaguePachTypeType,
 
   selectedLeagueId: null,
   selectedPatchId: null,
   selectedCalculationId: 0,
 
-  selectedPT: "player", // Player or Team
-  
-  selectedMatchId: null,
+  selectedPT: "player" as selectedPTType, // Player or Team
+
+  selectedMatchId: "",
   selectedComparison: "none",
   selectedComparisonType: "basic",
 
-  selectedDataType: "match",
-  
+  selectedDataFormat: "match" as selectedDataFormatType,
+
   selectedAggregationType: 1,
+  selectedCrossComparisonField: "l2",
 
   selectedCrossComparisonType: 1,
-  selectedCrossComparisonPosition: 1,  
-
+  selectedCrossComparisonPosition: 1,
 };
 
 const PageTypeContext = createContext<PageTypeType>(PageTypeDefaultState);

@@ -1,14 +1,22 @@
-import AggregationTypeSelector from "./Selectors/Aggregation/AggregationTypeSelector";
 import ComparisonSelector from "./Selectors/ComparisonSelector";
 import ComparisonTypeSelector from "./Selectors/Match/ComparisonTypeSelector";
 import CrossComparisonPositionSelector from "./Selectors/CrossComparison/CrossComparisonPositionSelector";
 import CrossComparisonTypeSelector from "./Selectors/CrossComparison/CrossComparisonTypeSelector";
 import MatchSelector from "./Selectors/Match/MatchSelector";
 import WindowsTypeSelector from "./Selectors/WindowsTypeSelector";
+import CrossComparisonFieldSelector from "./Selectors/CrossComparison/CrossComparisonFieldSelector";
+import type { selectedDataFormatType } from "@/types/types";
+import { selectedDataFormatEnum } from "@/types/enums";
 
-// CCOMP POS SELECTOR middle core support
-// CCOMP TYPE SELECTOR PLAYER HERO HERO/FACET
-// AGG TYPE SELECTOR
+
+function getSelector(selectorType: selectedDataFormatType) {
+  if (selectorType === selectedDataFormatEnum.MATCH) {
+    return 
+
+  } 
+
+}
+
 
 export default function DataTableSelectors() {
   return (
@@ -16,10 +24,12 @@ export default function DataTableSelectors() {
       <MatchSelector />
       <ComparisonTypeSelector />
       <ComparisonSelector />
-      <AggregationTypeSelector />
       <WindowsTypeSelector />
       <CrossComparisonPositionSelector />
       <CrossComparisonTypeSelector />
+      <CrossComparisonFieldSelector />
     </div>
   );
 }
+
+

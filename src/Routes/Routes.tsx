@@ -1,76 +1,41 @@
 import App from "@/App";
-import {
-  PageTypeContext,
-  PageTypeDefaultState,
-} from "@/components/context/DataTypeChoiceProvider";
 import { createBrowserRouter } from "react-router";
+
+const leaguePatchMatcher = ":leaguePachType(league|patch)/:leaguePatchId(\\d+)";
+const playerTeamMatcher = ":playerTeamType(player|team)";
+// dataTypeValue is a match id here
+const dataTypeMatcherMatch = ":dataType(match):dataTypeValue(\\d+)";
+// dataTypeValue is a type of aggregation of cross-comparison
+const dataTypeMatcherOther = ":dataType(aggregation|cross-comparison):dataTypeValue(\\d+)";
+const calculationMatcher = ":calcId(\\d+)$";
 
 const router = createBrowserRouter([
   {
-    path: ":leaguePatchId/match/all",
-    element: (
-      <PageTypeContext
-        value={{
-          ...PageTypeDefaultState,
-          isMatchAll: true,
-        }}
-      >
-        <App />
-      </PageTypeContext>
+    path: [leaguePatchMatcher, playerTeamMatcher, ":dataType(match)$"].join(
+      "/",
     ),
+    element: <App useDefault={false} />,
   },
   {
-    path: ":leaguePatchId/match/:matchId/:playerTeamId/:calcId",
-    element: (
-      <PageTypeContext
-        value={{
-          ...PageTypeDefaultState,
-          isMatchOne: true,
-        }}
-      >
-        <App />
-      </PageTypeContext>
+    path: [leaguePatchMatcher, playerTeamMatcher, dataTypeMatcherMatch, calculationMatcher].join(
+      "/",
     ),
+    element: <App useDefault={false} />,
+  },
+  
+  {
+    path: [
+      leaguePatchMatcher,
+      playerTeamMatcher,
+      dataTypeMatcherOther,
+      calculationMatcher,
+    ].join("/"),
+    element: <App useDefault={false} />,
   },
   {
-    path: ":leaguePatchId/aggregation/:aggTypeId/:playerTeamId/:calcId",
-    element: (
-      <PageTypeContext
-        value={{
-          ...PageTypeDefaultState,
-          isAggregation: true,
-        }}
-      >
-        <App />
-      </PageTypeContext>
-    ),
-  },
-  {
-    path: ":leaguePatchId/cross-comparison/:CCompTypeId/:playerTeamId/:calcId",
-    element: (
-      <PageTypeContext
-        value={{
-          ...PageTypeDefaultState,
-          isCrossComparison: true,
-        }}
-      >
-        <App />
-      </PageTypeContext>
-    ),
-  },
-  {
-    path: "/",
-    element: (
-      <PageTypeContext
-        value={{
-          ...PageTypeDefaultState,
-          isAggregation: true,
-        }}
-      >
-        <App />
-      </PageTypeContext>
-    ),
+    path: "/*",
+    element: <App useDefault={true} />,
   },
 ]);
 
-export default router
+export default router;

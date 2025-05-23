@@ -1,0 +1,29 @@
+import type { PageTypeType } from "src/components/context/types";
+
+export default function generateLink({ data }: { data: PageTypeType }): string {
+  const LoPPart = `${data.leaguePachType}/
+    ${data.leaguePachType === "patch" ? data.selectedPatchId : data.selectedLeagueId}`;
+
+  const linkStart = `${LoPPart}/${data.selectedPT}/${data.selectedDataFormat}`;
+
+  if (data.isMatchAll) {
+    return linkStart;
+  }
+  if (data.isMatchOne) {
+    const linkEnding = `${data.selectedMatchId}/${data.selectedCalculationId}`;
+    const params = `comp=${data.selectedComparison}&mcomp=${data.selectedComparisonType}`;
+    return `${linkStart}/${linkEnding}?${params}`;
+  }
+  if (data.isAggregation) {
+    const linkEnding = `${data.selectedAggregationType}/${data.selectedCalculationId}`;
+    const params = `comp=${data.selectedComparison}`;
+    return `${linkStart}/${linkEnding}?${params}`;
+  }
+  if (data.isCrossComparison) {
+    const linkEnding = `${data.selectedCrossComparisonType}/${data.selectedCalculationId}`;
+    const params = `comp=${data.selectedComparison}&field=${data.selectedCrossComparisonField}&cposition=${data.selectedCrossComparisonField}`;
+    return `${linkStart}/${linkEnding}?${params}`;
+  }
+
+  return "/";
+}

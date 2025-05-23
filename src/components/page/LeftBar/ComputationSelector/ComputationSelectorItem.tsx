@@ -6,6 +6,7 @@ import {
   CollapsibleContent,
   CollapsibleTrigger,
 } from "@/components/ui/collapsible";
+import { SelectSeparator } from "@/components/ui/select";
 import {
   SidebarMenuButton,
   SidebarMenuItem,
@@ -13,8 +14,6 @@ import {
   SidebarMenuSubButton,
   SidebarMenuSubItem,
 } from "@/components/ui/sidebar";
-import { Separator } from "@radix-ui/react-separator";
-import { SelectSeparator } from "@/components/ui/select";
 
 const getIcon = (value: number) => {
   switch (value) {
@@ -38,25 +37,25 @@ export default function ComputiationItem({
 
   if ("items" in item) {
     return (
-      <Collapsible key={item.title} asChild className="group/collapsible">
+      <Collapsible key={item.label} asChild className="group/collapsible">
         <SidebarMenuItem>
           <CollapsibleTrigger asChild>
             <SidebarMenuButton
               className="data-[state=open]:bg-main data-[state=open]:outline-border data-[state=open]:text-main-foreground"
-              tooltip={item.title}
+              tooltip={item.label}
             >
               <Icon />
-              <span>{item.title}</span>
+              <span>{item.label}</span>
               <ChevronRight className="ml-auto transition-transform duration-200 group-data-[state=open]/collapsible:rotate-90" />
             </SidebarMenuButton>
           </CollapsibleTrigger>
           <CollapsibleContent>
             <SidebarMenuSub>
               {item.items?.map((subItem) => (
-                <SidebarMenuSubItem key={subItem.title}>
+                <SidebarMenuSubItem key={subItem.label}>
                   <SidebarMenuSubButton asChild>
                     <a>
-                      <span>{subItem.title}</span>
+                      <span>{subItem.label}</span>
                     </a>
                   </SidebarMenuSubButton>
                 </SidebarMenuSubItem>
@@ -74,10 +73,10 @@ export default function ComputiationItem({
         <SidebarMenuItem>
           <SidebarMenuButton
             className="data-[state=open]:bg-main data-[state=open]:outline-border data-[state=open]:text-main-foreground"
-            tooltip={item.title}
+            tooltip={item.label}
           >
             <Icon />
-            <span>{item.title}</span>
+            <span>{item.label}</span>
           </SidebarMenuButton>
         </SidebarMenuItem>
       </SidebarMenuItem>

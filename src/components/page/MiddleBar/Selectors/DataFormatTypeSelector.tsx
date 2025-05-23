@@ -1,48 +1,58 @@
+import { usePageTypeContext } from "@/components/context/DataTypeChoiceProvider";
 import { Card } from "@/components/ui/card";
 import {
-    Select,
-    SelectContent,
-    SelectGroup,
-    SelectItem,
-    SelectLabel,
-    SelectTrigger,
-    SelectValue,
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectTrigger,
+  SelectValue,
 } from "@/components/ui/select";
-
-const crossComparisonData = [
-  {
-    value: "1",
-    label: "Player",
-  },
-  {
-    value: "2",
-    label: "Hero",
-  },
-  {
-    value: "3",
-    label: "Hero + Facet",
-  },
-];
-
+import useDataFormatData from "@/hooks/useDataFormatData";
 
 export default function DataFormatTypeSelector() {
+  const { selectedDataFormat } = usePageTypeContext();
+
+  const { isActive, data } = useDataFormatData({
+    dataType: selectedDataFormat,
+  });
+
+  if (!isActive) {
+    return (
+      <Card className="h-fit">
+        <Select disabled>
+          <SelectTrigger className="w-full">
+            <SelectValue placeholder="Select Data Format" />
+          </SelectTrigger>
+        </Select>
+      </Card>
+    );
+  }
+
   return (
-    <Card className="h-fit"> 
-    <Select>
-      <SelectTrigger className="w-full">
-        <SelectValue placeholder="Select Data Format" />
-      </SelectTrigger>
-      <SelectContent>
-        <SelectGroup>
-          <SelectLabel>Fruits</SelectLabel>
-          <SelectItem value="apple">Apple</SelectItem>
-          <SelectItem value="banana">Banana</SelectItem>
-          <SelectItem value="blueberry">Blueberry</SelectItem>
-          <SelectItem value="grapes">Grapes</SelectItem>
-          <SelectItem value="pineapple">Pineapple</SelectItem>
-        </SelectGroup>
-      </SelectContent>
-    </Select>
+    <Card className="h-fit">
+      <Select disabled={!isActive}>
+        <SelectTrigger className="w-full">
+          <SelectValue
+            placeholder="Select Data Format"
+            className="text-center"
+          />
+        </SelectTrigger>
+        <SelectContent>
+          <SelectGroup>
+            <SelectLabel>Data Formats</SelectLabel>
+            {data.map((item) => (
+              <SelectItem
+                key={`data-format-selector-${item.value}`}
+                value={item.value}
+              >
+                {item.label}
+              </SelectItem>
+            ))}
+          </SelectGroup>
+        </SelectContent>
+      </Select>
     </Card>
   );
 }

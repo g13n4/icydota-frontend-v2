@@ -4,7 +4,10 @@ import { createRoot } from "react-dom/client";
 import { RouterProvider } from "react-router";
 import useSWR, { SWRConfig } from "swr";
 import router from "./Routes/Routes";
-import { InitialData, InitialDataContext } from "./components/context/InitialDataProvider";
+import {
+  InitialData,
+  InitialDataContext,
+} from "./components/context/InitialDataProvider";
 import type { InitialDataType } from "./components/context/types.tsx";
 import { configSWR } from "./config.ts";
 import "./index.css";
@@ -13,12 +16,16 @@ import { initialDataUrl } from "./urls.ts";
 function Main() {
   const { data, isLoading } = useSWR<InitialDataType, Error>(initialDataUrl);
 
-  const value = !isLoading && data ? data : InitialData
+  const value = !isLoading && data ? data : InitialData;
+
+  if (isLoading) {
+    return <Spinner size="large" />;
+  }
 
   return (
-        <InitialDataContext value={value}>
-          <RouterProvider router={router} />
-        </InitialDataContext>
+    <InitialDataContext value={value}>
+      <RouterProvider router={router} />
+    </InitialDataContext>
   );
 }
 

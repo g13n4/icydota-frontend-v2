@@ -1,13 +1,12 @@
 import type { PropsWithChildren } from "react";
 
-
 export default function SelectorWrapper({
-  title,
+  label,
   children,
-}: PropsWithChildren<{ title: string }>): React.ReactNode {
+}: PropsWithChildren<{ label: string }>): React.ReactNode {
   return (
     <div className="grid grid-rows-2">
-      <div>{title}</div>
+      <div>{label}</div>
       {children}
     </div>
   );

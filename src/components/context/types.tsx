@@ -1,3 +1,10 @@
+import type {
+  ItemNymericType,
+  leaguePachTypeType,
+  selectedDataFormatType,
+  selectedPTType,
+} from "@/types/types";
+
 interface HelperContextType {
   isDarkMode: boolean;
   setDarkMode: (mode: boolean) => void;
@@ -14,46 +21,50 @@ interface PageTypeType {
   isAggregation: boolean;
   isCrossComparison: boolean;
 
+  selectedDataFormat: selectedDataFormatType;
+
   isLP: boolean; // if False patch is selected if True League
+  leaguePachType: leaguePachTypeType;
 
   selectedLeagueId: number | null;
   selectedPatchId: number | null;
-  selectedCalculationId: number;
+  selectedCalculationId: number | string;
 
-  selectedPT: string; // Player or Team
+  selectedPT: selectedPTType; // Player or Team
 
-  selectedMatchId: number | null;
-  selectedComparison: string;
-  selectedComparisonType: string;
+  selectedMatchId: number | string | null;
+  selectedComparison: string; // query param
+  selectedComparisonType: string; // query param
 
-  selectedDataType: string;
-  
-  selectedAggregationType: number;
+  selectedAggregationType: number | string;
 
-  selectedCrossComparisonType: number;
-  selectedCrossComparisonPosition: number;
+  selectedCrossComparisonType: number | string;
+  selectedCrossComparisonPosition: number | string; // query param
+  selectedCrossComparisonField: string; // query param
 }
 
-interface ItemType {
-  title: string;
-  value: number;
-}
+type OptionalPageTypeType = Partial<PageTypeType>;
 
 interface ItemCategoryType {
-  title: string;
+  label: string;
   description: string;
   value: number;
-  items: ItemType[];
+  items: ItemNymericType[];
 }
 
-type ComputationItemType = ItemCategoryType | ItemType;
+type ComputationItemType = ItemCategoryType | ItemNymericType;
 
 interface InitialDataType {
   computations: ComputationItemType[];
-  patch: ItemType[];
-  league: ItemType[];
+  patch: ItemNymericType[];
+  league: ItemNymericType[];
 }
 
 export type {
-  ComputationItemType, HelperContextType, InitialDataType, PageTypeType
+  ComputationItemType,
+  HelperContextType, InitialDataType,
+  leaguePachTypeType, OptionalPageTypeType, PageTypeType,
+  selectedDataFormatType,
+  selectedPTType
 };
+

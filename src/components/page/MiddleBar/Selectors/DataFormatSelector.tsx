@@ -1,27 +1,13 @@
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
-
-const data = [
-  {
-    value: "match",
-    label: "Match",
-  },
-  {
-    value: "agg",
-    label: "Aggregation",
-  },
-  {
-    value: "ccomp",
-    label: "Cross-Comparison",
-  },
-];
+import dataFormatSelectorData from "@/constants/Selectors/dataFormatSelectorData";
 
 export default function DataFormatSelector() {
   return (
-    <Tabs defaultValue="match" orientation="vertical">
+    <Tabs value="match" orientation="vertical">
       <TabsList
-        className={`grid w-full grid-rows-${data.length + 1} shadow-shadow border-2 `}
+        className={`grid w-full grid-rows-${dataFormatSelectorData.length + 1} shadow-shadow border-2 `}
       >
-        {data.map((item) => {
+        {dataFormatSelectorData.map((item) => {
           return (
             <TabsTrigger key={item.value} value={item.value}>
               {item.label}
