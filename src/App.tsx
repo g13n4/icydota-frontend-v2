@@ -1,25 +1,15 @@
-import { useNavigate } from "react-router";
 import { PageTypeContext } from "./components/context/DataTypeChoiceProvider";
 import { HelperProvider } from "./components/context/HelperProvider";
 import Page from "./components/page/Page";
 import { SidebarProvider } from "./components/ui/sidebar";
-import { useInitialDataContext } from "./components/context/InitialDataProvider";
-import useParseURL from "./hooks/useParseURL";
+import useParseURL from "./navigation/hooks/useParseURL";
 
-type appType = {useDefault: boolean}
+type appType = { match: number };
 
-function App({useDefault = true}: appType) {
-  const navigate = useNavigate()
+function App({ match }: appType) {
+  const data = useParseURL();
+  console.log(match)
 
-  if (useDefault) {
-    const {league } = useInitialDataContext()
-    const mostRecentLeague = league[0].value
-    navigate(`/league/${mostRecentLeague}/player/match/0`, {preventScrollReset: true})
-  }
-  
-  const data = useParseURL()
-
-  
   return (
     <PageTypeContext value={data}>
       <SidebarProvider>

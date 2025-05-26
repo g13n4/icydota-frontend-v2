@@ -1,30 +1,32 @@
 import {
-    Select,
-    SelectContent,
-    SelectGroup,
-    SelectItem,
-    SelectLabel,
-    SelectTrigger,
-    SelectValue,
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectTrigger,
+  SelectValue,
 } from "@/components/ui/select";
 import { cn } from "@/lib/utils";
 import type { ItemStringType } from "@/types/types";
 
-interface SelectorSelectorType {
+interface BaseSelectorType {
   title: string;
-  label: string;
+  label?: string;
   value?: string;
   data: ItemStringType[];
   className?: string | undefined;
+  navigateFunc: ({ value }: { value: string }) => void;
 }
 
-export default function SelectorSelector({
+export default function BaseSelector({
   title,
   label,
   value,
   data,
   className,
-}: SelectorSelectorType) {
+  navigateFunc,
+}: BaseSelectorType) {
   return (
     <Select value={value}>
       <SelectTrigger className={cn("w-full", className)}>
@@ -33,9 +35,13 @@ export default function SelectorSelector({
       <SelectContent>
         {
           <SelectGroup>
-            <SelectLabel>{label}</SelectLabel>
+            {label && <SelectLabel>{label}</SelectLabel>}
             {data.map((item) => (
-              <SelectItem key={item.value} value={item.value}>
+              <SelectItem
+                key={item.value}
+                value={item.value}
+                onClick={() => navigateFunc({ value: item.value })}
+              >
                 {item.label}
               </SelectItem>
             ))}

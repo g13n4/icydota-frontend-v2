@@ -14,6 +14,8 @@ import {
   SidebarMenuSubButton,
   SidebarMenuSubItem,
 } from "@/components/ui/sidebar";
+import CustomLink from "@/navigation/createURL";
+import useCustomUseNavigate from "@/navigation/hooks/useCustomUseNavigate";
 
 const getIcon = (value: number) => {
   switch (value) {
@@ -34,6 +36,7 @@ export default function ComputiationItem({
   item,
 }: { item: ComputationItemType }) {
   const Icon = getIcon(item.value);
+  const navigate = useCustomUseNavigate()
 
   if ("items" in item) {
     return (
@@ -43,6 +46,7 @@ export default function ComputiationItem({
             <SidebarMenuButton
               className="data-[state=open]:bg-main data-[state=open]:outline-border data-[state=open]:text-main-foreground"
               tooltip={item.label}
+              onClick={() => navigate({selectedCalculationId: item.value})}
             >
               <Icon />
               <span>{item.label}</span>
@@ -54,9 +58,9 @@ export default function ComputiationItem({
               {item.items?.map((subItem) => (
                 <SidebarMenuSubItem key={subItem.label}>
                   <SidebarMenuSubButton asChild>
-                    <a>
+                    <CustomLink changedData={{selectedCalculationId: subItem.value}}>
                       <span>{subItem.label}</span>
-                    </a>
+                    </CustomLink>
                   </SidebarMenuSubButton>
                 </SidebarMenuSubItem>
               ))}

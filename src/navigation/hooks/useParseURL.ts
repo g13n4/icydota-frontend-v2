@@ -23,7 +23,8 @@ export default function useParseURL(): PageTypeType {
   const comp = searchParams.get("comp"); // selectedComparison
   const mcomp = searchParams.get("mcomp"); // selectedComparisonType
   const ccfield = searchParams.get("field"); // selectedComparisonType
-
+  const gstate = searchParams.get("gstate"); // selectedLaneOrGame
+  
   const isMatch = dataType === "match";
   const isAggregation = dataType === "aggregation";
   const isCrossComparison = dataType === "cross-comparison";
@@ -63,6 +64,7 @@ export default function useParseURL(): PageTypeType {
       : PageTypeDefaultState.selectedComparisonType,
 
     selectedDataFormat: dataType as selectedDataFormatType,
+    selectedLaneOrGame: gstate ? gstate : PageTypeDefaultState.selectedLaneOrGame,
 
     selectedAggregationType:
       isAggregation && dataTypeValue

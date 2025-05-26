@@ -1,33 +1,43 @@
+import { usePageTypeContext } from "@/components/context/DataTypeChoiceProvider";
+import { selectedDataFormatEnum } from "@/types/enums";
 import ComparisonSelector from "./Selectors/ComparisonSelector";
-import ComparisonTypeSelector from "./Selectors/Match/ComparisonTypeSelector";
+import CrossComparisonFieldSelector from "./Selectors/CrossComparison/CrossComparisonFieldSelector";
 import CrossComparisonPositionSelector from "./Selectors/CrossComparison/CrossComparisonPositionSelector";
 import CrossComparisonTypeSelector from "./Selectors/CrossComparison/CrossComparisonTypeSelector";
+import ComparisonTypeSelector from "./Selectors/Match/ComparisonTypeSelector";
 import MatchSelector from "./Selectors/Match/MatchSelector";
 import WindowsTypeSelector from "./Selectors/WindowsTypeSelector";
-import CrossComparisonFieldSelector from "./Selectors/CrossComparison/CrossComparisonFieldSelector";
-import type { selectedDataFormatType } from "@/types/types";
-import { selectedDataFormatEnum } from "@/types/enums";
 
-
-function getSelector(selectorType: selectedDataFormatType) {
-  if (selectorType === selectedDataFormatEnum.MATCH) {
-    return 
-
-  } 
-
-}
-
+const gridTheme = "grid grid-cols-6 gap-2 p-2";
 
 export default function DataTableSelectors() {
+  const { selectedDataFormat } = usePageTypeContext();
+
+  if (selectedDataFormat === selectedDataFormatEnum.MATCH) {
+    return (
+      <div className={gridTheme}>
+        <MatchSelector />
+        <ComparisonSelector />
+        <ComparisonTypeSelector />
+        <WindowsTypeSelector />
+      </div>
+    );
+  }
+  if (selectedDataFormat === selectedDataFormatEnum.AGGREGATION) {
+    return (
+      <div className={gridTheme}>
+        <ComparisonSelector />
+        <WindowsTypeSelector />
+      </div>
+    );
+  }
+
   return (
-    <div className="grid grid-cols-6 gap-2 p-2">
-      <MatchSelector />
-      <ComparisonTypeSelector />
-      <ComparisonSelector />
-      <WindowsTypeSelector />
+    <div className={gridTheme}>
       <CrossComparisonPositionSelector />
       <CrossComparisonTypeSelector />
       <CrossComparisonFieldSelector />
+      <ComparisonSelector />
     </div>
   );
 }

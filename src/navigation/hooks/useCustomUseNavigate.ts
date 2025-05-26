@@ -3,8 +3,8 @@ import { useNavigate } from "react-router";
 import type {
   OptionalPageTypeType,
 } from "src/components/context/types";
-import generateLink from "./generateLink";
-import generateState from "./generateState";
+import generateLink from "../generateLink";
+import generateState from "../generateState";
 
 export default function useCustomUseNavigate() {
   const navigate = useNavigate();

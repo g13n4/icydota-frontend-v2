@@ -35,11 +35,12 @@ interface PageTypeType {
   selectedMatchId: number | string | null;
   selectedComparison: string; // query param
   selectedComparisonType: string; // query param
+  selectedLaneOrGame: string; // query param
 
   selectedAggregationType: number | string;
 
-  selectedCrossComparisonType: number | string;
-  selectedCrossComparisonPosition: number | string; // query param
+  selectedCrossComparisonType: string;
+  selectedCrossComparisonPosition: string; // query param
   selectedCrossComparisonField: string; // query param
 }
 

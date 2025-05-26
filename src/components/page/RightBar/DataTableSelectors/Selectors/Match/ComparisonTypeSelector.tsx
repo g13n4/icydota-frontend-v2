@@ -1,8 +1,9 @@
-import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import TabsSelector from "@/components/Templates/Selectors/Base/BaseTabsSelector";
+import { usePageTypeContext } from "@/components/context/DataTypeChoiceProvider";
+import useCustomUseNavigate from "@/navigation/hooks/useCustomUseNavigate";
 import { comparisonTypeEnum } from "@/types/enums";
 import type { List } from "@radix-ui/react-tabs";
 import type { ComponentProps } from "react";
-import { cn } from "@/lib/utils";
 
 const data = [
   {
@@ -18,17 +19,20 @@ const data = [
 export default function ComparisonTypeSelector({
   className,
 }: ComponentProps<typeof List>) {
+  const { selectedComparisonType } = usePageTypeContext();
+  const navigate = useCustomUseNavigate();
+
+  function navFunc({ value }: { value: string }): void {
+    navigate({ selectedComparisonType: value });
+  }
+
   return (
-    <Tabs orientation="horizontal" defaultValue="none">
-      <TabsList className={cn("grid grid-cols-2 border-0", className)}>
-        {data.map((item) => {
-          return (
-            <TabsTrigger key={item.value} value={item.value}>
-              {item.label}
-            </TabsTrigger>
-          );
-        })}
-      </TabsList>
-    </Tabs>
+    <TabsSelector
+      value={selectedComparisonType}
+      data={data}
+      orientation="horizontal"
+      navigateFunc={navFunc}
+      className={className}
+    />
   );
 }

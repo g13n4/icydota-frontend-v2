@@ -22,6 +22,7 @@ const PageTypeDefaultState = {
   selectedComparison: "none",
   selectedComparisonType: "basic",
 
+  selectedLaneOrGame: "lane",
   selectedDataFormat: "match" as selectedDataFormatType,
 
   selectedAggregationType: 1,

@@ -1,5 +1,8 @@
-import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
-
+import TabsSelector from "@/components/Templates/Selectors/Base/BaseTabsSelector";
+import { usePageTypeContext } from "@/components/context/DataTypeChoiceProvider";
+import useCustomUseNavigate from "@/navigation/hooks/useCustomUseNavigate";
+import type { List } from "@radix-ui/react-tabs";
+import type { ComponentProps } from "react";
 
 const data = [
   {
@@ -16,20 +19,23 @@ const data = [
   },
 ];
 
-export default function CrossComparisonPositionSelector() {
+export default function CrossComparisonPositionSelector({
+  className,
+}: ComponentProps<typeof List>) {
+  const { selectedCrossComparisonPosition } = usePageTypeContext();
+  const navigate = useCustomUseNavigate();
+
+  function navFunc({ value }: { value: string }): void {
+    navigate({ selectedCrossComparisonPosition: value });
+  }
+
   return (
-    <Tabs orientation="horizontal" defaultValue="none">
-      <TabsList
-        className="grid grid-cols-3 border-0"
-      >
-        {data.map((item) => {
-          return (
-            <TabsTrigger key={item.value} value={item.value}>
-              {item.label}
-            </TabsTrigger>
-          );
-        })}
-      </TabsList>
-    </Tabs>
+    <TabsSelector
+      value={selectedCrossComparisonPosition}
+      data={data}
+      orientation="horizontal"
+      navigateFunc={navFunc}
+      className={className}
+    />
   );
 }

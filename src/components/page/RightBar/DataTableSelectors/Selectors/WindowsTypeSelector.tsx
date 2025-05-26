@@ -1,15 +1,17 @@
-import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { cn } from "@/lib/utils";
+import TabsSelector from "@/components/Templates/Selectors/Base/BaseTabsSelector";
+import { usePageTypeContext } from "@/components/context/DataTypeChoiceProvider";
+import useCustomUseNavigate from "@/navigation/hooks/useCustomUseNavigate";
+import { GameStateEnum } from "@/types/enums";
 import type { List } from "@radix-ui/react-tabs";
 import type { ComponentProps } from "react";
 
 const data = [
   {
-    value: "lane",
+    value: GameStateEnum.LANE,
     label: "Lane",
   },
   {
-    value: "game",
+    value: GameStateEnum.GAME,
     label: "Game",
   },
 ];
@@ -17,17 +19,20 @@ const data = [
 export default function WindowsTypeSelector({
   className,
 }: ComponentProps<typeof List>) {
+  const { selectedLaneOrGame } = usePageTypeContext();
+  const navigate = useCustomUseNavigate();
+
+  function navFunc({ value }: { value: string }): void {
+    navigate({ selectedLaneOrGame: value });
+  }
+
   return (
-    <Tabs orientation="horizontal" defaultValue="none">
-      <TabsList className={cn("grid grid-cols-2 border-0", className)}>
-        {data.map((item) => {
-          return (
-            <TabsTrigger key={item.value} value={item.value}>
-              {item.label}
-            </TabsTrigger>
-          );
-        })}
-      </TabsList>
-    </Tabs>
+    <TabsSelector
+      value={selectedLaneOrGame}
+      data={data}
+      orientation="horizontal"
+      navigateFunc={navFunc}
+      className={className}
+    />
   );
 }

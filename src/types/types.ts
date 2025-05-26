@@ -1,6 +1,7 @@
 import type {
   comparisonEnum,
   comparisonTypeEnum,
+  GameStateEnum,
   leaguePachTypeEnum,
   selectedDataFormatEnum,
   selectedPTEnum,
@@ -23,7 +24,10 @@ type selectedDataFormatType = `${selectedDataFormatEnum}`;
 type comparisonTypeType = `${comparisonTypeEnum}`;
 type comparisonType = `${comparisonEnum}`;
 
+type gameStateType = `${GameStateEnum}`
+
 export type {
+  gameStateType,
   comparisonType, comparisonTypeType,
   ItemNymericType,
   ItemStringType,

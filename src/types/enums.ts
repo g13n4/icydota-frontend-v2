@@ -25,6 +25,11 @@ enum comparisonEnum {
   NONE = "none",
 }
 
+enum GameStateEnum {
+  LANE = "lane",
+  GAME = "game",
+}
+
 export {
-    comparisonEnum, comparisonTypeEnum, leaguePachTypeEnum, selectedDataFormatEnum, selectedPTEnum
+  GameStateEnum, comparisonEnum, comparisonTypeEnum, leaguePachTypeEnum, selectedDataFormatEnum, selectedPTEnum
 };

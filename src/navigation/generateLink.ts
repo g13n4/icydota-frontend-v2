@@ -11,12 +11,12 @@ export default function generateLink({ data }: { data: PageTypeType }): string {
   }
   if (data.isMatchOne) {
     const linkEnding = `${data.selectedMatchId}/${data.selectedCalculationId}`;
-    const params = `comp=${data.selectedComparison}&mcomp=${data.selectedComparisonType}`;
+    const params = `comp=${data.selectedComparison}&mcomp=${data.selectedComparisonType}&gstate=${data.selectedLaneOrGame}`;
     return `${linkStart}/${linkEnding}?${params}`;
   }
   if (data.isAggregation) {
     const linkEnding = `${data.selectedAggregationType}/${data.selectedCalculationId}`;
-    const params = `comp=${data.selectedComparison}`;
+    const params = `comp=${data.selectedComparison}&gstate=${data.selectedLaneOrGame}`;
     return `${linkStart}/${linkEnding}?${params}`;
   }
   if (data.isCrossComparison) {

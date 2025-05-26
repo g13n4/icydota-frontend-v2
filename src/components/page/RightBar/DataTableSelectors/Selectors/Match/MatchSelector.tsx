@@ -1,24 +1,12 @@
+import SelectorSelector from "@/components/Templates/Selectors/Base/BaseSelector";
 import { usePageTypeContext } from "@/components/context/DataTypeChoiceProvider";
-import SelectorSelector from "@/components/Templates/Selectors/SelectorSelector";
-import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectLabel,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
-import { cn } from "@/lib/utils";
+import { Select } from "@/components/ui/select";
+import useCustomUseNavigate from "@/navigation/hooks/useCustomUseNavigate";
 import type { ItemStringType } from "@/types/types";
 import { leagueMatchesUrl } from "@/urls";
-import type { Trigger } from "@radix-ui/react-select";
-import type { ComponentProps } from "react";
 import useSWR from "swr";
 
-export default function MatchSelector({
-  ...className
-}: ComponentProps<typeof Trigger>) {
+export default function MatchSelector({ className }: { className?: string }) {
   const { selectedLeagueId, selectedMatchId } = usePageTypeContext();
 
   const { data, isLoading } = useSWR<ItemStringType[], Error>(
@@ -26,9 +14,20 @@ export default function MatchSelector({
   );
 
   if (!data || isLoading) return <Select disabled={isLoading} />;
+  const navigate = useCustomUseNavigate();
+
+  function navFunc({ value }: { value: string }): void {
+    navigate({ selectedMatchId: value });
+  }
 
   return (
-    <SelectorSelector title="Select match" label="" value={`${selectedMatchId}`} />
+    <SelectorSelector
+      title="Select match"
+      data={data}
+      value={`${selectedMatchId}`}
+      className={className}
+      navigateFunc={navFunc}
+    />
   );
 }
   

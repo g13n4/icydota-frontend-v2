@@ -1,26 +1,29 @@
 import App from "@/App";
 import { createBrowserRouter } from "react-router";
+import DefaultRoute from "./DefaultRoute";
 
-const leaguePatchMatcher = ":leaguePachType(league|patch)/:leaguePatchId(\\d+)";
-const playerTeamMatcher = ":playerTeamType(player|team)";
+const leaguePatchMatcher = "/:leaguePachType/:leaguePatchId";
+const playerTeamMatcher = ":playerTeamType";
 // dataTypeValue is a match id here
-const dataTypeMatcherMatch = ":dataType(match):dataTypeValue(\\d+)";
+const dataTypeMatcherMatch = ":dataType/:dataTypeValue";
 // dataTypeValue is a type of aggregation of cross-comparison
-const dataTypeMatcherOther = ":dataType(aggregation|cross-comparison):dataTypeValue(\\d+)";
-const calculationMatcher = ":calcId(\\d+)$";
+const dataTypeMatcherOther = ":dataType/:dataTypeValue";
+const calculationMatcher = ":calcId";
+
+
 
 const router = createBrowserRouter([
   {
-    path: [leaguePatchMatcher, playerTeamMatcher, ":dataType(match)$"].join(
+    path: [leaguePatchMatcher, playerTeamMatcher, ":dataType"].join(
       "/",
     ),
-    element: <App useDefault={false} />,
+    element: <App match={1} />,
   },
   {
     path: [leaguePatchMatcher, playerTeamMatcher, dataTypeMatcherMatch, calculationMatcher].join(
       "/",
     ),
-    element: <App useDefault={false} />,
+    element: <App match={2} />,
   },
   
   {
@@ -30,11 +33,11 @@ const router = createBrowserRouter([
       dataTypeMatcherOther,
       calculationMatcher,
     ].join("/"),
-    element: <App useDefault={false} />,
+    element: <App match={3} />,
   },
   {
     path: "/*",
-    element: <App useDefault={true} />,
+    element: <DefaultRoute />,
   },
 ]);
 
