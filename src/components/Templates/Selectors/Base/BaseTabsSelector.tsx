@@ -7,19 +7,21 @@ interface BaseTabsType extends Pick<TabsProps, "orientation"> {
   value?: string;
   data: ItemStringType[];
   className?: string | undefined;
+  classNameMain?: string | undefined;
   navigateFunc: ({ value }: { value: string }) => void;
 }
 
 export default function BaseTabsSelector({
   value,
   data,
-  orientation,
+  orientation = "horizontal",
   className,
+  classNameMain,
   navigateFunc,
 }: BaseTabsType) {
   const tabSize = data.length;
   return (
-    <Tabs orientation={orientation} value={value}>
+    <Tabs orientation={orientation} value={value} className={classNameMain}>
       <TabsList className={cn(`grid grid-cols-${tabSize} border-0`, className)}>
         {data.map((item) => {
           return (

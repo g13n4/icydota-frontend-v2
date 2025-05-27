@@ -14,7 +14,7 @@ const PageTypeDefaultState = {
 
   selectedLeagueId: null,
   selectedPatchId: null,
-  selectedCalculationId: 0,
+  selectedCalculationId: "0",
 
   selectedPT: "player" as selectedPTType, // Player or Team
 
@@ -28,8 +28,8 @@ const PageTypeDefaultState = {
   selectedAggregationType: 1,
   selectedCrossComparisonField: "l2",
 
-  selectedCrossComparisonType: 1,
-  selectedCrossComparisonPosition: 1,
+  selectedCrossComparisonType: "1",
+  selectedCrossComparisonPosition: "1",
 };
 
 const PageTypeContext = createContext<PageTypeType>(PageTypeDefaultState);

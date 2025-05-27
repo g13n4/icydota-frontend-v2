@@ -1,6 +1,5 @@
 import { ChevronRight, SquareTerminal } from "lucide-react";
-
-import type { ComputationItemType } from "@/components/context/types";
+import { usePageTypeContext } from "@/components/context/DataTypeChoiceProvider";
 import {
   Collapsible,
   CollapsibleContent,
@@ -16,16 +15,18 @@ import {
 } from "@/components/ui/sidebar";
 import CustomLink from "@/navigation/createURL";
 import useCustomUseNavigate from "@/navigation/hooks/useCustomUseNavigate";
+import type { ItemCategoryType } from "@/components/context/types";
+import type { ItemStringType } from "@/types/types";
 
-const getIcon = (value: number) => {
+const getIcon = (value: string) => {
   switch (value) {
-    case 1:
+    case "1":
       return SquareTerminal;
-    case 2:
+    case "2":
       return SquareTerminal;
-    case 3:
+    case "3":
       return SquareTerminal;
-    case 4:
+    case "4":
       return SquareTerminal;
     default:
       return SquareTerminal;
@@ -34,9 +35,10 @@ const getIcon = (value: number) => {
 
 export default function ComputiationItem({
   item,
-}: { item: ComputationItemType }) {
+}: { item: ItemCategoryType | ItemStringType}) {
   const Icon = getIcon(item.value);
-  const navigate = useCustomUseNavigate()
+  const { selectedCalculationId } = usePageTypeContext();
+  const navigate = useCustomUseNavigate();
 
   if ("items" in item) {
     return (
@@ -46,7 +48,6 @@ export default function ComputiationItem({
             <SidebarMenuButton
               className="data-[state=open]:bg-main data-[state=open]:outline-border data-[state=open]:text-main-foreground"
               tooltip={item.label}
-              onClick={() => navigate({selectedCalculationId: item.value})}
             >
               <Icon />
               <span>{item.label}</span>
@@ -57,8 +58,13 @@ export default function ComputiationItem({
             <SidebarMenuSub>
               {item.items?.map((subItem) => (
                 <SidebarMenuSubItem key={subItem.label}>
-                  <SidebarMenuSubButton asChild>
-                    <CustomLink changedData={{selectedCalculationId: subItem.value}}>
+                  <SidebarMenuSubButton
+                    asChild
+                    isActive={subItem.value === selectedCalculationId}
+                  >
+                    <CustomLink
+                      changedData={{ selectedCalculationId: subItem.value }}
+                    >
                       <span>{subItem.label}</span>
                     </CustomLink>
                   </SidebarMenuSubButton>
@@ -78,6 +84,8 @@ export default function ComputiationItem({
           <SidebarMenuButton
             className="data-[state=open]:bg-main data-[state=open]:outline-border data-[state=open]:text-main-foreground"
             tooltip={item.label}
+            isActive={item.value === selectedCalculationId}
+            onClick={() => navigate({ selectedCalculationId: item.value })}
           >
             <Icon />
             <span>{item.label}</span>

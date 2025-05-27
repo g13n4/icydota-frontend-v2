@@ -12,14 +12,20 @@ export default function useDataFormatData({
     return {
       isActive: true,
       data: aggregationTypeSelectorData,
+      dataFormatType: "selectedAggregationType",
     };
   }
   if (dataType === "ccomp") {
     return {
       isActive: true,
       data: CrossComparisonTypeSelectorData,
+      dataFormatType: "selectedCrossComparisonType",
     };
   }
 
-  return { isActive: false, data: [] };
+  return {
+    isActive: false,
+    data: [],
+    dataFormatType: "",
+  };
 }

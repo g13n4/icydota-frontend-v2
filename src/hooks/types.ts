@@ -7,6 +7,7 @@ interface useDataFormatDataType {
 interface useDataFormatDataReturnType {
     isActive: boolean;
     data: ItemStringType[];
+    dataFormatType: string;
   }
   
 

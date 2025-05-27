@@ -10,11 +10,12 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import useDataFormatData from "@/hooks/useDataFormatData";
+import useCustomUseNavigate from "@/navigation/hooks/useCustomUseNavigate";
 
 export default function DataFormatTypeSelector() {
+  const navigate = useCustomUseNavigate();
   const { selectedDataFormat } = usePageTypeContext();
-
-  const { isActive, data } = useDataFormatData({
+  const { isActive, data, dataFormatType } = useDataFormatData({
     dataType: selectedDataFormat,
   });
 
@@ -28,6 +29,10 @@ export default function DataFormatTypeSelector() {
         </Select>
       </Card>
     );
+  }
+
+  function baseFunc({ value }: { value: string }): void {
+    navigate({ [dataFormatType]: value as string });
   }
 
   return (
@@ -46,6 +51,7 @@ export default function DataFormatTypeSelector() {
               <SelectItem
                 key={`data-format-selector-${item.value}`}
                 value={item.value}
+                onClick={() => baseFunc({ value: item.value })}
               >
                 {item.label}
               </SelectItem>

@@ -13,10 +13,10 @@ interface CustomSelectorType {
 }
 
 export default function CustomSelector({
-  title,
-  className,
   fieldName,
+  title,
   data,
+  className,
   navigateFunc,
 }: CustomSelectorType) {
   const { [fieldName]: fieldValue } = usePageTypeContext();

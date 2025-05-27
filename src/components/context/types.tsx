@@ -1,5 +1,5 @@
 import type {
-  ItemNymericType,
+  ItemStringType,
   leaguePachTypeType,
   selectedDataFormatType,
   selectedPTType,
@@ -26,9 +26,9 @@ interface PageTypeType {
   isLP: boolean; // if False patch is selected if True League
   leaguePachType: leaguePachTypeType;
 
-  selectedLeagueId: number | null;
-  selectedPatchId: number | null;
-  selectedCalculationId: number | string;
+  selectedLeagueId: string | null;
+  selectedPatchId: string | null;
+  selectedCalculationId: string | string;
 
   selectedPT: selectedPTType; // Player or Team
 
@@ -49,22 +49,23 @@ type OptionalPageTypeType = Partial<PageTypeType>;
 interface ItemCategoryType {
   label: string;
   description: string;
-  value: number;
-  items: ItemNymericType[];
+  value: string;
+  items: ItemStringType[];
 }
 
-type ComputationItemType = ItemCategoryType | ItemNymericType;
-
 interface InitialDataType {
-  computations: ComputationItemType[];
-  patch: ItemNymericType[];
-  league: ItemNymericType[];
+  computations: ItemStringType[];
+  patch: ItemStringType[];
+  league: ItemStringType[];
 }
 
 export type {
-  ComputationItemType,
-  HelperContextType, InitialDataType,
-  leaguePachTypeType, OptionalPageTypeType, PageTypeType,
+  ItemCategoryType,
+  HelperContextType,
+  InitialDataType,
+  leaguePachTypeType,
+  OptionalPageTypeType,
+  PageTypeType,
   selectedDataFormatType,
   selectedPTType
 };

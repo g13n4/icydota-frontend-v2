@@ -1,21 +1,10 @@
-import {
-  AudioWaveform,
-  ChevronsUpDown,
-  Command,
-  GalleryVerticalEnd,
-  Plus,
-} from "lucide-react";
-
-import * as React from "react";
-
 import { CardTop } from "@/components/Templates/Cards/Cards";
+import { usePageTypeContext } from "@/components/context/DataTypeChoiceProvider";
+import { useInitialDataContext } from "@/components/context/InitialDataProvider";
 import {
   DropdownMenu,
   DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
   DropdownMenuSeparator,
-  DropdownMenuShortcut,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import {
@@ -25,31 +14,33 @@ import {
   SidebarMenuItem,
   useSidebar,
 } from "@/components/ui/sidebar";
-import { useInitialDataContext } from "@/components/context/InitialDataProvider";
+import type { ItemStringType } from "@/types/types";
+import { ChevronsUpDown } from "lucide-react";
+import * as React from "react";
+import { useEffect } from "react";
 import LeaguePatchSelectorMenu from "./LeaguePatchSelectorMenu";
 
-const teams = [
-  {
-    name: "Acme Inc",
-    logo: GalleryVerticalEnd,
-    plan: "Enterprise",
-  },
-  {
-    name: "Acme Corp.",
-    logo: AudioWaveform,
-    plan: "Startup",
-  },
-  {
-    name: "Evil Corp.",
-    logo: Command,
-    plan: "Free",
-  },
-];
-
 export default function LeaguePatchSelector() {
-  const { patch, league } = useInitialDataContext()  
+  const { selectedLeagueId, selectedPatchId, isLP } = usePageTypeContext();
+
+  const { patch, league } = useInitialDataContext();
   const { isMobile } = useSidebar();
-  const [activeTeam, setActiveTeam] = React.useState(teams[0]);
+  const [activeTeam, setActiveTeam] = React.useState<ItemStringType>({
+    label: "",
+    value: "",
+  });
+
+  useEffect(() => {
+    if (isLP) {
+      league.map(
+        (item) => item.value === selectedLeagueId && setActiveTeam(item),
+      );
+    } else {
+      patch.map(
+        (item) => item.value === selectedPatchId && setActiveTeam(item),
+      );
+    }
+  }, [selectedLeagueId, selectedPatchId, isLP, patch, league]);
 
   if (!activeTeam) {
     return null;
@@ -66,12 +57,10 @@ export default function LeaguePatchSelector() {
                   size="lg"
                   className="data-[state=open]:bg-main data-[state=open]:text-main-foreground data-[state=open]:outline-border data-[state=open]:outline-2"
                 >
-
                   <div className="grid flex-1 text-center text-xl leading-tight">
                     <span className="truncate font-heading">
-                      {activeTeam.name}
+                      {activeTeam.label}
                     </span>
-                    <span className="truncate text-xs">{activeTeam.plan}</span>
                   </div>
                   <ChevronsUpDown className="ml-auto" />
                 </SidebarMenuButton>
@@ -82,9 +71,17 @@ export default function LeaguePatchSelector() {
                 side={isMobile ? "bottom" : "right"}
                 sideOffset={4}
               >
-                <LeaguePatchSelectorMenu title="League" data={league}/>
+                <LeaguePatchSelectorMenu
+                  menuType="league"
+                  title="League"
+                  data={league}
+                />
                 <DropdownMenuSeparator />
-                <LeaguePatchSelectorMenu title="Patch" data={patch}/>
+                <LeaguePatchSelectorMenu
+                  menuType="patch"
+                  title="Patch"
+                  data={patch}
+                />
               </DropdownMenuContent>
             </DropdownMenu>
           </SidebarMenuItem>
