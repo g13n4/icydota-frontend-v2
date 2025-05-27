@@ -1,4 +1,4 @@
-import TabsSelector from "@/components/Templates/Selectors/Base/BaseTabsSelector";
+import BaseTabsSelector from "@/components/Templates/Selectors/Base/BaseTabsSelector";
 import { usePageTypeContext } from "@/components/context/DataTypeChoiceProvider";
 import type { PageTypeType } from "@/components/context/types";
 import useCustomUseNavigate from "@/navigation/hooks/useCustomUseNavigate";
@@ -29,7 +29,7 @@ export default function CustomTabsSelector({
   }
 
   return (
-    <TabsSelector
+    <BaseTabsSelector
       value={fieldValue as string}
       data={data}
       orientation={orientation}

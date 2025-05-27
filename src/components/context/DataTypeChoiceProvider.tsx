@@ -1,8 +1,6 @@
 import { createContext, useContext } from "react";
 import type { leaguePachTypeType, PageTypeType, selectedDataFormatType, selectedPTType } from "./types";
 
-
-
 const PageTypeDefaultState = {
   isMatchOne: false,
   isMatchAll: false,
@@ -25,7 +23,7 @@ const PageTypeDefaultState = {
   selectedLaneOrGame: "lane",
   selectedDataFormat: "match" as selectedDataFormatType,
 
-  selectedAggregationType: 1,
+  selectedAggregationType: "1",
   selectedCrossComparisonField: "l2",
 
   selectedCrossComparisonType: "1",

@@ -1,26 +1,22 @@
-import { usePageTypeContext } from "@/components/context/DataTypeChoiceProvider";
 import type {
-  OptionalPageTypeType,
-  PageTypeType,
+  PageTypeType
 } from "src/components/context/types";
 
+// DEPRECATED: Решил, что буду просто выставлять
+// это в значениях которые передаются для navigate
 export default function generateState({
   data,
-}: { data: OptionalPageTypeType }): PageTypeType {
-  const prevData = usePageTypeContext();
+}: { data: PageTypeType }): PageTypeType {
+  const isMatch = data.selectedDataFormat === "match";
+  const isAggregation = data.selectedDataFormat === "aggregation";
+  const isCrossComparison = data.selectedDataFormat === "cross-comparison";
 
-  const output: PageTypeType = { ...prevData, ...data };
-
-  const isMatch = output.selectedDataFormat === "match";
-  const isAggregation = output.selectedDataFormat === "aggregation";
-  const isCrossComparison = output.selectedDataFormat === "cross-comparison";
-
-  const isLeagueMode = output.leaguePachType === "league";
+  const isLeagueMode = data.leaguePachType === "league";
 
   return {
-    ...output,
-    isMatchOne: isMatch && !!output.selectedMatchId,
-    isMatchAll: isMatch && !output.selectedMatchId,
+    ...data,
+    isMatchOne: isMatch && !!data.selectedMatchId,
+    isMatchAll: isMatch && !data.selectedMatchId,
     isAggregation: isAggregation,
     isCrossComparison: isCrossComparison,
 

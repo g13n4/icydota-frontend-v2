@@ -9,6 +9,7 @@ type appType = { match: number };
 function App({ match }: appType) {
   const data = useParseURL();
   console.log(match)
+  console.log(data)
 
   return (
     <PageTypeContext value={data}>

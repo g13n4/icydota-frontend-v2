@@ -42,14 +42,14 @@ export default function useParseURL(): PageTypeType {
 
     selectedLeagueId:
       isLeagueMode && leaguePatchId
-        ? Number.parseInt(leaguePatchId)
+        ? leaguePatchId.toString()
         : PageTypeDefaultState.selectedLeagueId,
     selectedPatchId:
       !isLeagueMode && leaguePatchId
-        ? Number.parseInt(leaguePatchId)
+        ? leaguePatchId.toString()
         : PageTypeDefaultState.selectedPatchId,
     selectedCalculationId: calcId
-      ? Number.parseInt(calcId)
+      ? calcId.toString()
       : PageTypeDefaultState.selectedCalculationId,
 
     selectedPT: playerTeamType as selectedPTType, // Player or Team
@@ -73,10 +73,10 @@ export default function useParseURL(): PageTypeType {
 
     selectedCrossComparisonType:
       isCrossComparison && dataTypeValue
-        ? Number.parseInt(dataTypeValue)
+        ? dataTypeValue.toString()
         : PageTypeDefaultState.selectedCrossComparisonType,
     selectedCrossComparisonPosition: cposition
-      ? Number.parseInt(cposition)
+      ? cposition.toString()
       : PageTypeDefaultState.selectedCrossComparisonPosition,
     selectedCrossComparisonField: ccfield
       ? ccfield

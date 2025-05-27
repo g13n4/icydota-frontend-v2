@@ -1,14 +1,16 @@
+import { selectedDataFormatEnum } from "@/types/enums";
+
 const dataFormatSelectorData = [
   {
-    value: "match",
+    value: selectedDataFormatEnum.MATCH,
     label: "Match",
   },
   {
-    value: "agg",
+    value: selectedDataFormatEnum.AGGREGATION,
     label: "Aggregation",
   },
   {
-    value: "ccomp",
+    value: selectedDataFormatEnum.CROSS_COMPARISON,
     label: "Cross-Comparison",
   },
 ];
