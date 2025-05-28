@@ -15,7 +15,7 @@ export default function useCustomUseNavigate() {
     const newState = generateState({ data: { ...prevData, ...changedData }  });
     const navigateLink = generateLink({ data: newState });
     console.log(navigateLink)
-    navigate(navigateLink, {replace: true, ...options});
+    navigate(navigateLink, {replace: false, ...options});
   }
 
   return customNavigate;

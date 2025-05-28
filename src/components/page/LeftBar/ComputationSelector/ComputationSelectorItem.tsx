@@ -1,5 +1,5 @@
-import { ChevronRight, SquareTerminal } from "lucide-react";
 import { usePageTypeContext } from "@/components/context/DataTypeChoiceProvider";
+import type { ItemCategoryType } from "@/components/context/types";
 import {
   Collapsible,
   CollapsibleContent,
@@ -13,10 +13,9 @@ import {
   SidebarMenuSubButton,
   SidebarMenuSubItem,
 } from "@/components/ui/sidebar";
-import CustomLink from "@/navigation/createURL";
 import useCustomUseNavigate from "@/navigation/hooks/useCustomUseNavigate";
-import type { ItemCategoryType } from "@/components/context/types";
 import type { ItemStringType } from "@/types/types";
+import { ChevronRight, SquareTerminal } from "lucide-react";
 
 const getIcon = (value: string) => {
   switch (value) {
@@ -35,7 +34,7 @@ const getIcon = (value: string) => {
 
 export default function ComputiationItem({
   item,
-}: { item: ItemCategoryType | ItemStringType}) {
+}: { item: ItemCategoryType | ItemStringType }) {
   const Icon = getIcon(item.value);
   const { selectedCalculationId } = usePageTypeContext();
   const navigate = useCustomUseNavigate();
@@ -61,12 +60,12 @@ export default function ComputiationItem({
                   <SidebarMenuSubButton
                     asChild
                     isActive={subItem.value === selectedCalculationId}
+                    onClick={() =>
+                      navigate({ selectedCalculationId: item.value })
+                    }
+                    className="cursor-pointer"
                   >
-                    <CustomLink
-                      changedData={{ selectedCalculationId: subItem.value }}
-                    >
-                      <span>{subItem.label}</span>
-                    </CustomLink>
+                    <span>{subItem.label}</span>
                   </SidebarMenuSubButton>
                 </SidebarMenuSubItem>
               ))}
@@ -80,17 +79,15 @@ export default function ComputiationItem({
   return (
     <>
       <SidebarMenuItem>
-        <SidebarMenuItem>
-          <SidebarMenuButton
-            className="data-[state=open]:bg-main data-[state=open]:outline-border data-[state=open]:text-main-foreground"
-            tooltip={item.label}
-            isActive={item.value === selectedCalculationId}
-            onClick={() => navigate({ selectedCalculationId: item.value })}
-          >
-            <Icon />
-            <span>{item.label}</span>
-          </SidebarMenuButton>
-        </SidebarMenuItem>
+        <SidebarMenuButton
+          className="data-[state=open]:bg-main data-[state=open]:outline-border data-[state=open]:text-main-foreground"
+          tooltip={item.label}
+          isActive={item.value === selectedCalculationId}
+          onClick={() => navigate({ selectedCalculationId: item.value })}
+        >
+          <Icon />
+          <span>{item.label}</span>
+        </SidebarMenuButton>
       </SidebarMenuItem>
       <SelectSeparator />
     </>

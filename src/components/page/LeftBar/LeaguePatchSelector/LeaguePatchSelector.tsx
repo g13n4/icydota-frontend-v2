@@ -58,7 +58,7 @@ export default function LeaguePatchSelector() {
                   className="data-[state=open]:bg-main data-[state=open]:text-main-foreground data-[state=open]:outline-border data-[state=open]:outline-2"
                 >
                   <div className="grid flex-1 text-center text-xl leading-tight">
-                    <span className="truncate font-heading">
+                    <span className="font-heading">
                       {activeTeam.label}
                     </span>
                   </div>

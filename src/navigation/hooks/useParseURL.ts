@@ -1,13 +1,15 @@
 import { PageTypeDefaultState } from "@/components/context/DataTypeChoiceProvider";
 import { useParams, useSearchParams } from "react-router";
 import type {
+  OptionalPageTypeType,
   PageTypeType,
   leaguePachTypeType,
   selectedDataFormatType,
   selectedPTType,
 } from "src/components/context/types";
+import { compareVals } from "./helpers";
 
-export default function useParseURL(): PageTypeType {
+export default function useParseURL(props: OptionalPageTypeType): PageTypeType {
   const {
     leaguePachType,
     leaguePatchId,
@@ -24,15 +26,23 @@ export default function useParseURL(): PageTypeType {
   const mcomp = searchParams.get("mcomp"); // selectedComparisonType
   const ccfield = searchParams.get("field"); // selectedComparisonType
   const gstate = searchParams.get("gstate"); // selectedLaneOrGame
-  
-  const isMatch = dataType === "match";
-  const isAggregation = dataType === "aggregation";
-  const isCrossComparison = dataType === "cross-comparison";
+
+  const isMatch = compareVals(props.selectedDataFormat, dataType, "match");
+  const isAggregation = compareVals(
+    props.selectedDataFormat,
+    dataType,
+    "aggregation",
+  );
+  const isCrossComparison = compareVals(
+    props.selectedDataFormat,
+    dataType,
+    "cross-comparison",
+  );
 
   const isLeagueMode = leaguePachType === "league";
 
   return {
-    isMatchOne: isMatch && !!dataTypeValue,
+    isMatchOne: (isMatch && !!dataTypeValue) as boolean,
     isMatchAll: isMatch && !dataTypeValue,
     isAggregation: isAggregation,
     isCrossComparison: isCrossComparison,
@@ -64,7 +74,9 @@ export default function useParseURL(): PageTypeType {
       : PageTypeDefaultState.selectedComparisonType,
 
     selectedDataFormat: dataType as selectedDataFormatType,
-    selectedLaneOrGame: gstate ? gstate : PageTypeDefaultState.selectedLaneOrGame,
+    selectedLaneOrGame: gstate
+      ? gstate
+      : PageTypeDefaultState.selectedLaneOrGame,
 
     selectedAggregationType:
       isAggregation && dataTypeValue
@@ -81,5 +93,6 @@ export default function useParseURL(): PageTypeType {
     selectedCrossComparisonField: ccfield
       ? ccfield
       : PageTypeDefaultState.selectedCrossComparisonField,
+    ...props,
   };
 }

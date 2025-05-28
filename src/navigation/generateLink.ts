@@ -1,8 +1,7 @@
 import type { PageTypeType } from "src/components/context/types";
 
 export default function generateLink({ data }: { data: PageTypeType }): string {
-  const LoPPart = `${data.leaguePachType}/
-    ${data.leaguePachType === "patch" ? data.selectedPatchId : data.selectedLeagueId}`;
+  const LoPPart = `/${data.leaguePachType}/${data.leaguePachType === "patch" ? data.selectedPatchId : data.selectedLeagueId}`;
 
   const linkStart = `${LoPPart}/${data.selectedPT}/${data.selectedDataFormat}`;
 

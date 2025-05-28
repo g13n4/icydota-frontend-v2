@@ -1,15 +1,13 @@
 import { PageTypeContext } from "./components/context/DataTypeChoiceProvider";
 import { HelperProvider } from "./components/context/HelperProvider";
+import type { OptionalPageTypeType } from "./components/context/types";
 import Page from "./components/page/Page";
 import { SidebarProvider } from "./components/ui/sidebar";
 import useParseURL from "./navigation/hooks/useParseURL";
 
-type appType = { match: number };
 
-function App({ match }: appType) {
-  const data = useParseURL();
-  console.log(match)
-  console.log(data)
+function App(props: OptionalPageTypeType) {
+  const data = useParseURL(props);
 
   return (
     <PageTypeContext value={data}>

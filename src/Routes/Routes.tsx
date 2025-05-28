@@ -1,39 +1,31 @@
 import App from "@/App";
+import { selectedDataFormatEnum } from "@/types/enums";
 import { createBrowserRouter } from "react-router";
 import DefaultRoute from "./DefaultRoute";
 
 const leaguePatchMatcher = "/:leaguePachType/:leaguePatchId";
 const playerTeamMatcher = ":playerTeamType";
 // dataTypeValue is a match id here
-const dataTypeMatcherMatch = ":dataType/:dataTypeValue";
-// dataTypeValue is a type of aggregation of cross-comparison
-const dataTypeMatcherOther = ":dataType/:dataTypeValue";
-const calculationMatcher = ":calcId";
-
-
 
 const router = createBrowserRouter([
   {
-    path: [leaguePatchMatcher, playerTeamMatcher, ":dataType"].join(
-      "/",
-    ),
-    element: <App match={1} />,
+    path: `${leaguePatchMatcher}/${playerTeamMatcher}/match/:dataTypeValue/:calcId`,
+    element: <App selectedDataFormat={selectedDataFormatEnum.MATCH} />,
   },
   {
-    path: [leaguePatchMatcher, playerTeamMatcher, dataTypeMatcherMatch, calculationMatcher].join(
-      "/",
-    ),
-    element: <App match={2} />,
+    path: `${leaguePatchMatcher}/${playerTeamMatcher}/match`,
+    element: <App selectedDataFormat={selectedDataFormatEnum.MATCH} />,
   },
-  
+
   {
-    path: [
-      leaguePatchMatcher,
-      playerTeamMatcher,
-      dataTypeMatcherOther,
-      calculationMatcher,
-    ].join("/"),
-    element: <App match={3} />,
+    path: `${leaguePatchMatcher}/${playerTeamMatcher}/aggregation/:dataTypeValue/:calcId`,
+    element: <App selectedDataFormat={selectedDataFormatEnum.AGGREGATION} />,
+  },
+  {
+    path: `${leaguePatchMatcher}/${playerTeamMatcher}/cross-comparison/:dataTypeValue/:calcId`,
+    element: (
+      <App selectedDataFormat={selectedDataFormatEnum.CROSS_COMPARISON} />
+    ),
   },
   {
     path: "/*",

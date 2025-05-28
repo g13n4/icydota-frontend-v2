@@ -1,9 +1,5 @@
-import type {
-  PageTypeType
-} from "src/components/context/types";
+import type { PageTypeType } from "src/components/context/types";
 
-// DEPRECATED: Решил, что буду просто выставлять
-// это в значениях которые передаются для navigate
 export default function generateState({
   data,
 }: { data: PageTypeType }): PageTypeType {
