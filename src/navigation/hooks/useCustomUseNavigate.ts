@@ -3,7 +3,7 @@ import { useNavigate } from "react-router";
 import type {
   OptionalPageTypeType,
 } from "src/components/context/types";
-import generateLink from "../generateLink";
+import generateLink from "../generateNavigationLink";
 import generateState from "../generateState";
 import { usePageTypeContext } from "@/components/context/DataTypeChoiceProvider";
 

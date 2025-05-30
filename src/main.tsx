@@ -3,7 +3,7 @@ import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { RouterProvider } from "react-router";
 import useSWR, { SWRConfig } from "swr";
-import router from "./Routes/Routes";
+import router from "./routes/Routes.tsx";
 import {
   InitialData,
   InitialDataContext,

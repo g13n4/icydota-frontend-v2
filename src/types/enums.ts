@@ -3,7 +3,7 @@ enum leaguePachTypeEnum {
   PATCH = "patch",
 }
 
-enum selectedPTEnum {
+enum PlayerTeamEnum {
   PLAYER = "player",
   TEAM = "team",
 }
@@ -33,5 +33,5 @@ enum GameStateEnum {
 
 
 export {
-  GameStateEnum, comparisonEnum, comparisonTypeEnum, leaguePachTypeEnum, selectedDataFormatEnum, selectedPTEnum
+  GameStateEnum, comparisonEnum, comparisonTypeEnum, leaguePachTypeEnum, selectedDataFormatEnum, PlayerTeamEnum
 };

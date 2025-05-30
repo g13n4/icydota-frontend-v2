@@ -2,7 +2,7 @@ import { usePageTypeContext } from "@/components/context/DataTypeChoiceProvider"
 import type { OptionalPageTypeType } from "@/components/context/types";
 import type { PropsWithChildren } from "react";
 import { Link } from "react-router";
-import generateLink from "./generateLink";
+import generateLink from "./generateNavigationLink";
 import generateState from "./generateState";
 import { cn } from "@/lib/utils";
 
