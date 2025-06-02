@@ -1,8 +1,8 @@
 import { usePageTypeContext } from "@/components/context/DataTypeChoiceProvider";
 import { Card } from "@/components/ui/card";
-import DataTable from "./DataTable/Table/Table";
 import DataTableSelectors from "./DataTableSelectors/DataTableSelectors";
 import MatchSelectorPage from "./MatchSelectorPage/MatchSelectorPage";
+import DataTable from "./DataTable/DataTablePage";
 
 export default function RightBar() {
   const { isMatchAll } = usePageTypeContext();

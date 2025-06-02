@@ -28,13 +28,13 @@ function matchUrl(
     `${PoT}`,
     `${matchId}`,
     `${calculationId}`,
-  ].concat("/");
+  ].join("/");
 
   const params = [
     `stage=${stage}`,
     `comparison=${comparison}`,
     `ctype=${comparisonType}`,
-  ].concat("&");
+  ].join("&");
 
   return `${link}?${params}`;
 }
@@ -59,9 +59,12 @@ function aggregationUrl(
     `${id_}`,
     `${calculationId}`,
     `${aggregationType}`,
-  ].concat("/");
+  ].join("/");
 
-  const params = [`stage=${stage}`, `comparison=${comparison}`].concat("&");
+  const params = [
+    `stage=${stage}`, 
+    `comparison=${comparison}`
+  ].join("&");
 
   return `${link}?${params}`;
 }
@@ -88,9 +91,12 @@ function crossComparisonUrl(
     `${calculationId}`,
     `${crossComparisonType}`,
     `${position}`,
-  ].concat("/");
+  ].join("/");
 
-  const params = [`field=${field}`, `comparison=${comparison}`].concat("&");
+  const params = [
+    `field=${field}`, 
+    `comparison=${comparison}`
+  ].concat("&");
 
   return `${link}?${params}`;
 }
