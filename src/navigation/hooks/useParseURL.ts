@@ -41,6 +41,22 @@ export default function useParseURL(props: OptionalPageTypeType): PageTypeType {
 
   const isLeagueMode = leaguePachType === "league";
 
+  const selectedCalculationId = calcId
+    ? calcId.toString()
+    : PageTypeDefaultState.selectedCalculationId;
+
+  const totalSelected = selectedCalculationId === "0";
+
+  const selectedCrossComparisonFieldTotal =
+    ccfield && !totalSelected
+      ? ccfield
+      : PageTypeDefaultState.selectedCrossComparisonFieldTotal;
+
+  const selectedCrossComparisonFieldWindow =
+    ccfield && totalSelected
+      ? ccfield
+      : PageTypeDefaultState.selectedCrossComparisonFieldWindow;
+
   return {
     isMatchOne: (isMatch && !!dataTypeValue) as boolean,
     isMatchAll: isMatch && !dataTypeValue,
@@ -90,9 +106,8 @@ export default function useParseURL(props: OptionalPageTypeType): PageTypeType {
     selectedCrossComparisonPosition: cposition
       ? cposition.toString()
       : PageTypeDefaultState.selectedCrossComparisonPosition,
-    selectedCrossComparisonField: ccfield
-      ? ccfield
-      : PageTypeDefaultState.selectedCrossComparisonField,
+    selectedCrossComparisonFieldTotal: selectedCrossComparisonFieldTotal,
+    selectedCrossComparisonFieldWindow: selectedCrossComparisonFieldWindow,
     ...props,
   };
 }

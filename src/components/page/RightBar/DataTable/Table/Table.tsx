@@ -2,10 +2,11 @@ import { setLang } from "@antv/s2";
 import { SheetComponent } from "@antv/s2-react";
 import "@antv/s2/dist/s2.min.css"
 import { getColours, getTargetColor } from "./helpers";
+import type { TableResponseType } from "./types";
 setLang("en_US");
 
 interface TableType {
-  tableData: Record<string, unknown>;
+  tableData: TableResponseType;
   hoverHighlight: boolean;
   isDarkMode: boolean;
 }
@@ -27,7 +28,7 @@ export default function Table({
       background: tableData.value_mapping.map((item) => {
         return {
           field: item.col,
-          mapping(value) {
+          mapping(value: number | null) {
             const cellColour = getTargetColor(
               colours,
               value,

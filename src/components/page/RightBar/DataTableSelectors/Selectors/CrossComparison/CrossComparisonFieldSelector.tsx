@@ -21,13 +21,22 @@ type CrossComparisonFieldResponse = {
 
 function CrossComparisonFieldSelectorSelectGroup({
   title,
+  isTotalSelected,
   values,
-}: { title: string; values: ItemStringType[] | undefined }) {
+}: {
+  title: string;
+  isTotalSelected: boolean;
+  values: ItemStringType[] | undefined;
+}) {
   const navigate = useCustomUseNavigate();
   if (!values) return null;
 
+  const crossComparisonFieldToChange = isTotalSelected
+    ? "selectedCrossComparisonFieldTotal"
+    : "selectedCrossComparisonFieldWindow";
+
   function navFunc({ value }: { value: string }): void {
-    navigate({ selectedCrossComparisonField: value });
+    navigate({ [crossComparisonFieldToChange]: value });
   }
 
   return (
@@ -47,31 +56,49 @@ function CrossComparisonFieldSelectorSelectGroup({
 }
 
 export default function CrossComparisonFieldSelector() {
-  const { selectedCrossComparisonField } = usePageTypeContext();
+  const {
+    selectedCrossComparisonFieldTotal,
+    selectedCrossComparisonFieldWindow,
+    selectedCalculationId,
+  } = usePageTypeContext();
   const { data, isLoading } = useSWR<CrossComparisonFieldResponse, Error>(
     crossComparisonFieldsUrl,
   );
 
   if (!data || isLoading) return <Select disabled={isLoading} />;
 
+  const isTotalSelected = selectedCalculationId === "0";
+  const selectedField = isTotalSelected
+    ? selectedCrossComparisonFieldTotal
+    : selectedCrossComparisonFieldWindow;
+
   return (
-    <Select defaultValue={selectedCrossComparisonField}>
+    <Select defaultValue={selectedField}>
       <SelectTrigger className="w-full">
         <SelectValue placeholder="Select a field for cross-comparison" />
       </SelectTrigger>
       <SelectContent>
-        <CrossComparisonFieldSelectorSelectGroup
-          title="Totals"
-          values={data?.totals}
-        />
-        <CrossComparisonFieldSelectorSelectGroup
-          title="Lane"
-          values={data?.Lwindows}
-        />
-        <CrossComparisonFieldSelectorSelectGroup
-          title="Game"
-          values={data?.Gwindows}
-        />
+        {isTotalSelected && (
+          <CrossComparisonFieldSelectorSelectGroup
+            title="Totals"
+            isTotalSelected={isTotalSelected}
+            values={data?.totals}
+          />
+        )}
+        {!isTotalSelected && (
+          <>
+            <CrossComparisonFieldSelectorSelectGroup
+              title="Lane"
+              isTotalSelected={isTotalSelected}
+              values={data?.Lwindows}
+            />
+            <CrossComparisonFieldSelectorSelectGroup
+              title="Game"
+              isTotalSelected={isTotalSelected}
+              values={data?.Gwindows}
+            />
+          </>
+        )}
       </SelectContent>
     </Select>
   );

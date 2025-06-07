@@ -24,7 +24,8 @@ const PageTypeDefaultState = {
   selectedDataFormat: "match" as selectedDataFormatType,
 
   selectedAggregationType: "1",
-  selectedCrossComparisonField: "l2",
+  selectedCrossComparisonFieldTotal: "kda",
+  selectedCrossComparisonFieldWindow: "l2",
 
   selectedCrossComparisonType: "1",
   selectedCrossComparisonPosition: "1",

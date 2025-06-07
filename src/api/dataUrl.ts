@@ -1,4 +1,9 @@
 import { PlayerTeamEnum, leaguePachTypeEnum } from "@/types/enums";
+import type {
+  AggregationUrlType,
+  CrossComparisonUrl,
+  MatchUrlType,
+} from "./types";
 
 function getDataSource(
   isLeague: boolean,
@@ -14,14 +19,14 @@ function getDataSource(
 //   return isPlayer ? PlayerTeamEnum.PLAYER : PlayerTeamEnum.TEAM;
 // }
 
-function matchUrl(
-  matchId: string | number,
-  calculationId: string | number,
-  PoT: string,
-  stage: string,
-  comparison: string,
-  comparisonType: string,
-) {
+function matchUrl({
+  matchId,
+  calculationId,
+  PoT,
+  stage,
+  comparison,
+  comparisonType,
+}: MatchUrlType) {
   const link = [
     "data",
     "match",
@@ -30,25 +35,29 @@ function matchUrl(
     `${calculationId}`,
   ].join("/");
 
-  const params = [
-    `stage=${stage}`,
-    `comparison=${comparison}`,
-    `ctype=${comparisonType}`,
-  ].join("&");
+  if (PlayerTeamEnum.PLAYER === PoT) {
+    const params = [
+      `stage=${stage}`,
+      `comp=${comparison}`,
+      `ctype=${comparisonType}`,
+    ].join("&");
+    return `${link}?${params}`;
+  }
+  const params = [`comp=${comparison}`].join("&");
 
   return `${link}?${params}`;
 }
 
-function aggregationUrl(
-  isLeague: boolean,
-  laegueId: string | number,
-  patchId: string | number,
-  PoT: string,
-  calculationId: string | number,
-  aggregationType: string | number,
-  stage: string,
-  comparison: string,
-) {
+function aggregationUrl({
+  isLeague,
+  laegueId,
+  patchId,
+  PoT,
+  calculationId,
+  aggregationType,
+  stage,
+  comparison,
+}: AggregationUrlType) {
   const { LoP, id_ } = getDataSource(isLeague, laegueId, patchId);
 
   const link = [
@@ -58,28 +67,35 @@ function aggregationUrl(
     LoP,
     `${id_}`,
     `${calculationId}`,
-    `${aggregationType}`,
   ].join("/");
 
-  const params = [
-    `stage=${stage}`, 
-    `comparison=${comparison}`
-  ].join("&");
+  if (PlayerTeamEnum.PLAYER === PoT) {
+    const params = [
+      `atype=${aggregationType}`,
+      `stage=${stage}`,
+      `comp=${comparison}`,
+    ].join("&");
+
+    return `${link}?${params}`;
+  }
+
+  const params = [`stage=${stage}`, `comp=${comparison}`].join("&");
 
   return `${link}?${params}`;
 }
 
-function crossComparisonUrl(
-  isLeague: boolean,
-  laegueId: string | number,
-  patchId: string | number,
-  PoT: string,
-  calculationId: string | number,
-  crossComparisonType: string | number,
-  position: string | number,
-  comparison: string,
-  field: string,
-) {
+function crossComparisonUrl({
+  isLeague,
+  laegueId,
+  patchId,
+  PoT,
+  calculationId,
+  crossComparisonType,
+  position,
+  comparison,
+  fieldTotal,
+  fieldWindow,
+}: CrossComparisonUrl) {
   const { LoP, id_ } = getDataSource(isLeague, laegueId, patchId);
 
   const link = [
@@ -89,14 +105,21 @@ function crossComparisonUrl(
     LoP,
     `${id_}`,
     `${calculationId}`,
-    `${crossComparisonType}`,
-    `${position}`,
   ].join("/");
 
-  const params = [
-    `field=${field}`, 
-    `comparison=${comparison}`
-  ].concat("&");
+  const selectedField = calculationId === "0" ? fieldTotal : fieldWindow;
+
+  if (PlayerTeamEnum.PLAYER === PoT) {
+    const params = [
+      `atype=${crossComparisonType}`,
+      `position=${position}`,
+      `field=${selectedField}`,
+      `comp=${comparison}`,
+    ].join("&");
+
+    return `${link}?${params}`;
+  }
+  const params = [`field=${selectedField}`, `comp=${comparison}`].join("&");
 
   return `${link}?${params}`;
 }

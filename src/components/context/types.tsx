@@ -29,7 +29,7 @@ interface PageTypeType {
   selectedLeagueId: string | null;
   selectedPatchId: string | null;
 
-  selectedCalculationId: string | string;
+  selectedCalculationId: string;
 
   selectedPT: selectedPTType; // Player or Team
 
@@ -42,7 +42,8 @@ interface PageTypeType {
 
   selectedCrossComparisonType: string;
   selectedCrossComparisonPosition: string; // query param
-  selectedCrossComparisonField: string; // query param
+  selectedCrossComparisonFieldTotal: string; // query param
+  selectedCrossComparisonFieldWindow: string; // query param
 }
 
 type OptionalPageTypeType = Partial<PageTypeType>;
