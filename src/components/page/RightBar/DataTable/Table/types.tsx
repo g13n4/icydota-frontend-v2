@@ -1,20 +1,4 @@
-interface TableFieldsType {
-  rows: string[];
-  colunbs: string[];
-  values: string[];
-  valueInCols?: boolean;
-}
-
-interface TableMetaItemType {
-  field: string;
-  name: string;
-}
-
-interface TableDataType {
-  fields: TableFieldsType;
-  meta: TableMetaItemType[];
-  windows_data: Record<string, number | null>;
-}
+import type { S2DataConfig } from "@antv/s2";
 
 interface ValueMappingItemType {
   col: string;
@@ -23,7 +7,7 @@ interface ValueMappingItemType {
 }
 
 interface TableResponseType {
-  table_data: TableDataType;
+  table_data: S2DataConfig;
   table_options: Record<string, unknown>;
   value_mapping: ValueMappingItemType[];
 }

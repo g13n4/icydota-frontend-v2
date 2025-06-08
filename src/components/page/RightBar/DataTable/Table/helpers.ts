@@ -33,11 +33,11 @@ function getColours(isDarkTheme: boolean) {
 
 function getTargetColor(
   colours: string[],
-  value: number | null,
+  value: number | string,
   min: number,
   max: number,
 ) {
-  if (Number.isNaN(Number(value)) || null === value) {
+  if (Number.isNaN(Number(value)) || null === value || typeof value === "string") {
     return NANCOLOUR;
   }
   if (min === max && value) {

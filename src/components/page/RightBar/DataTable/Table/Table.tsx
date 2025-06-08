@@ -1,6 +1,7 @@
 import { setLang } from "@antv/s2";
+import type { SheetComponentOptions } from "@antv/s2-react";
 import { SheetComponent } from "@antv/s2-react";
-import "@antv/s2/dist/s2.min.css"
+import "@antv/s2/dist/s2.min.css";
 import { getColours, getTargetColor } from "./helpers";
 import type { TableResponseType } from "./types";
 setLang("en_US");
@@ -18,17 +19,21 @@ export default function Table({
 }: TableType) {
   const colours = getColours(isDarkMode);
 
-  const tableOptions = {
-    layoutWidthType: "colAdaptive",
+  const tableOptions: SheetComponentOptions = {
     interaction: {
       selectedCellsSpotlight: false,
       hoverHighlight: hoverHighlight,
+      resize: {
+        minCellWidth: 40,
+        minCellHeight: 20,
+      },
     },
+    showDefaultHeaderActionIcon: true,
     conditions: {
       background: tableData.value_mapping.map((item) => {
         return {
           field: item.col,
-          mapping(value: number | null) {
+          mapping(value: number | string) {
             const cellColour = getTargetColor(
               colours,
               value,
@@ -44,17 +49,14 @@ export default function Table({
       }),
     },
   };
-  
+
   return (
     <SheetComponent
       dataCfg={tableData.table_data}
-      options={{
-        ...tableOptions,
-      }}
+      options={tableOptions}
       adaptive={{
         width: true,
         height: true,
-        getContainer: () => document.getElementById("dota-data-table"),
       }}
       sheetType="pivot"
       themeCfg={{

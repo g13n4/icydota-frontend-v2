@@ -61,7 +61,7 @@ export default function ComputiationItem({
                     asChild
                     isActive={subItem.value === selectedCalculationId}
                     onClick={() =>
-                      navigate({ selectedCalculationId: item.value })
+                      navigate({ selectedCalculationId: subItem.value })
                     }
                     className="cursor-pointer"
                   >
