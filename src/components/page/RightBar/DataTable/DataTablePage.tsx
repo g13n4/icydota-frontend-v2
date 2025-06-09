@@ -4,7 +4,7 @@ import EmptyTable from "./EmptyTable";
 import Table from "./Table/Table";
 
 export default function DataTable() {
-  const { data, isLoading, error, hoverHighlight } = useGetTableData();
+  const { data, isLoading, error } = useGetTableData();
   const { isDarkMode } = useHelperContext();
 
   if (isLoading) {
@@ -18,7 +18,6 @@ export default function DataTable() {
     return (
       <Table
         tableData={data}
-        hoverHighlight={hoverHighlight}
         isDarkMode={isDarkMode}
       />
     );
