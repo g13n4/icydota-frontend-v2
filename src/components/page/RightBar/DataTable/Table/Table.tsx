@@ -1,7 +1,6 @@
 import { type ThemeName, setLang } from "@antv/s2";
-import type { SheetComponentOptions } from "@antv/s2-react";
-import { SheetComponent } from "@antv/s2-react";
-import "@antv/s2-react/dist/style.min.css";
+import { SheetComponent, type SheetComponentOptions } from "@antv/s2-react";
+import { customBlackPallete, customBlackTheme } from "./customBlackTheme";
 import { getColours, getTargetColor } from "./helpers";
 import type { TableResponseType } from "./types";
 setLang("en_US");
@@ -20,8 +19,13 @@ export default function Table({
   const colours = getColours(isDarkMode);
 
   const tableOptions: SheetComponentOptions = {
+    tooltip: {
+      operation: {
+        trend: true,
+        hiddenColumns: true,
+      },
+    },
     interaction: {
-      selectedCellsSpotlight: false,
       hoverHighlight: hoverHighlight,
     },
     conditions: {
@@ -54,9 +58,16 @@ export default function Table({
         height: true,
       }}
       sheetType="pivot"
-      themeCfg={{
-        name: isDarkMode ? ("colorful" as ThemeName) : ("colorful" as ThemeName),
-      }}
+      themeCfg={
+        isDarkMode
+          ? {
+              theme: customBlackTheme,
+              palette: customBlackPallete,
+            }
+          : {
+              name: "colorful" as ThemeName,
+            }
+      }
     />
   );
 }
