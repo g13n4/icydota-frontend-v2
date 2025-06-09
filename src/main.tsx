@@ -29,7 +29,7 @@ function Main() {
   );
 }
 
-createRoot(document.getElementById("root")!).render(
+createRoot(document.getElementById("root") as HTMLElement).render(
   <StrictMode>
     <SWRConfig value={configSWR}>
       <Main />

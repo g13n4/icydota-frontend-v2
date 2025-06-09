@@ -10,9 +10,8 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@antv/g2": "^5.3.3",
-    "@antv/s2": "^2.4.0",
-    "@antv/s2-react": "^2.2.0",
+    "@antv/s2": "1.56.2",
+    "@antv/s2-react": "1.48.0",
     "@radix-ui/react-avatar": "^1.1.9",
     "@radix-ui/react-collapsible": "^1.1.10",
     "@radix-ui/react-dialog": "^1.1.13",

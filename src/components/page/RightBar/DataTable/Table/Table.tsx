@@ -1,7 +1,7 @@
-import { setLang } from "@antv/s2";
+import { type ThemeName, setLang } from "@antv/s2";
 import type { SheetComponentOptions } from "@antv/s2-react";
 import { SheetComponent } from "@antv/s2-react";
-import "@antv/s2/dist/s2.min.css";
+import "@antv/s2-react/dist/style.min.css";
 import { getColours, getTargetColor } from "./helpers";
 import type { TableResponseType } from "./types";
 setLang("en_US");
@@ -23,12 +23,7 @@ export default function Table({
     interaction: {
       selectedCellsSpotlight: false,
       hoverHighlight: hoverHighlight,
-      resize: {
-        minCellWidth: 40,
-        minCellHeight: 20,
-      },
     },
-    showDefaultHeaderActionIcon: true,
     conditions: {
       background: tableData.value_mapping.map((item) => {
         return {
@@ -60,8 +55,9 @@ export default function Table({
       }}
       sheetType="pivot"
       themeCfg={{
-        name: isDarkMode ? "dark" : "colorful",
+        name: isDarkMode ? ("colorful" as ThemeName) : ("colorful" as ThemeName),
       }}
     />
   );
 }
+
