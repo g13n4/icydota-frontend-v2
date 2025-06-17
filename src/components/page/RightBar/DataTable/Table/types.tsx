@@ -13,7 +13,7 @@ interface TableMetaItemType {
 interface TableDataType {
   fields: TableFieldsType;
   meta: TableMetaItemType[];
-  windows_data: Record<string, number | null>;
+  data: Record<string, number | null>;
 }
 
 interface ValueMappingItemType {
@@ -22,10 +22,24 @@ interface ValueMappingItemType {
   max: number;
 }
 
-interface TableResponseType {
-  table_data: TableDataType;
-  table_options: Record<string, unknown>;
-  value_mapping: ValueMappingItemType[];
+type ValueMappingMapType = Record<
+  string,
+  {
+    min: number;
+    max: number;
+  }
+>;
+
+interface AgGridColumnsType {
+  field: string;
+  headerName: string;
+  pinned: string;
 }
 
-export type { TableResponseType };
+interface TableResponseType {
+  data: TableDataType;
+  columns: AgGridColumnsType[];
+  valueMapping: ValueMappingMapType;
+}
+
+export type { TableResponseType, ValueMappingItemType, ValueMappingMapType, AgGridColumnsType };

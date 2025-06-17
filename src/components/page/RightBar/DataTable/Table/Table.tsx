@@ -5,6 +5,7 @@ import {
 } from "ag-grid-community";
 import { AgGridReact } from "ag-grid-react";
 import type { TableResponseType } from "./types";
+import setCellsStyling from "./cellsStyling";
 
 type TableType = {
   tableData: TableResponseType;
@@ -16,10 +17,20 @@ export default function Table({ tableData, isDarkMode }: TableType) {
     isDarkMode ? colorSchemeDark : colorSchemeLightCold,
   );
 
+  const updatedColumnData = setCellsStyling({
+    columnData: tableData.columns,
+    valueMap: tableData.valueMapping,
+    isDarkTheme: isDarkMode,
+  });
+
   return (
     // Data Grid will fill the size of the parent container
-    <div>
-      <AgGridReact rowData={tableData.table_data.windows_data} theme={themeBalham} />
+    <div className="h-96">
+      <AgGridReact
+        columnDefs={updatedColumnData}
+        rowData={tableData.data.data}
+        theme={themeBalham}
+      />
     </div>
   );
 }
