@@ -23,7 +23,7 @@ export default function LeaguePatchSelectorMenu({
   const navigate = useCustomUseNavigate();
 
   const isLP = menuType === "league";
-  const valueKey = isLP ? "selectedLeagueId" : "selectedCalculationId";
+  const valueKey = isLP ? "selectedLeagueId" : "selectedPatchId";
 
   return (
     <>

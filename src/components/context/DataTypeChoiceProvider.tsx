@@ -27,6 +27,8 @@ const PageTypeDefaultState = {
   selectedCrossComparisonFieldTotal: "kda",
   selectedCrossComparisonFieldWindow: "l2",
 
+
+  selectedCrossComparisonComparison: "flat",
   selectedCrossComparisonType: "1",
   selectedCrossComparisonPosition: "1",
 };

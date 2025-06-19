@@ -12,7 +12,7 @@ function CardBase({ children, className }: CardInterface) {
 
 function CardBottom({ children, className }: CardInterface) {
   return (
-    <CardBase className={cn("h-120 overflow-auto", className)}>
+    <CardBase className={cn("h-120", className)}>
       {children}
     </CardBase>
   );

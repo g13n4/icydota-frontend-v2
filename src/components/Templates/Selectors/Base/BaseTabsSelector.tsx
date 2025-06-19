@@ -19,16 +19,19 @@ export default function BaseTabsSelector({
   classNameMain,
   navigateFunc,
 }: BaseTabsType) {
-  const tabSize = data.length;
+  const tabDirection =
+    orientation === "horizontal"
+      ? "auto-cols-fr grid-flow-col"
+      : "auto-rows-fr grid-flow-row";
   return (
     <Tabs orientation={orientation} value={value} className={classNameMain}>
-      <TabsList className={cn(`grid grid-cols-${tabSize} border-0`, className)}>
+      <TabsList className={cn("grid  border-0", tabDirection, className)}>
         {data.map((item) => {
           return (
             <TabsTrigger
               key={item.value}
               value={item.value}
-              onClick={() => navigateFunc({value: item.value})}
+              onClick={() => navigateFunc({ value: item.value })}
             >
               {item.label}
             </TabsTrigger>

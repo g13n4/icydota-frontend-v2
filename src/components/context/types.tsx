@@ -40,6 +40,7 @@ interface PageTypeType {
 
   selectedAggregationType: number | string;
 
+  selectedCrossComparisonComparison: string; // query param
   selectedCrossComparisonType: string;
   selectedCrossComparisonPosition: string; // query param
   selectedCrossComparisonFieldTotal: string; // query param

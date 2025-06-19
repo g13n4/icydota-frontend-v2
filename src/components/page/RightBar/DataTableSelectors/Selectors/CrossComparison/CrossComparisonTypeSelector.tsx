@@ -25,6 +25,7 @@ export default function CrossComparisonTypeSelector({
       fieldName="selectedCrossComparisonType"
       data={data}
       className={className}
+      orientation="horizontal"
     />
   );
 }

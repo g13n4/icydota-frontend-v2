@@ -22,6 +22,7 @@ export default function ComparisonTypeSelector({
       fieldName="selectedComparisonType"
       data={data}
       className={className}
+      orientation="horizontal"
     />
   );
 }

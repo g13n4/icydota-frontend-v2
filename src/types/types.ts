@@ -1,10 +1,10 @@
 import type {
+  GameStateEnum,
+  PlayerTeamEnum,
   comparisonEnum,
   comparisonTypeEnum,
-  GameStateEnum,
   leaguePachTypeEnum,
   selectedDataFormatEnum,
-  selectedPTEnum,
 } from "./enums";
 
 interface ItemNymericType {
@@ -18,21 +18,22 @@ interface ItemStringType {
 }
 
 type leaguePachTypeType = `${leaguePachTypeEnum}`;
-type selectedPTType = `${selectedPTEnum}`;
+type selectedPTType = `${PlayerTeamEnum}`;
 type selectedDataFormatType = `${selectedDataFormatEnum}`;
 
 type comparisonTypeType = `${comparisonTypeEnum}`;
 type comparisonType = `${comparisonEnum}`;
 
-type gameStateType = `${GameStateEnum}`
+type gameStateType = `${GameStateEnum}`;
 
 export type {
   gameStateType,
-  comparisonType, comparisonTypeType,
+  comparisonType,
+  comparisonTypeType,
   ItemNymericType,
   ItemStringType,
   leaguePachTypeType,
   selectedDataFormatType,
-  selectedPTType
+  selectedPTType,
 };
 

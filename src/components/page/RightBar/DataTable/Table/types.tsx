@@ -1,21 +1,3 @@
-interface TableFieldsType {
-  rows: string[];
-  colunbs: string[];
-  values: string[];
-  valueInCols?: boolean;
-}
-
-interface TableMetaItemType {
-  field: string;
-  name: string;
-}
-
-interface TableDataType {
-  fields: TableFieldsType;
-  meta: TableMetaItemType[];
-  data: Record<string, number | null>;
-}
-
 interface ValueMappingItemType {
   col: string;
   min: number;
@@ -37,9 +19,14 @@ interface AgGridColumnsType {
 }
 
 interface TableResponseType {
-  data: TableDataType;
+  data: Record<string, number | null>;
   columns: AgGridColumnsType[];
   valueMapping: ValueMappingMapType;
 }
 
-export type { TableResponseType, ValueMappingItemType, ValueMappingMapType, AgGridColumnsType };
+export type {
+  AgGridColumnsType, TableResponseType,
+  ValueMappingItemType,
+  ValueMappingMapType
+};
+

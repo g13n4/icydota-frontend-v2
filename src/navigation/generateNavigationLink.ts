@@ -27,7 +27,7 @@ export default function generateNavigationLink({
       ? data.selectedCrossComparisonFieldTotal
       : data.selectedCrossComparisonFieldWindow;
 
-    const params = `comp=${data.selectedComparison}&field=${selectedCrossComparisonField}&cposition=${data.selectedCrossComparisonPosition}`;
+    const params = `comp=${data.selectedCrossComparisonComparison}&field=${selectedCrossComparisonField}&cposition=${data.selectedCrossComparisonPosition}`;
     return `${linkStart}/${linkEnding}?${params}`;
   }
 

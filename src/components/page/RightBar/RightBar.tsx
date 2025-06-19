@@ -1,10 +1,11 @@
 import { usePageTypeContext } from "@/components/context/DataTypeChoiceProvider";
 import { Card } from "@/components/ui/card";
+import { memo } from "react";
+import DataTable from "./DataTable/DataTablePage";
 import DataTableSelectors from "./DataTableSelectors/DataTableSelectors";
 import MatchSelectorPage from "./MatchSelectorPage/MatchSelectorPage";
-import DataTable from "./DataTable/DataTablePage";
 
-export default function RightBar() {
+const RightBar = memo(function RightBar() {
   const { isMatchAll } = usePageTypeContext();
 
   if (isMatchAll) {
@@ -17,4 +18,6 @@ export default function RightBar() {
       <DataTable />
     </Card>
   );
-}
+});
+
+export default RightBar;

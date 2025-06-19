@@ -1,34 +1,27 @@
 import CustomTabsSelector from "@/components/Templates/Selectors/CustomTabsSelector";
-import { comparisonEnum } from "@/types/enums";
+import { crossComparisonComparisonEnum } from "@/types/enums";
 import type { List } from "@radix-ui/react-tabs";
 import type { ComponentProps } from "react";
 
-comparisonEnum
-
 const data = [
   {
-    value: comparisonEnum.NONE,
-    label: "None",
-  },
-  {
-    value: comparisonEnum.FLAT,
+    value: crossComparisonComparisonEnum.FLAT,
     label: "Flat",
   },
   {
-    value: comparisonEnum.PERCENT,
+    value: crossComparisonComparisonEnum.PERCENT,
     label: "Percent",
   },
 ];
 
-export default function ComparisonSelector({
+export default function CrossComparisonComparisonSelector({
   className,
 }: ComponentProps<typeof List>) {
   return (
     <CustomTabsSelector
-      fieldName="selectedComparison"
+      fieldName="selectedCrossComparisonComparison"
       data={data}
       className={className}
-      orientation="horizontal"
     />
   );
 }

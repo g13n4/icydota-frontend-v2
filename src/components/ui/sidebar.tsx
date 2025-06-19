@@ -206,7 +206,7 @@ function Sidebar({
 
   return (
     <div
-      className="group peer hidden md:block"
+      className="group peer hidden md:block gap-6 grid-rows-2"
       data-state={state}
       data-collapsible={state === "collapsed" ? collapsible : ""}
       data-variant={variant}

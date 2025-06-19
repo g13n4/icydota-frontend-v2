@@ -7,8 +7,9 @@ import CrossComparisonTypeSelector from "./Selectors/CrossComparison/CrossCompar
 import ComparisonTypeSelector from "./Selectors/Match/ComparisonTypeSelector";
 import MatchSelector from "./Selectors/Match/MatchSelector";
 import WindowsTypeSelector from "./Selectors/WindowsTypeSelector";
+import CrossComparisonComparisonSelector from "./Selectors/CrossComparison/CrossComparisonComparisonSelector";
 
-const gridTheme = "grid grid-cols-6 gap-2 p-2";
+const gridTheme = "grid grid-cols-5 gap-2 p-2";
 
 export default function DataTableSelectors() {
   const { selectedDataFormat } = usePageTypeContext();
@@ -37,9 +38,7 @@ export default function DataTableSelectors() {
       <CrossComparisonPositionSelector />
       <CrossComparisonTypeSelector />
       <CrossComparisonFieldSelector />
-      <ComparisonSelector />
+      <CrossComparisonComparisonSelector />
     </div>
   );
 }
-
-

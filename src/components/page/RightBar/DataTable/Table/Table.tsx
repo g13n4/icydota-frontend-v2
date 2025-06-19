@@ -25,13 +25,14 @@ export default function Table({ tableData, isDarkMode }: TableType) {
 
   return (
     // Data Grid will fill the size of the parent container
-    <div className="h-96">
+    <div className="h-186">
       <AgGridReact
+        className="h-auto w-auto"
         columnDefs={updatedColumnData}
-        rowData={tableData.data.data}
-        theme={themeBalham}
+        rowData={tableData.data}
+        theme={theme}
       />
     </div>
-  );
+  );  
 }
 

@@ -35,7 +35,7 @@ export default function generateTableDataLink({
       calculationId: data.selectedCalculationId,
       crossComparisonType: data.selectedCrossComparisonType,
       position: data.selectedCrossComparisonPosition,
-      comparison: data.selectedComparison,
+      comparison: data.selectedCrossComparisonComparison,
       fieldTotal: data.selectedCrossComparisonFieldTotal,
       fieldWindow: data.selectedCrossComparisonFieldWindow,
     });

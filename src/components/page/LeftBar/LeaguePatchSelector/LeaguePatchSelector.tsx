@@ -59,7 +59,7 @@ export default function LeaguePatchSelector() {
                 >
                   <div className="grid flex-1 text-center text-xl leading-tight">
                     <span className="font-heading">
-                      {activeTeam.label}
+                      {isLP ? "" : "Patch: "}{activeTeam.label}
                     </span>
                   </div>
                   <ChevronsUpDown className="ml-auto" />

@@ -84,7 +84,10 @@ export default function useParseURL(props: OptionalPageTypeType): PageTypeType {
       isMatch && dataTypeValue
         ? Number.parseInt(dataTypeValue)
         : PageTypeDefaultState.selectedMatchId,
-    selectedComparison: comp ? comp : PageTypeDefaultState.selectedComparison,
+    selectedComparison:
+      comp && !isCrossComparison
+        ? comp
+        : PageTypeDefaultState.selectedComparison,
     selectedComparisonType: mcomp
       ? mcomp
       : PageTypeDefaultState.selectedComparisonType,
@@ -99,6 +102,10 @@ export default function useParseURL(props: OptionalPageTypeType): PageTypeType {
         ? Number.parseInt(dataTypeValue)
         : PageTypeDefaultState.selectedAggregationType,
 
+    selectedCrossComparisonComparison:
+      comp && isCrossComparison
+        ? comp
+        : PageTypeDefaultState.selectedCrossComparisonComparison,
     selectedCrossComparisonType:
       isCrossComparison && dataTypeValue
         ? dataTypeValue.toString()

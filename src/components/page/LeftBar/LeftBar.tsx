@@ -4,9 +4,9 @@ import ComputationSelector from "./ComputationSelector/ComputationSelector";
 
 export default function LeftSidebar() {
   return (
-    <Sidebar>
+    <div className="grid grid-flow-row-dense grid-rows-3 gap-2 my-auto">
       <LeaguePatchSelector />
       <ComputationSelector />
-    </Sidebar>
+    </div>
   );
 } 

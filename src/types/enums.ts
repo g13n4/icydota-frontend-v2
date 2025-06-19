@@ -19,6 +19,11 @@ enum comparisonTypeEnum {
   COMPLEX = "complex",
 }
 
+enum crossComparisonComparisonEnum {
+  FLAT = "flat",
+  PERCENT = "perc",
+}
+
 enum comparisonEnum {
   FLAT = "flat",
   PERCENT = "perc",
@@ -30,8 +35,8 @@ enum GameStateEnum {
   GAME = "game",
 }
 
-
-
 export {
-  GameStateEnum, comparisonEnum, comparisonTypeEnum, leaguePachTypeEnum, selectedDataFormatEnum, PlayerTeamEnum
+  comparisonEnum,
+  comparisonTypeEnum, crossComparisonComparisonEnum, GameStateEnum, leaguePachTypeEnum, PlayerTeamEnum, selectedDataFormatEnum
 };
+
