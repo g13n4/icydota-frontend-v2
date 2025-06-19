@@ -47,7 +47,7 @@ export default function LeaguePatchSelector() {
   }
 
   return (
-    <CardTop>
+    <CardTop className="h-20">
       <SidebarHeader>
         <SidebarMenu>
           <SidebarMenuItem>

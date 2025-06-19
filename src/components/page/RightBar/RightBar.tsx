@@ -13,7 +13,7 @@ const RightBar = memo(function RightBar() {
   }
 
   return (
-    <Card className="flex flex-col col-span-4">
+    <Card className="flex flex-col col-span-5">
       <DataTableSelectors />
       <DataTable />
     </Card>

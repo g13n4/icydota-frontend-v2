@@ -7,7 +7,7 @@ export default function DataFormatSelector() {
       orientation="vertical"
       fieldName="selectedDataFormat"
       data={dataFormatSelectorData}
-      className={`grid w-full grid-rows-${dataFormatSelectorData.length} shadow-shadow border-2 `}
+      className={`grid w-full grid-rows-${dataFormatSelectorData.length} shadow-shadow border-2`}
     />
   );
 }
