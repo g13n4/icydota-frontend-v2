@@ -7,7 +7,7 @@ export default function generateState({
   const isAggregation = data.selectedDataFormat === "aggregation";
   const isCrossComparison = data.selectedDataFormat === "cross-comparison";
 
-  const isLeagueMode = data.leaguePachType === "league";
+  const isLeagueMode = data.LoPType === "league";
 
   return {
     ...data,

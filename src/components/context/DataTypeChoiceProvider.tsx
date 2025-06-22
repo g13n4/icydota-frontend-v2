@@ -1,5 +1,5 @@
 import { createContext, useContext } from "react";
-import type { leaguePachTypeType, PageTypeType, selectedDataFormatType, selectedPTType } from "./types";
+import type { LoPTypeType, PageTypeType, selectedDataFormatType, selectedPTType } from "./types";
 
 const PageTypeDefaultState = {
   isMatchOne: false,
@@ -8,7 +8,7 @@ const PageTypeDefaultState = {
   isCrossComparison: false,
 
   isLP: true, // if False patch is selected if True League
-  leaguePachType: "league" as leaguePachTypeType,
+  LoPType: "league" as LoPTypeType,
 
   selectedLeagueId: null,
   selectedPatchId: null,

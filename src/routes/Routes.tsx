@@ -3,7 +3,7 @@ import { selectedDataFormatEnum } from "@/types/enums";
 import { createBrowserRouter } from "react-router";
 import DefaultRoute from "./DefaultRoute";
 
-const leaguePatchMatcher = "/:leaguePachType/:leaguePatchId";
+const leaguePatchMatcher = "/:LoPType/:leaguePatchId";
 const playerTeamMatcher = ":playerTeamType";
 // dataTypeValue is a match id here
 

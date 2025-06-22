@@ -5,7 +5,8 @@ const InitialData = {
   computations: [],
   patch: [],
   league: [],
-}
+
+};
 
 const InitialDataContext = createContext<InitialDataType>(InitialData);
 
@@ -13,5 +14,5 @@ function useInitialDataContext(): InitialDataType {
   return useContext(InitialDataContext);
 }
 
-export { InitialDataContext, useInitialDataContext, InitialData };
+export { InitialData, InitialDataContext, useInitialDataContext };
 

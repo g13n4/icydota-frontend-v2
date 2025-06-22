@@ -3,7 +3,7 @@ import { useParams, useSearchParams } from "react-router";
 import type {
   OptionalPageTypeType,
   PageTypeType,
-  leaguePachTypeType,
+  LoPTypeType,
   selectedDataFormatType,
   selectedPTType,
 } from "src/components/context/types";
@@ -11,7 +11,7 @@ import { compareVals } from "./helpers";
 
 export default function useParseURL(props: OptionalPageTypeType): PageTypeType {
   const {
-    leaguePachType,
+    LoPType,
     leaguePatchId,
     playerTeamType,
     dataType,
@@ -39,7 +39,7 @@ export default function useParseURL(props: OptionalPageTypeType): PageTypeType {
     "cross-comparison",
   );
 
-  const isLeagueMode = leaguePachType === "league";
+  const isLeagueMode = LoPType === "league";
 
   const selectedCalculationId = calcId
     ? calcId.toString()
@@ -64,7 +64,7 @@ export default function useParseURL(props: OptionalPageTypeType): PageTypeType {
     isCrossComparison: isCrossComparison,
 
     isLP: isLeagueMode, // if False patch is selected if True League
-    leaguePachType: leaguePachType as leaguePachTypeType,
+    LoPType: LoPType as LoPTypeType,
 
     selectedLeagueId:
       isLeagueMode && leaguePatchId

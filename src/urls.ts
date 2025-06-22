@@ -1,9 +1,22 @@
-import type { leaguePachTypeType } from "./types/types";
+import type { LoPTypeType } from "./types/types";
 
 const initialDataUrl = "initial";
 const crossComparisonFieldsUrl = "cross-comparison/fields";
-const leagueMatchesUrl = (leagueId: string | number | null) => `league/${leagueId}`;
-const allMatchesUrl = (type_: leaguePachTypeType, id_: number | string) =>
-  `all/${type_}/${id_}`;
+const leagueMatchesUrl = (leagueId: string | number | null) =>
+  `league/${leagueId}`;
+const allMatchesUrl = (
+  type_: LoPTypeType,
+  id_: number | string | null,
+  limit: number | string,
+  offset: number | string,
+) => `all/${type_}/${id_}?limit=${limit}&offset=${offset}`;
 
-export { initialDataUrl, crossComparisonFieldsUrl, leagueMatchesUrl, allMatchesUrl };
+const steamLink = (link: string) =>
+  `https://cdn.cloudflare.steamstatic.com/${link}`;
+
+export {
+  allMatchesUrl, crossComparisonFieldsUrl,
+  initialDataUrl,
+  leagueMatchesUrl, steamLink
+};
+

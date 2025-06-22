@@ -1,6 +1,6 @@
 import type {
   ItemStringType,
-  leaguePachTypeType,
+  LoPTypeType,
   selectedDataFormatType,
   selectedPTType,
 } from "@/types/types";
@@ -24,7 +24,7 @@ interface PageTypeType {
   selectedDataFormat: selectedDataFormatType;
 
   isLP: boolean; // if False patch is selected if True League
-  leaguePachType: leaguePachTypeType;
+  LoPType: LoPTypeType;
 
   selectedLeagueId: string | null;
   selectedPatchId: string | null;
@@ -56,17 +56,24 @@ interface ItemCategoryType {
   items: ItemStringType[];
 }
 
+interface NameMapType {
+  heroes: Record<string, string>;
+  facets: Record<string, string>;
+  sideCalc: Record<string, string>;
+}
+
 interface InitialDataType {
   computations: ItemStringType[];
   patch: ItemStringType[];
   league: ItemStringType[];
+
 }
 
 export type {
   ItemCategoryType,
   HelperContextType,
   InitialDataType,
-  leaguePachTypeType,
+  LoPTypeType,
   OptionalPageTypeType,
   PageTypeType,
   selectedDataFormatType,

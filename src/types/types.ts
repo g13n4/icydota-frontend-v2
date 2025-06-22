@@ -17,7 +17,7 @@ interface ItemStringType {
   value: string;
 }
 
-type leaguePachTypeType = `${leaguePachTypeEnum}`;
+type LoPTypeType = `${leaguePachTypeEnum}`;
 type selectedPTType = `${PlayerTeamEnum}`;
 type selectedDataFormatType = `${selectedDataFormatEnum}`;
 
@@ -32,7 +32,7 @@ export type {
   comparisonTypeType,
   ItemNymericType,
   ItemStringType,
-  leaguePachTypeType,
+  LoPTypeType,
   selectedDataFormatType,
   selectedPTType,
 };

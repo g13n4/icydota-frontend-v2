@@ -7,6 +7,12 @@ const axiosInstance = axios.create({
   baseURL: API_URL,
 });
 
+const axiosInfiniteFetcher = (url: string) =>
+  axiosInstance
+    .get(url)
+    .then((res) => res.data)
+    .then((data) => data.data);
+
 function getSWRConfig(isDebugMode: boolean) {
   if (isDebugMode) {
     return {
@@ -34,5 +40,5 @@ function getSWRConfig(isDebugMode: boolean) {
 
 const configSWR = getSWRConfig(DEBUG_MDOE);
 
-export { API_URL, configSWR, DEBUG_MDOE };
+export { API_URL, configSWR, DEBUG_MDOE, axiosInfiniteFetcher };
 

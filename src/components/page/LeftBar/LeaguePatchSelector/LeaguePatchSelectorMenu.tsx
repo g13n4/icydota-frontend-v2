@@ -1,6 +1,6 @@
 import type {
   ItemStringType,
-  leaguePachTypeType
+  LoPTypeType
 } from "@/types/types";
 
 import {
@@ -35,7 +35,7 @@ export default function LeaguePatchSelectorMenu({
           key={item.value}
           onClick={() =>
             navigate({
-              leaguePachType: menuType as leaguePachTypeType,
+              LoPType: menuType as LoPTypeType,
               isLP,
               [valueKey]: item.value,
             })
