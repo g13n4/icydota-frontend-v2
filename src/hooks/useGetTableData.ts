@@ -14,7 +14,7 @@ export default function useGetTableData(): useGetTableDataResultType {
   const url = generateTableDataLink({ data: stateData });
 
   const { data, isLoading, error } = useSWR<TableResponseType, Error>(url);
-  console.log(url, data, isLoading, error);
+
   return {
     data,
     isLoading,

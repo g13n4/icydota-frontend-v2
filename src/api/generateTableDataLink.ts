@@ -11,7 +11,7 @@ export default function generateTableDataLink({
       PoT: data.selectedPT,
       stage: data.selectedLaneOrGame,
       comparison: data.selectedComparison,
-      comparisonType: data.selectedCrossComparisonType,
+      comparisonType: data.selectedComparisonType,
     });
   }
   if (data.isAggregation) {

@@ -33,7 +33,7 @@ interface PageTypeType {
 
   selectedPT: selectedPTType; // Player or Team
 
-  selectedMatchId: number | string;
+  selectedMatchId: string;
   selectedComparison: string; // query param
   selectedComparisonType: string; // query param
   selectedLaneOrGame: string; // query param

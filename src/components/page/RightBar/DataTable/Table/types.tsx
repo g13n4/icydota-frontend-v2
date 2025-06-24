@@ -18,14 +18,22 @@ interface AgGridColumnsType {
   pinned: string;
 }
 
+interface MatchNamingDataType {
+  direName: string;
+  sentName: string;
+  hasDireWon: boolean;
+}
+
 interface TableResponseType {
   data: Record<string, number | null>;
   columns: AgGridColumnsType[];
   valueMapping: ValueMappingMapType;
+  MatchNamingData?: MatchNamingDataType;
 }
 
 export type {
-  AgGridColumnsType, TableResponseType,
+  AgGridColumnsType,
+  TableResponseType,
   ValueMappingItemType,
   ValueMappingMapType
 };

@@ -5,11 +5,11 @@ import CrossComparisonFieldSelector from "./Selectors/CrossComparison/CrossCompa
 import CrossComparisonPositionSelector from "./Selectors/CrossComparison/CrossComparisonPositionSelector";
 import CrossComparisonTypeSelector from "./Selectors/CrossComparison/CrossComparisonTypeSelector";
 import ComparisonTypeSelector from "./Selectors/Match/ComparisonTypeSelector";
-import MatchSelector from "./Selectors/Match/MatchSelector";
 import WindowsTypeSelector from "./Selectors/WindowsTypeSelector";
 import CrossComparisonComparisonSelector from "./Selectors/CrossComparison/CrossComparisonComparisonSelector";
+import MatchSelectorV2 from "./Selectors/Match/MatchSelectorV2";
 
-const gridTheme = "grid grid-cols-5 gap-2 p-2";
+const gridTheme = "grid grid-flow-col-dense gap-2 content-baseline *:border-l-1 *:first:border-0 *:px-2";
 
 export default function DataTableSelectors() {
   const { selectedDataFormat } = usePageTypeContext();
@@ -17,7 +17,7 @@ export default function DataTableSelectors() {
   if (selectedDataFormat === selectedDataFormatEnum.MATCH) {
     return (
       <div className={gridTheme}>
-        <MatchSelector />
+        <MatchSelectorV2 />
         <ComparisonSelector />
         <ComparisonTypeSelector />
         <WindowsTypeSelector />
@@ -35,9 +35,9 @@ export default function DataTableSelectors() {
 
   return (
     <div className={gridTheme}>
+      <CrossComparisonFieldSelector />
       <CrossComparisonPositionSelector />
       <CrossComparisonTypeSelector />
-      <CrossComparisonFieldSelector />
       <CrossComparisonComparisonSelector />
     </div>
   );

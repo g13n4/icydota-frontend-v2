@@ -82,7 +82,7 @@ export default function useParseURL(props: OptionalPageTypeType): PageTypeType {
 
     selectedMatchId:
       isMatch && dataTypeValue
-        ? Number.parseInt(dataTypeValue)
+        ? dataTypeValue
         : PageTypeDefaultState.selectedMatchId,
     selectedComparison:
       comp && !isCrossComparison

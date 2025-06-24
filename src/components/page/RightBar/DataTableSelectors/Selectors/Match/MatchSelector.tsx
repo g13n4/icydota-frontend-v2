@@ -8,7 +8,7 @@ import useSWR from "swr";
 export default function MatchSelector({ className }: { className?: string }) {
   const { selectedLeagueId } = usePageTypeContext();
 
-  const { data, isLoading } = useSWR<ItemStringType[], Error>(
+  const { data, isLoading } = useSWR<{ games: ItemStringType[] }, Error>(
     leagueMatchesUrl(selectedLeagueId),
   );
 
@@ -17,7 +17,7 @@ export default function MatchSelector({ className }: { className?: string }) {
     <CustomSelector
       fieldName="selectedMatchId"
       title="Select match"
-      data={data}
+      data={data.games}
       className={className}
     />
   );
