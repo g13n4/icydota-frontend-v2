@@ -1,5 +1,4 @@
 import { usePageTypeContext } from "@/components/context/DataTypeChoiceProvider";
-import { Card } from "@/components/ui/card";
 import { allMatchesUrl } from "@/urls";
 import useSWR from "swr";
 import GameCard from "./GameCard/GameCard";
@@ -8,23 +7,43 @@ import type { AllGamesResponse } from "./types";
 const PAGE_SIZE = 48;
 const OFFSET = 0;
 
-
 export default function InfiniteMatchSelectorPage() {
   const { LoPType, isLP, selectedLeagueId, selectedPatchId } =
     usePageTypeContext();
 
   const { data, error, isLoading } = useSWR<AllGamesResponse, Error>(
-    allMatchesUrl(LoPType, isLP ? selectedLeagueId : selectedPatchId, PAGE_SIZE, OFFSET),
+    allMatchesUrl(
+      LoPType,
+      isLP ? selectedLeagueId : selectedPatchId,
+      PAGE_SIZE,
+      OFFSET,
+    ),
   );
 
   if (isLoading || error || !data) return null;
 
   return (
-    <div className="mb-8">
-      <div className="grid grid-cols-4 overflow-scroll gap-2 bg-secondary-background ">
-        {data.data.map((item) => (
-          <GameCard {...item} key={item.id} />
-        ))}
+    <>
+      <div
+        className="
+      flex
+      flex-col
+      h-svh
+      overflow-y-scroll
+      col-span-5"
+      >
+        <div
+          className="
+      grid 
+      xl:grid-cols-4 
+      md:grid-cols-3 
+      gap-2 
+        "
+        >
+          {data.data.map((item) => (
+            <GameCard {...item} key={item.id} />
+          ))}
+        </div>
       </div>
       <div
         className="h-8 w-max text-2xl text-center align-middle"
@@ -33,6 +52,6 @@ export default function InfiniteMatchSelectorPage() {
       >
         Load More
       </div>
-    </div>
+    </>
   );
 }

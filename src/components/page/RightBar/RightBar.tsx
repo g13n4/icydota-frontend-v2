@@ -10,9 +10,7 @@ const RightBar = memo(function RightBar() {
 
   if (isMatchAll) {
     return (
-      <Card className="flex flex-col col-span-5 max-h-[80%]">
         <MatchSelectorPage />
-      </Card>
     );
   }
 
