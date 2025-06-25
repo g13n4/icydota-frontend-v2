@@ -28,13 +28,14 @@ interface TableResponseType {
   data: Record<string, number | null>;
   columns: AgGridColumnsType[];
   valueMapping: ValueMappingMapType;
-  MatchNamingData?: MatchNamingDataType;
+  matchName?: MatchNamingDataType;
 }
 
 export type {
   AgGridColumnsType,
   TableResponseType,
   ValueMappingItemType,
-  ValueMappingMapType
+  ValueMappingMapType,
+  MatchNamingDataType
 };
 

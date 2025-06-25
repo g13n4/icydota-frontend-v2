@@ -21,6 +21,7 @@ export default function setCellsStyling({
           rangeValues?.min,
           rangeValues?.max,
           isDarkTheme,
+          item.field
         );
       },
       ...item,

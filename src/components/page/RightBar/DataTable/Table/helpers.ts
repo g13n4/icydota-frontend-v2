@@ -37,9 +37,9 @@ function getTargetColor(
   min: number,
   max: number,
   isDarkTheme: boolean,
+  colName: string,
 ) {
   const textColour = isDarkTheme ? "white" : "black";
-
   if (
     Number.isNaN(Number(value)) ||
     null === value ||
@@ -47,12 +47,14 @@ function getTargetColor(
   ) {
     return { color: textColour, backgroundColor: NANCOLOUR };
   }
-  if (min === max && value) {
+  if ((min === max && value) || max === value) {
     return { color: textColour, backgroundColor: colours[9] };
+  } 
+  if (min === value) {
+    return { color: textColour, backgroundColor: colours[0] };
   }
 
   const colourIndex = Math.floor(((value - min) / (max - min)) * 10);
-
   return { color: textColour, backgroundColor: colours[colourIndex] };
 }
 
