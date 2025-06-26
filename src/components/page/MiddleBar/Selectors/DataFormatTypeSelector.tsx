@@ -1,4 +1,5 @@
 import { usePageTypeContext } from "@/components/context/DataTypeChoiceProvider";
+import type { PageTypeType } from "@/components/context/types";
 import { Card } from "@/components/ui/card";
 import {
   Select,
@@ -14,33 +15,33 @@ import useCustomUseNavigate from "@/navigation/hooks/useCustomUseNavigate";
 
 export default function DataFormatTypeSelector() {
   const navigate = useCustomUseNavigate();
-  const { selectedDataFormat } = usePageTypeContext();
-  const { isActive, data, dataFormatType } = useDataFormatData({
-    dataType: selectedDataFormat,
-  });
+  const { isActive, data, dataFormatType } = useDataFormatData();
+  const params = usePageTypeContext();
+  const dataFormatValue = params[dataFormatType as keyof PageTypeType];
 
   if (!isActive) {
     return (
       <Card className="h-fit">
         <Select disabled>
           <SelectTrigger className="w-full">
-            <SelectValue placeholder="Select Data Format" />
+            <SelectValue placeholder="No format available" />
           </SelectTrigger>
         </Select>
       </Card>
     );
   }
 
-  function baseFunc({ value }: { value: string }): void {
-    navigate({ [dataFormatType]: value as string });
-  }
-
   return (
     <Card className="h-fit">
-      <Select disabled={!isActive}>
+      <Select
+        defaultValue={dataFormatValue as string}
+        onValueChange={(value) =>
+          navigate({ [dataFormatType as string]: value })
+        }
+      >
         <SelectTrigger className="w-full">
           <SelectValue
-            placeholder="Select Data Format"
+            placeholder="Select data format"
             className="text-center"
           />
         </SelectTrigger>
@@ -51,7 +52,6 @@ export default function DataFormatTypeSelector() {
               <SelectItem
                 key={`data-format-selector-${item.value}`}
                 value={item.value}
-                onClick={() => baseFunc({ value: item.value })}
               >
                 {item.label}
               </SelectItem>
@@ -62,4 +62,3 @@ export default function DataFormatTypeSelector() {
     </Card>
   );
 }
-  

@@ -1,4 +1,3 @@
-import { usePageTypeContext } from "@/components/context/DataTypeChoiceProvider";
 import {
   Select,
   SelectContent,
@@ -8,46 +7,24 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import useDataCrossComparisonField from "@/hooks/useDataCrossComparisonField";
 import useCustomUseNavigate from "@/navigation/hooks/useCustomUseNavigate";
 import type { ItemStringType } from "@/types/types";
-import { crossComparisonFieldsUrl } from "@/urls";
-import useSWR from "swr";
-
-type CrossComparisonFieldResponse = {
-  totals: ItemStringType[];
-  Lwindows: ItemStringType[];
-  Gwindows: ItemStringType[];
-};
+import { useEffect } from "react";
 
 function CrossComparisonFieldSelectorSelectGroup({
   title,
-  isTotalSelected,
   values,
 }: {
   title: string;
   isTotalSelected: boolean;
-  values: ItemStringType[] | undefined;
+  values: ItemStringType[];
 }) {
-  const navigate = useCustomUseNavigate();
-  if (!values) return null;
-
-  const crossComparisonFieldToChange = isTotalSelected
-    ? "selectedCrossComparisonFieldTotal"
-    : "selectedCrossComparisonFieldWindow";
-
-  function navFunc({ value }: { value: string }): void {
-    navigate({ [crossComparisonFieldToChange]: value });
-  }
-
   return (
     <SelectGroup>
       <SelectLabel>{title}</SelectLabel>
       {values.map((item) => (
-        <SelectItem
-          key={item.value}
-          value={item.value}
-          onClick={() => navFunc({ value: item.value })}
-        >
+        <SelectItem key={item.value} value={item.value}>
           {item.label}
         </SelectItem>
       ))}
@@ -55,47 +32,42 @@ function CrossComparisonFieldSelectorSelectGroup({
   );
 }
 
+// TODO: create a hook
+
 export default function CrossComparisonFieldSelector() {
-  const {
-    selectedCrossComparisonFieldTotal,
-    selectedCrossComparisonFieldWindow,
-    selectedCalculationId,
-  } = usePageTypeContext();
-  const { data, isLoading } = useSWR<CrossComparisonFieldResponse, Error>(
-    crossComparisonFieldsUrl,
-  );
+  const navigate = useCustomUseNavigate();
+  const fieldData = useDataCrossComparisonField();
 
-  if (!data || isLoading) return <Select disabled={isLoading} />;
-
-  const isTotalSelected = selectedCalculationId === "0";
-  const selectedField = isTotalSelected
-    ? selectedCrossComparisonFieldTotal
-    : selectedCrossComparisonFieldWindow;
+  if (fieldData.isLoading) return <Select disabled />;
 
   return (
-    <Select defaultValue={selectedField}>
+    <Select
+    key={`cross-comparison-field-selector-${fieldData.isTotal}`}
+      defaultValue={fieldData.currentSelectedField}
+      onValueChange={(value) => navigate({ [fieldData.fieldToChange]: value })}
+    >
       <SelectTrigger className="w-full">
         <SelectValue placeholder="Select a field for cross-comparison" />
       </SelectTrigger>
       <SelectContent>
-        {isTotalSelected && (
+        {fieldData.totals && (
           <CrossComparisonFieldSelectorSelectGroup
             title="Totals"
-            isTotalSelected={isTotalSelected}
-            values={data?.totals}
+            isTotalSelected={fieldData.isTotal}
+            values={fieldData.totals}
           />
         )}
-        {!isTotalSelected && (
+        {fieldData.lWindows && fieldData.gWindows && (
           <>
             <CrossComparisonFieldSelectorSelectGroup
               title="Lane"
-              isTotalSelected={isTotalSelected}
-              values={data?.Lwindows}
+              isTotalSelected={fieldData.isTotal}
+              values={fieldData.lWindows}
             />
             <CrossComparisonFieldSelectorSelectGroup
               title="Game"
-              isTotalSelected={isTotalSelected}
-              values={data?.Gwindows}
+              isTotalSelected={fieldData.isTotal}
+              values={fieldData.gWindows}
             />
           </>
         )}

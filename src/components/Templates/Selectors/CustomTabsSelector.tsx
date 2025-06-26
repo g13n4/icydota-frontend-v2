@@ -8,6 +8,7 @@ import type { TabsProps } from "@radix-ui/react-tabs";
 interface CustomTabsSelectorType extends Pick<TabsProps, "orientation"> {
   className?: string | undefined;
   classNameMain?: string | undefined;
+  disabled?: boolean | undefined;
   fieldName: keyof PageTypeType;
   data: ItemStringType[];
   navigateFunc?: ({ value }: { value: string }) => void;
@@ -20,6 +21,7 @@ export default function CustomTabsSelector({
   classNameMain,
   navigateFunc,
   orientation,
+  disabled,
 }: CustomTabsSelectorType) {
   const { [fieldName]: fieldValue } = usePageTypeContext();
   const navigate = useCustomUseNavigate();
@@ -36,6 +38,7 @@ export default function CustomTabsSelector({
       navigateFunc={navigateFunc || baseFunc}
       className={className}
       classNameMain={classNameMain}
+      disabled={disabled}
     />
   );
 }

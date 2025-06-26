@@ -3,11 +3,10 @@ import { selectedDataFormatEnum } from "@/types/enums";
 import ComparisonSelector from "./Selectors/ComparisonSelector";
 import CrossComparisonFieldSelector from "./Selectors/CrossComparison/CrossComparisonFieldSelector";
 import CrossComparisonPositionSelector from "./Selectors/CrossComparison/CrossComparisonPositionSelector";
-import CrossComparisonTypeSelector from "./Selectors/CrossComparison/CrossComparisonTypeSelector";
 import ComparisonTypeSelector from "./Selectors/Match/ComparisonTypeSelector";
 import WindowsTypeSelector from "./Selectors/WindowsTypeSelector";
 import CrossComparisonComparisonSelector from "./Selectors/CrossComparison/CrossComparisonComparisonSelector";
-import MatchSelectorV2 from "./Selectors/Match/MatchSelectorV2";
+import MatchSelectorV2 from "./Selectors/Match/MatchSelector";
 
 const gridTheme = "grid grid-flow-col-dense gap-2 content-baseline *:border-l-1 *:first:border-0 *:px-2";
 
@@ -37,7 +36,6 @@ export default function DataTableSelectors() {
     <div className={gridTheme}>
       <CrossComparisonFieldSelector />
       <CrossComparisonPositionSelector />
-      <CrossComparisonTypeSelector />
       <CrossComparisonComparisonSelector />
     </div>
   );

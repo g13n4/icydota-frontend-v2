@@ -1,3 +1,4 @@
+import type { PageTypeType } from "@/components/context/types";
 import type { ItemStringType } from "@/types/types";
 
 interface useDataFormatDataType {
@@ -7,7 +8,7 @@ interface useDataFormatDataType {
 interface useDataFormatDataReturnType {
     isActive: boolean;
     data: ItemStringType[];
-    dataFormatType: string;
+    dataFormatType: keyof PageTypeType | null;
   }
   
 

@@ -1,6 +1,6 @@
 interface FacetHeroMap {
   name: string;
-  descriptin: string;
+  description: string;
 }
 
 type FacetsMapType = Record<string, Record<string, FacetHeroMap>>;

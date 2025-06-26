@@ -14,7 +14,6 @@ export default function CustomLink({
 
   const data = generateState({ data: { ...oldData, ...changedData } });
   const navigateLink = generateLink({ data });
-  console.log(navigateLink)
 
   return (
     <Link

@@ -37,7 +37,6 @@ function getTargetColor(
   min: number,
   max: number,
   isDarkTheme: boolean,
-  colName: string,
 ) {
   const textColour = isDarkTheme ? "white" : "black";
   if (

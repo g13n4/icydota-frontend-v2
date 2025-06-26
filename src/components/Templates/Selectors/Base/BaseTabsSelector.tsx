@@ -7,6 +7,7 @@ interface BaseTabsType extends Pick<TabsProps, "orientation"> {
   value?: string;
   data: ItemStringType[];
   className?: string | undefined;
+  disabled?: boolean | undefined;
   classNameMain?: string | undefined;
   navigateFunc: ({ value }: { value: string }) => void;
 }
@@ -17,18 +18,23 @@ export default function BaseTabsSelector({
   orientation = "horizontal",
   className,
   classNameMain,
+  disabled = false,
   navigateFunc,
 }: BaseTabsType) {
   const tabDirection =
     orientation === "horizontal"
       ? "auto-cols-fr grid-flow-col"
       : "auto-rows-fr grid-flow-row";
+
   return (
-    <Tabs orientation={orientation} value={value} className={classNameMain}>
-      <TabsList className={cn("grid  border-0", tabDirection, className)}>
+    <Tabs orientation={orientation} value={value} className={cn(
+      classNameMain,
+      )} >
+      <TabsList className={cn("grid  border-0 ", tabDirection, className)}>
         {data.map((item) => {
           return (
             <TabsTrigger
+            disabled={disabled}
               key={item.value}
               value={item.value}
               onClick={() => navigateFunc({ value: item.value })}

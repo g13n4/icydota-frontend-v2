@@ -48,12 +48,12 @@ export default function useParseURL(props: OptionalPageTypeType): PageTypeType {
   const totalSelected = selectedCalculationId === "0";
 
   const selectedCrossComparisonFieldTotal =
-    ccfield && !totalSelected
+    ccfield && totalSelected
       ? ccfield
       : PageTypeDefaultState.selectedCrossComparisonFieldTotal;
 
   const selectedCrossComparisonFieldWindow =
-    ccfield && totalSelected
+    ccfield && !totalSelected
       ? ccfield
       : PageTypeDefaultState.selectedCrossComparisonFieldWindow;
 
@@ -99,7 +99,7 @@ export default function useParseURL(props: OptionalPageTypeType): PageTypeType {
 
     selectedAggregationType:
       isAggregation && dataTypeValue
-        ? Number.parseInt(dataTypeValue)
+        ? dataTypeValue
         : PageTypeDefaultState.selectedAggregationType,
 
     selectedCrossComparisonComparison:

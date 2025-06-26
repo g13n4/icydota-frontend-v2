@@ -4,9 +4,9 @@ import {
   themeBalham,
 } from "ag-grid-community";
 import { AgGridReact } from "ag-grid-react";
-import type { TableResponseType } from "./types";
-import setCellsStyling from "./cellsStyling";
 import TableHeader from "./TableHeader";
+import setCellsStyling from "./cellsStyling";
+import type { TableResponseType } from "./types";
 
 type TableType = {
   tableData: TableResponseType;
@@ -26,17 +26,22 @@ export default function Table({ tableData, isDarkMode }: TableType) {
 
   return (
     // Data Grid will fill the size of the parent container
-    <div className="flex flex-col"> 
-    <TableHeader  tableHeaderData={tableData.matchName}/>
-    <div className="h-200">
-      <AgGridReact
-        className="h-auto w-auto"
-        columnDefs={updatedColumnData}
-        rowData={tableData.data}
-        theme={theme}
-      />
+    <div className="flex flex-col">
+      <TableHeader tableHeaderData={tableData.matchName} />
+      <div className="h-200">
+        <AgGridReact
+          className="h-auto w-auto"
+          columnDefs={updatedColumnData}
+          rowData={tableData.data}
+          theme={theme}
+          autoSizeStrategy={{
+            type: "fitCellContents",
+            defaultMaxWidth: 150,
+            defaultMinWidth: 50,
+          }}
+        />
+      </div>
     </div>
-    </div>
-  );  
+  );
 }
 

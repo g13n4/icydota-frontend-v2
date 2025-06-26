@@ -38,7 +38,7 @@ interface PageTypeType {
   selectedComparisonType: string; // query param
   selectedLaneOrGame: string; // query param
 
-  selectedAggregationType: number | string;
+  selectedAggregationType: string;
 
   selectedCrossComparisonComparison: string; // query param
   selectedCrossComparisonType: string;

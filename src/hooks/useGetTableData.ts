@@ -12,7 +12,6 @@ interface useGetTableDataResultType {
 export default function useGetTableData(): useGetTableDataResultType {
   const stateData = usePageTypeContext();
   const url = generateTableDataLink({ data: stateData });
-
   const { data, isLoading, error } = useSWR<TableResponseType, Error>(url);
 
   return {

@@ -1,3 +1,4 @@
+import { usePageTypeContext } from "@/components/context/DataTypeChoiceProvider";
 import CustomTabsSelector from "@/components/Templates/Selectors/CustomTabsSelector";
 import { GameStateEnum } from "@/types/enums";
 import type { List } from "@radix-ui/react-tabs";
@@ -17,11 +18,16 @@ const data = [
 export default function WindowsTypeSelector({
   className,
 }: ComponentProps<typeof List>) {
+  const { selectedCalculationId } = usePageTypeContext();
+  const isHidden = selectedCalculationId === "0"
+
+  
   return (
     <CustomTabsSelector
       fieldName="selectedLaneOrGame"
       data={data}
       className={className}
-    />
+      disabled={isHidden}
+      />
   );
 }
