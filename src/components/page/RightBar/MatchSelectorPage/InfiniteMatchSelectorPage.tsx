@@ -34,8 +34,9 @@ export default function InfiniteMatchSelectorPage() {
       >
         <div
           className="
-      grid 
-      xl:grid-cols-4 
+      grid
+      xl:grid-cols-5
+      lg:grid-cols-4
       md:grid-cols-3 
       gap-2 
         "

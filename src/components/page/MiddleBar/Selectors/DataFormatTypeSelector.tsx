@@ -16,8 +16,8 @@ import useCustomUseNavigate from "@/navigation/hooks/useCustomUseNavigate";
 export default function DataFormatTypeSelector() {
   const navigate = useCustomUseNavigate();
   const { isActive, data, dataFormatType } = useDataFormatData();
-  const params = usePageTypeContext();
-  const dataFormatValue = params[dataFormatType as keyof PageTypeType];
+  const props = usePageTypeContext();
+  const dataFormatValue = props[dataFormatType as keyof PageTypeType];
 
   if (!isActive) {
     return (
@@ -34,6 +34,7 @@ export default function DataFormatTypeSelector() {
   return (
     <Card className="h-fit">
       <Select
+      key={`data-format-type-selector-${props.selectedDataFormat}`}
         defaultValue={dataFormatValue as string}
         onValueChange={(value) =>
           navigate({ [dataFormatType as string]: value })

@@ -1,5 +1,4 @@
 import { usePageTypeContext } from "@/components/context/DataTypeChoiceProvider";
-import type { ItemCategoryType } from "@/components/context/types";
 import {
   Collapsible,
   CollapsibleContent,
@@ -13,9 +12,18 @@ import {
   SidebarMenuSubButton,
   SidebarMenuSubItem,
 } from "@/components/ui/sidebar";
+import { cn } from "@/lib/utils";
 import useCustomUseNavigate from "@/navigation/hooks/useCustomUseNavigate";
 import type { ItemStringType } from "@/types/types";
 import { ChevronRight, SquareTerminal } from "lucide-react";
+
+function valueToCatgetory(value: string): string {
+  const output = Math.floor(Number(value) / 100)
+  console.log(value, output )
+  return output.toString();
+}
+
+const selectedButton = "text-main"
 
 const getIcon = (value: string) => {
   switch (value) {
@@ -34,18 +42,22 @@ const getIcon = (value: string) => {
 
 export default function ComputiationItem({
   item,
-}: { item: ItemCategoryType | ItemStringType }) {
+}: { item: ItemStringType & { items?: ItemStringType[] } }) {
   const Icon = getIcon(item.value);
   const { selectedCalculationId } = usePageTypeContext();
   const navigate = useCustomUseNavigate();
 
   if ("items" in item) {
+    console.log();
     return (
       <Collapsible key={item.label} asChild className="group/collapsible">
         <SidebarMenuItem>
           <CollapsibleTrigger asChild>
             <SidebarMenuButton
-              className="data-[state=open]:bg-main data-[state=open]:outline-border data-[state=open]:text-main-foreground"
+              className={cn(
+                "data-[state=open]:bg-main data-[state=open]:outline-border data-[state=open]:text-main-foreground",
+                valueToCatgetory(selectedCalculationId) === item.value ? selectedButton : "",
+              )}
               tooltip={item.label}
             >
               <Icon />
@@ -55,15 +67,18 @@ export default function ComputiationItem({
           </CollapsibleTrigger>
           <CollapsibleContent>
             <SidebarMenuSub>
-              {item.items?.map((subItem) => (
+              {item.items?.map((subItem: ItemStringType) => (
                 <SidebarMenuSubItem key={subItem.label}>
                   <SidebarMenuSubButton
                     asChild
-                    isActive={subItem.value === selectedCalculationId}
                     onClick={() =>
                       navigate({ selectedCalculationId: subItem.value })
                     }
-                    className="cursor-pointer"
+                    isActive={subItem.value === selectedCalculationId}
+                    className={cn(
+                      "cursor-pointer",
+                      item.value === selectedCalculationId ? selectedButton : "",
+                    )}
                   >
                     <span>{subItem.label}</span>
                   </SidebarMenuSubButton>
@@ -80,9 +95,11 @@ export default function ComputiationItem({
     <>
       <SidebarMenuItem>
         <SidebarMenuButton
-          className="data-[state=open]:bg-main data-[state=open]:outline-border data-[state=open]:text-main-foreground"
+          className={cn(
+            "data-[state=open]:bg-main data-[state=open]:outline-border data-[state=open]:text-main-foreground",
+            item.value === selectedCalculationId ? selectedButton : "",
+          )}
           tooltip={item.label}
-          isActive={item.value === selectedCalculationId}
           onClick={() => navigate({ selectedCalculationId: item.value })}
         >
           <Icon />
