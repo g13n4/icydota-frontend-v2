@@ -16,6 +16,10 @@ const aggregationTypeSelectorData = [
     label: "Position",
   },
   {
+    value: "9",
+    label: "Position + Hero",
+  },
+  {
     value: "5",
     label: "Hero + Player",
   },
