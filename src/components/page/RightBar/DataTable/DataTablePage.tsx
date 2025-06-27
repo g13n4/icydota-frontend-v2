@@ -2,10 +2,12 @@ import { useHelperContext } from "@/components/context/HelperProvider";
 import useGetTableData from "@/hooks/useGetTableData";
 import EmptyTable from "./EmptyTable";
 import Table from "./Table/Table";
+import { usePageTypeContext } from "@/components/context/DataTypeChoiceProvider";
 
 export default function DataTable() {
   const { data, isLoading, error } = useGetTableData();
   const { isDarkMode } = useHelperContext();
+  const { selectedCalculationId } = usePageTypeContext();
 
   if (isLoading) {
     return <EmptyTable isLoading={isLoading} />;
@@ -19,6 +21,7 @@ export default function DataTable() {
       <Table
         tableData={data}
         isDarkMode={isDarkMode}
+        isTotal={selectedCalculationId === "0"}
       />
     );
   }

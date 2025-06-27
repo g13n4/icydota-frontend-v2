@@ -4,6 +4,7 @@ import {
   themeBalham,
 } from "ag-grid-community";
 import { AgGridReact } from "ag-grid-react";
+import { useRef } from "react";
 import TableHeader from "./TableHeader";
 import setCellsStyling from "./cellsStyling";
 import type { TableResponseType } from "./types";
@@ -11,9 +12,11 @@ import type { TableResponseType } from "./types";
 type TableType = {
   tableData: TableResponseType;
   isDarkMode: boolean;
+  isTotal: boolean;
 };
 
-export default function Table({ tableData, isDarkMode }: TableType) {
+export default function Table({ tableData, isDarkMode, isTotal }: TableType) {
+  const gridRef = useRef<AgGridReact<Record<string, number | string>>>(null);
   const theme = themeBalham.withPart(
     isDarkMode ? colorSchemeDark : colorSchemeLightCold,
   );
@@ -30,13 +33,14 @@ export default function Table({ tableData, isDarkMode }: TableType) {
       <TableHeader tableHeaderData={tableData.matchName} />
       <div className="h-200">
         <AgGridReact
+          ref={gridRef}
           className="h-auto w-auto"
           columnDefs={updatedColumnData}
           rowData={tableData.data}
           theme={theme}
           autoSizeStrategy={{
             type: "fitCellContents",
-            defaultMaxWidth: 150,
+            defaultMaxWidth: 120,
             defaultMinWidth: 50,
           }}
         />

@@ -32,7 +32,7 @@ export default function CustomTabsSelector({
 
   return (
     <BaseTabsSelector
-      value={fieldValue as string}
+      value={disabled ? undefined : fieldValue as string}
       data={data}
       orientation={orientation}
       navigateFunc={navigateFunc || baseFunc}

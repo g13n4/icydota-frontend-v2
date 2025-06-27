@@ -1,3 +1,4 @@
+import { usePageTypeContext } from "@/components/context/DataTypeChoiceProvider";
 import CustomTabsSelector from "@/components/Templates/Selectors/CustomTabsSelector";
 import type { List } from "@radix-ui/react-tabs";
 import type { ComponentProps } from "react";
@@ -20,11 +21,15 @@ const data = [
 export default function CrossComparisonPositionSelector({
   className,
 }: ComponentProps<typeof List>) {
+const { selectedPT } = usePageTypeContext();
+  const isDisabled = selectedPT === "team"
+
   return (
     <CustomTabsSelector
       fieldName="selectedCrossComparisonPosition"
       data={data}
       className={className}
+      disabled={isDisabled}
     />
   );
 }
