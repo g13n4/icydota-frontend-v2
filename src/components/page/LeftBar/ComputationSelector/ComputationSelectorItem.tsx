@@ -48,7 +48,6 @@ export default function ComputiationItem({
   const navigate = useCustomUseNavigate();
 
   if ("items" in item) {
-    console.log();
     return (
       <Collapsible key={item.label} asChild className="group/collapsible">
         <SidebarMenuItem>

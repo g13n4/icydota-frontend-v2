@@ -63,7 +63,7 @@ interface NameMapType {
 }
 
 interface InitialDataType {
-  computations: ItemStringType[];
+  computations: (ItemStringType | ItemCategoryType)[];
   patch: ItemStringType[];
   league: ItemStringType[];
 

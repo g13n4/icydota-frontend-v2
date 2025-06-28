@@ -5,9 +5,10 @@ export default function DataFormatSelector() {
   return (
     <CustomTabsSelector
       orientation="vertical"
+      reponsive={true}
       fieldName="selectedDataFormat"
       data={dataFormatSelectorData}
-      className={`grid w-full grid-rows-${dataFormatSelectorData.length} shadow-shadow border-2`}
+      className="w-full shadow-shadow border-2"
     />
   );
 }

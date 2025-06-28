@@ -9,6 +9,7 @@ interface CustomTabsSelectorType extends Pick<TabsProps, "orientation"> {
   className?: string | undefined;
   classNameMain?: string | undefined;
   disabled?: boolean | undefined;
+  reponsive?: boolean | undefined;
   fieldName: keyof PageTypeType;
   data: ItemStringType[];
   navigateFunc?: ({ value }: { value: string }) => void;
@@ -22,6 +23,7 @@ export default function CustomTabsSelector({
   navigateFunc,
   orientation,
   disabled,
+  reponsive,
 }: CustomTabsSelectorType) {
   const { [fieldName]: fieldValue } = usePageTypeContext();
   const navigate = useCustomUseNavigate();
@@ -32,7 +34,8 @@ export default function CustomTabsSelector({
 
   return (
     <BaseTabsSelector
-      value={disabled ? undefined : fieldValue as string}
+      reponsive={reponsive}
+      value={disabled ? undefined : (fieldValue as string)}
       data={data}
       orientation={orientation}
       navigateFunc={navigateFunc || baseFunc}

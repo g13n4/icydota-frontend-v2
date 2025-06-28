@@ -43,7 +43,8 @@ function matchUrl({
     ].join("&");
     return `${link}?${params}`;
   }
-  const params = [`comp=${comparison}`].join("&");
+  const params = [`stage=${stage}`, `comp=${comparison}`].join("&");
+
 
   return `${link}?${params}`;
 }

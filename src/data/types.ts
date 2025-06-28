@@ -13,6 +13,11 @@ interface HeroMap {
 
 type HeroesMapType = Record<string, HeroMap>;
 
+type HeroesIconMapType = Record<string, string>;
+
 type SideCalcMapType = Record<string, string>;
 
-export type { FacetsMapType, HeroesMapType, SideCalcMapType, HeroMap };
+export type {
+  FacetsMapType, HeroesIconMapType, HeroesMapType, HeroMap, SideCalcMapType
+};
+
