@@ -15,7 +15,9 @@ const RightBar = memo(function RightBar() {
   const { isMatchAll } = usePageTypeContext();
 
   if (isMatchAll) {
-    return <MatchSelectorPage />;
+    return (
+      <MatchSelectorPage className={isMobile ? mobileColSize : pcColSize} />
+    );
   }
 
   return (

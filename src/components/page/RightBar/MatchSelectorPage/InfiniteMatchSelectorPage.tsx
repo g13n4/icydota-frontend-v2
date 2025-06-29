@@ -3,11 +3,12 @@ import { allMatchesUrl } from "@/urls";
 import useSWR from "swr";
 import GameCard from "./GameCard/GameCard";
 import type { AllGamesResponse } from "./types";
+import { cn } from "@/lib/utils";
 
 const PAGE_SIZE = 48;
 const OFFSET = 0;
 
-export default function InfiniteMatchSelectorPage() {
+export default function InfiniteMatchSelectorPage({className}: {className?: string | undefined}) {
   const { LoPType, isLP, selectedLeagueId, selectedPatchId } =
     usePageTypeContext();
 
@@ -25,12 +26,10 @@ export default function InfiniteMatchSelectorPage() {
   return (
     <>
       <div
-        className="
-      flex
-      flex-col
-      h-svh
-      overflow-y-scroll
-      col-span-5"
+        className={cn(
+          "flex flex-col h-svh overflow-y-scroll",
+          className
+        )}
       >
         <div
           className="

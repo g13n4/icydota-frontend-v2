@@ -3,8 +3,6 @@ import { comparisonEnum } from "@/types/enums";
 import type { List } from "@radix-ui/react-tabs";
 import type { ComponentProps } from "react";
 
-comparisonEnum
-
 const data = [
   {
     value: comparisonEnum.NONE,

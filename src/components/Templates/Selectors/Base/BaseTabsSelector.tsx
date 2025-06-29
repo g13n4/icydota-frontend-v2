@@ -40,9 +40,11 @@ export default function BaseTabsSelector({
       <TabsList
         className={cn(
           "grid  border-0 ",
-          isHorizontal
-            ? "auto-cols-fr grid-flow-col h-full"
-            : "auto-rows-fr grid-flow-row",
+          reponsive
+            ? "grid-flow-dense"
+            : isHorizontal
+              ? "auto-cols-fr grid-flow-col h-full"
+              : "auto-rows-fr grid-flow-row",
 
           className,
         )}

@@ -37,13 +37,14 @@ export default function MatchSelector() {
   const leagueGames = data.games;
 
   return (
+    <div className="w-full flex items-center justify-center">
     <Popover open={open} onOpenChange={setOpen}>
       <PopoverTrigger asChild>
         <Button
           variant="noShadow"
           role="combobox"
           aria-expanded={open}
-          className="w-full justify-between"
+          className="xl:w-11/12 md:w-full"
         >
           {leagueGames
             ? leagueGames.find((item) => {
@@ -77,5 +78,6 @@ export default function MatchSelector() {
         </Command>
       </PopoverContent>
     </Popover>
+    </div>
   );
 }
