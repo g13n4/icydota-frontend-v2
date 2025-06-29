@@ -1,3 +1,4 @@
+import { usePageTypeContext } from "@/components/context/DataTypeChoiceProvider";
 import { Card } from "@/components/ui/card";
 import useCustomUseNavigate from "@/navigation/hooks/useCustomUseNavigate";
 import type { AllGamesItem } from "../types";
@@ -7,6 +8,7 @@ import GameCardStatsTable from "./GameCard/GameCardStatsTable";
 
 export default function GameCard({ ...data }: AllGamesItem) {
   const navigate = useCustomUseNavigate();
+  const { LoPType } = usePageTypeContext();
 
   return (
     <Card
@@ -22,10 +24,12 @@ export default function GameCard({ ...data }: AllGamesItem) {
       hover:outline-4
       hover:outline-amber-600/70
       hover:cursor-pointer
+      gap-2
       "
       onClick={() => navigate({ isMatchOne: true, selectedMatchId: data.id })}
       key={data.id}
     >
+      {LoPType === "patch" && <h1 className="text-center">{data.leagueName}</h1>}
       <GameCardFrontTable {...data} />
       <GameCardStatsTable {...data} />
       <GameCardOtherTable {...data} />

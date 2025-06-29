@@ -29,6 +29,8 @@ interface AllGamesItem {
   sentName: string;
   sentData: AllGameSideData;
   sentHeroes: AllGamesHeroes[];
+
+  leagueName: string;
 }
 
 interface AllGamesResponse {
