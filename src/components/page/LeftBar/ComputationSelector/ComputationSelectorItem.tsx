@@ -19,7 +19,6 @@ import { ChevronRight, SquareTerminal } from "lucide-react";
 
 function valueToCatgetory(value: string): string {
   const output = Math.floor(Number(value) / 100)
-  console.log(value, output )
   return output.toString();
 }
 

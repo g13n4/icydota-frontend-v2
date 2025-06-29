@@ -14,7 +14,6 @@ export default function useCustomUseNavigate() {
   function customNavigate(changedData: OptionalPageTypeType, options?: NavigateOptions) {
     const newState = generateState({ data: { ...prevData, ...changedData }  });
     const navigateLink = generateLink({ data: newState });
-    console.log(navigateLink)
     navigate(navigateLink, {replace: false, ...options});
   }
 

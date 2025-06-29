@@ -5,7 +5,7 @@ import { cn } from "@/lib/utils";
 import { memo } from "react";
 import DataTable from "./DataTable/DataTablePage";
 import DataTableSelectors from "./DataTableSelectors/DataTableSelectors";
-import MatchSelectorPage from "./MatchSelectorPage/InfiniteMatchSelectorPage";
+import MatchCardPage from "./MatchSelectorPage/MatchCardPage";
 
 const mobileColSize = "";
 const pcColSize = "col-span-5";
@@ -15,9 +15,7 @@ const RightBar = memo(function RightBar() {
   const { isMatchAll } = usePageTypeContext();
 
   if (isMatchAll) {
-    return (
-      <MatchSelectorPage className={isMobile ? mobileColSize : pcColSize} />
-    );
+    return <MatchCardPage />;
   }
 
   return (
