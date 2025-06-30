@@ -7,7 +7,7 @@ import GameCardOtherTable from "./GameCard/GameCardOtherTable";
 import GameCardStatsTable from "./GameCard/GameCardStatsTable";
 
 export default function GameCard({ ...data }: AllGamesItem) {
-  const navigate = useCustomUseNavigate();
+  const navigate = useCustomUseNavigate(true);
   const { LoPType } = usePageTypeContext();
 
   return (
@@ -26,10 +26,14 @@ export default function GameCard({ ...data }: AllGamesItem) {
       hover:cursor-pointer
       gap-2
       "
-      onClick={() => navigate({ isMatchOne: true, selectedMatchId: data.id })}
+      onClick={() =>
+        navigate({ isMatchOne: true, selectedMatchId: data.id }, {})
+      }
       key={data.id}
     >
-      {LoPType === "patch" && <h1 className="text-center">{data.leagueName}</h1>}
+      {LoPType === "patch" && (
+        <h1 className="text-center">{data.leagueName}</h1>
+      )}
       <GameCardFrontTable {...data} />
       <GameCardStatsTable {...data} />
       <GameCardOtherTable {...data} />

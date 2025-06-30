@@ -11,7 +11,7 @@ export default function Page() {
   const isMobile = useIsMobile()
 
   return (
-    <div className="bg-red-200">
+    <div className="dark:bg-gray-700/90 bg-gray-400/90">
       <div className={cn(
         "grid items-center justify-center",
         isMobile ? mobileStyle : pcStyle
