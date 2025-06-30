@@ -7,7 +7,7 @@ import GameCardOtherTable from "./GameCard/GameCardOtherTable";
 import GameCardStatsTable from "./GameCard/GameCardStatsTable";
 
 export default function GameCard({ ...data }: AllGamesItem) {
-  const navigate = useCustomUseNavigate(true);
+  const navigate = useCustomUseNavigate(false);
   const { LoPType } = usePageTypeContext();
 
   return (
