@@ -32,12 +32,12 @@ function getColours(isDarkTheme: boolean) {
 }
 
 function getTargetColor(
-  colours: string[],
   value: number | string,
   min: number,
   max: number,
   isDarkTheme: boolean,
 ) {
+  const colours = getColours(isDarkTheme);
   const textColour = isDarkTheme ? "white" : "black";
   if (
     Number.isNaN(Number(value)) ||

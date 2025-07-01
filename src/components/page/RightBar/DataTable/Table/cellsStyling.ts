@@ -1,4 +1,4 @@
-import { getColours, getTargetColor } from "./helpers";
+import { getTargetColor } from "./helpers";
 import type { AgGridColumnsType, ValueMappingMapType,  } from "./types";
 // import type { HeroesMapType, FacetsMapType } from "@/data/types";
 // import HeroNameMap from "@/data/heroes.json";
@@ -16,14 +16,12 @@ export default function setCellsStyling({
   valueMap: ValueMappingMapType;
   isDarkTheme: boolean;
 }) {
-  const colours = getColours(isDarkTheme);
   return columnData.map((item) => {
     const rangeValues = valueMap[item.field];
 
     return {
       cellStyle: (params) => {
         return getTargetColor(
-          colours,
           params.value,
           rangeValues?.min,
           rangeValues?.max,

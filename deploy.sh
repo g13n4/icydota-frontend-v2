@@ -1,5 +1,5 @@
 #!/bin/bash
-bunx --bun vite build
+bunx --bun vite build --mode production
 cd ./dist/
 tar czf index.tar.gz *
 cd ..

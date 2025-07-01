@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const API_URL = import.meta.env.VITE_API_URL;
-const DEBUG_MDOE = import.meta.env.VITE_DEBUG === "true";
+const DEBUG_MODE = import.meta.env.VITE_DEBUG === "true";
 
 const axiosInstance = axios.create({
   baseURL: API_URL,
@@ -38,7 +38,6 @@ function getSWRConfig(isDebugMode: boolean) {
   };
 }
 
-const configSWR = getSWRConfig(DEBUG_MDOE);
+const configSWR = getSWRConfig(DEBUG_MODE);
 
-export { API_URL, configSWR, DEBUG_MDOE, axiosInfiniteFetcher };
-
+export { API_URL, configSWR, DEBUG_MODE, axiosInfiniteFetcher };
