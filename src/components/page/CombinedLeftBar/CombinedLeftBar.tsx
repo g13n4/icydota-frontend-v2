@@ -1,3 +1,4 @@
+import { usePageTypeContext } from "@/components/context/DataTypeChoiceProvider";
 import { useIsMobile } from "@/hooks/use-mobile";
 import ComputationSelector from "../LeftBar/ComputationSelector/ComputationSelector";
 import ComputationSelectorMobile from "../LeftBar/ComputationSelector/ComputationSelectorMobile";
@@ -8,17 +9,19 @@ import PlayerTeamSelector from "../MiddleBar/Selectors/PlayerTeamSelector";
 
 export default function CombinedLeftBar() {
   const isMobile = useIsMobile();
+  const { isMatchAll } = usePageTypeContext();
+  const isMatchAllMobile = isMatchAll && isMobile;
 
   const selectors = [
     <LeaguePatchSelector key={"league-patch-selector"} />,
-    <PlayerTeamSelector key={"player-team-selector"} />,
+    !isMatchAllMobile && <PlayerTeamSelector key={"player-team-selector"} />,
     <DataFormatSelector key={"data-format-selector"} />,
-    <DataFormatTypeSelector key={"data-format-type-selector"} />,
-    isMobile ? (
+    !isMatchAllMobile && <DataFormatTypeSelector key={"data-format-type-selector"} />,
+    !isMatchAll && (isMobile ? (
       <ComputationSelectorMobile key={"computation-selector-monile"} />
     ) : (
       <ComputationSelector key={"computation-selector"} />
-    ),
+    )),
   ];
 
   if (isMobile) return <>{selectors}</>;

@@ -12,6 +12,20 @@ interface AllGameSideData {
   sentry_uses: string;
 }
 
+interface AllGameSideComparisonData {
+  gold: boolean | null;
+  xp: boolean | null;
+  hero_kills: boolean | null;
+  kills_per_min: boolean | null;
+  neutral_kills: boolean | null;
+  roshan_kills: boolean | null;
+  runes_picked_up: boolean | null;
+  observer_kills: boolean | null;
+  observer_uses: boolean | null;
+  sentry_kills: boolean | null;
+  sentry_uses: boolean | null;
+}
+
 interface AllGamesHeroes {
   hero_id: string;
   position_id: string;
@@ -30,11 +44,14 @@ interface AllGamesItem {
   sentData: AllGameSideData;
   sentHeroes: AllGamesHeroes[];
 
+  compData: AllGameSideComparisonData;
+
   leagueName: string;
 }
 
 interface AllGamesResponse {
-    data: AllGamesItem[]
+  data: AllGamesItem[];
 }
 
-export type { AllGameSideData, AllGamesItem, AllGamesResponse, AllGamesHeroes };
+export type { AllGamesHeroes, AllGameSideData, AllGamesItem, AllGamesResponse, AllGameSideComparisonData };
+

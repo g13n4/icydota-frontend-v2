@@ -62,7 +62,7 @@ export default function GameCardHeroTable({
   direWon,
 }: AllGamesItem & { direWon: boolean }) {
   return (
-    <Table className="w-full table-fixed">
+    <Table className="w-full table-fixed border-0">
       <TableHeader>
         <TableRow className="bg-secondary-background text-l">
           <TableHead className="text-center text-foreground w-5/12">
@@ -100,7 +100,7 @@ export default function GameCardHeroTable({
         </TableRow>
 
         {[0, 1, 2, 3, 4].map((idx) => (
-          <TableRow key={idx}>
+          <TableRow key={idx} className="">
             <HeroLine isDire={false} {...sentHeroes[idx]} />
             <HeroLine isDire={true} {...direHeroes[idx]} />
           </TableRow>
