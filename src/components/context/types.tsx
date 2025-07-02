@@ -66,7 +66,7 @@ interface InitialDataType {
   computations: (ItemStringType | ItemCategoryType)[];
   patch: ItemStringType[];
   league: ItemStringType[];
-
+  totalPercentFields: string[]
 }
 
 export type {

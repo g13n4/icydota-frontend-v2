@@ -7,7 +7,7 @@ import { usePageTypeContext } from "@/components/context/DataTypeChoiceProvider"
 export default function DataTable() {
   const { data, isLoading, error } = useGetTableData();
   const { isDarkMode } = useHelperContext();
-  const { selectedCalculationId } = usePageTypeContext();
+  const { selectedCalculationId, selectedDataFormat, selectedPT } = usePageTypeContext();
 
   if (isLoading) {
     return <EmptyTable isLoading={isLoading} />;
@@ -22,6 +22,7 @@ export default function DataTable() {
         tableData={data}
         isDarkMode={isDarkMode}
         isTotal={selectedCalculationId === "0"}
+        useBoolean={selectedPT === "player" && selectedDataFormat === "match"}
       />
     );
   }

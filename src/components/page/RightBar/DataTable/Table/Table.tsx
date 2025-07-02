@@ -6,25 +6,29 @@ import {
 import { AgGridReact } from "ag-grid-react";
 import { useRef } from "react";
 import TableHeader from "./TableHeader";
-import setCellsStyling from "./cellsStyling";
+import setCellsOptions from "./cellsStyling";
 import type { TableResponseType } from "./types";
+import type { selectedDataFormatType } from "@/types/types";
 
 type TableType = {
   tableData: TableResponseType;
   isDarkMode: boolean;
   isTotal: boolean;
+  useBoolean: boolean;
 };
 
-export default function Table({ tableData, isDarkMode, isTotal }: TableType) {
+export default function Table({ tableData, isDarkMode, isTotal, useBoolean }: TableType) {
   const gridRef = useRef<AgGridReact<Record<string, number | string>>>(null);
   const theme = themeBalham.withPart(
     isDarkMode ? colorSchemeDark : colorSchemeLightCold,
   );
 
-  const updatedColumnData = setCellsStyling({
+  const updatedColumnData = setCellsOptions({
     columnData: tableData.columns,
     valueMap: tableData.valueMapping,
     isDarkTheme: isDarkMode,
+    isTotal: isTotal,
+    useBoolean: useBoolean,
   });
 
   return (

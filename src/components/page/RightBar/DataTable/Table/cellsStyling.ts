@@ -1,23 +1,45 @@
+import { useInitialDataContext } from "@/components/context/InitialDataProvider";
+import type { ReactNode } from "react";
+import getBooleanStyling from "./getBooleanStyling";
+import getHeroStyling from "./getHeroStyling";
 import { getTargetColor } from "./helpers";
-import type { AgGridColumnsType, ValueMappingMapType,  } from "./types";
-// import type { HeroesMapType, FacetsMapType } from "@/data/types";
-// import HeroNameMap from "@/data/heroes.json";
-// import FaceteMap from "@/data/facets.json";
+import type { AgGridColumnsType, ValueMappingMapType } from "./types";
 
-// const HERO_MAP = HeroNameMap as HeroesMapType;
-// const FACET_MAP = FaceteMap as FacetsMapType;
+interface CellOptionsType {
+  // adds icons
+  cellRenderer?: (params: any) => ReactNode | null;
+  // adds formatting to totals
+  valueFormatter?: (params: any) => string | null;
+}
 
-export default function setCellsStyling({
+export default function setCellsOptions({
   columnData,
   valueMap,
   isDarkTheme,
+  isTotal,
+  useBoolean,
 }: {
   columnData: AgGridColumnsType[];
   valueMap: ValueMappingMapType;
   isDarkTheme: boolean;
+  isTotal: boolean;
+  useBoolean: boolean;
 }) {
+  const { totalPercentFields } = useInitialDataContext();
+
   return columnData.map((item) => {
     const rangeValues = valueMap[item.field];
+    const cellOptions: CellOptionsType = {};
+
+    if (isTotal && totalPercentFields.find((i) => i === item.field)) {
+      cellOptions.valueFormatter = (params) =>
+        getBooleanStyling(params.value, useBoolean);
+    }
+
+    // doesn't work for some reason
+    // if (["hero", "heroes"].includes(item.field.toLowerCase())) {
+    //   cellOptions.cellRenderer = (params) => getHeroStyling(params.value);
+    // }
 
     return {
       cellStyle: (params) => {
@@ -28,6 +50,7 @@ export default function setCellsStyling({
           isDarkTheme,
         );
       },
+      ...cellOptions,
       ...item,
     };
   });
