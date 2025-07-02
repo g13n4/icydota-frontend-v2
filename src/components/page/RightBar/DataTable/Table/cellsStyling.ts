@@ -1,9 +1,9 @@
 import { useInitialDataContext } from "@/components/context/InitialDataProvider";
 import type { ReactNode } from "react";
 import getBooleanStyling from "./getBooleanStyling";
-import getHeroStyling from "./getHeroStyling";
 import { getTargetColor } from "./helpers";
 import type { AgGridColumnsType, ValueMappingMapType } from "./types";
+import getTimeStyling from "./getTimeStyling";
 
 interface CellOptionsType {
   // adds icons
@@ -34,6 +34,11 @@ export default function setCellsOptions({
     if (isTotal && totalPercentFields.find((i) => i === item.field)) {
       cellOptions.valueFormatter = (params) =>
         getBooleanStyling(params.value, useBoolean);
+    }
+
+    
+    if (["duration", ].includes(item.field.toLowerCase())) {
+      cellOptions.valueFormatter = (params) => getTimeStyling(params.value);
     }
 
     // doesn't work for some reason
