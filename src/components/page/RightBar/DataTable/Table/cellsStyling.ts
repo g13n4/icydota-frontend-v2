@@ -37,7 +37,7 @@ export default function setCellsOptions({
     }
 
     
-    if (["duration", ].includes(item.field.toLowerCase())) {
+    if ("duration" === item.field.toLowerCase() && item.field.endsWith("_time")) {
       cellOptions.valueFormatter = (params) => getTimeStyling(params.value);
     }
 
