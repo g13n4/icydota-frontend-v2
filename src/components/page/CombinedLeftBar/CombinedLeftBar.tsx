@@ -14,7 +14,7 @@ export default function CombinedLeftBar() {
 
   const selectors = [
     <LeaguePatchSelector key={"league-patch-selector"} />,
-    !isMatchAllMobile && <PlayerTeamSelector key={"player-team-selector"} />,
+    !isMatchAll && <PlayerTeamSelector key={"player-team-selector"} />,
     <DataFormatSelector key={"data-format-selector"} />,
     !isMatchAllMobile && <DataFormatTypeSelector key={"data-format-type-selector"} />,
     !isMatchAll && (isMobile ? (

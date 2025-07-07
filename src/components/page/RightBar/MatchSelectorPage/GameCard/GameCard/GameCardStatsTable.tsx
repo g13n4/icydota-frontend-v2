@@ -13,7 +13,7 @@ import type { AllGameSideComparisonData, AllGameSideData } from "../../types";
 const CALC_NAME_MAP = SideCalcNames as SideCalcMapType;
 
 const WinStatusCell = "border-1 border-green-600/50";
-const LoseStatusCell = "border-1 border-red-600/50";
+const LoseStatusCell = "border-1 border-red-600/50 border-dotted";
 
 const sentCellBorder = "border-y-0 border-l-0";
 const direCellBorder = "border-y-0 border-r-0";

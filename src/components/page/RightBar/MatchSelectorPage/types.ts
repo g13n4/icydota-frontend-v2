@@ -29,6 +29,8 @@ interface AllGameSideComparisonData {
 interface AllGamesHeroes {
   hero_id: string;
   position_id: string;
+  nickname: string;
+  kda: string;
 }
 
 interface AllGamesItem {
@@ -53,5 +55,9 @@ interface AllGamesResponse {
   data: AllGamesItem[];
 }
 
-export type { AllGamesHeroes, AllGameSideData, AllGamesItem, AllGamesResponse, AllGameSideComparisonData };
+export type {
+  AllGamesHeroes, AllGameSideComparisonData, AllGameSideData,
+  AllGamesItem,
+  AllGamesResponse
+};
 

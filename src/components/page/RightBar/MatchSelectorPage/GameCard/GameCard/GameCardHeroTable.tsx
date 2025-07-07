@@ -6,34 +6,64 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 import HeroNameMap from "@/data/heroes.json";
 import type { HeroesMapType } from "@/data/types";
 import { cn } from "@/lib/utils";
 import { steamLink } from "@/urls";
-import type { AllGamesItem } from "../../types";
+import type { AllGamesHeroes, AllGamesItem } from "../../types";
 
 const HERO_MAP = HeroNameMap as HeroesMapType;
 const CellClass = "p-0.5 align-baseline";
-const SentCellClass = `${CellClass} text-right pr-1`;
-const DireCellClass = `${CellClass}  pl-1`;
+const SentCellClass = `${CellClass} text-right pr-0.5`;
+const DireCellClass = `${CellClass} text-left  pl-0.5`;
 
-const WinStatusCell = "decoration-green-500 font-semibold bg-green-500/50";
-const LoseStatusCell = "decoration-red-500 bg-red-500/50 text-black";
-
-function HeroLine({ isDire, hero_id }: { isDire: boolean; hero_id: string }) {
-  const { name, icon_url } = HERO_MAP[hero_id];
+function HeroLine({
+  isDire,
+  hero_id,
+  nickname,
+  kda,
+}: { isDire: boolean } & AllGamesHeroes) {
+  const { name: hero_name, icon_url } = HERO_MAP[hero_id];
 
   const IconCell = () => (
     <TableCell className="min-w-[24px]">
-      <img src={steamLink(icon_url)} alt={name} width={24} height={24} />
+      <TooltipProvider>
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <img
+              src={steamLink(icon_url)}
+              alt={hero_name}
+              width={24}
+              height={24}
+            />
+          </TooltipTrigger>
+          <TooltipContent>
+            <p>{hero_name}</p>
+          </TooltipContent>
+        </Tooltip>
+      </TooltipProvider>
     </TableCell>
   );
-  const CurrentCell = () => (
+  const NicknameCell = () => (
     <TableCell
       className={cn("truncate", isDire ? DireCellClass : SentCellClass)}
-      key={name}
+      key={nickname}
     >
-      {name}
+      {nickname}
+    </TableCell>
+  );
+  const KDACell = () => (
+    <TableCell
+      key={`${hero_name}-kda`}
+      className={cn(isDire ? DireCellClass : SentCellClass)}
+    >
+      {kda}
     </TableCell>
   );
 
@@ -41,64 +71,38 @@ function HeroLine({ isDire, hero_id }: { isDire: boolean; hero_id: string }) {
     return (
       <>
         <IconCell />
-        <CurrentCell />
+        <KDACell />
+        <NicknameCell />
       </>
     );
   }
 
   return (
     <>
-      <CurrentCell />
+      <NicknameCell />
+      <KDACell />
       <IconCell />
     </>
   );
 }
 
 export default function GameCardHeroTable({
-  sentName,
-  direName,
   sentHeroes,
   direHeroes,
-  direWon,
 }: AllGamesItem & { direWon: boolean }) {
   return (
     <Table className="w-full table-fixed border-0">
       <TableHeader>
         <TableRow className="bg-secondary-background text-l">
-          <TableHead className="text-center text-foreground w-5/12">
-            {sentName}
-          </TableHead>
-          <TableHead className="align-middle text-right">v</TableHead>
-          <TableHead className="align-middle text-left">s</TableHead>
-          <TableHead className="text-center text-foreground w-5/12">
-            {direName}
-          </TableHead>
+          <TableHead className="text-center text-foreground w-6/24" />
+          <TableHead className="text-center text-foreground w-4/24" />
+          <TableHead className="text-center text-foreground w-2/24" />
+          <TableHead className="text-center text-foreground w-2/24" />
+          <TableHead className="text-center text-foreground w-4/24" />
+          <TableHead className="text-center text-foreground w-6/24" />
         </TableRow>
       </TableHeader>
       <TableBody>
-        <TableRow className="text-center">
-          <TableCell
-            colSpan={2}
-            className={cn(
-              CellClass,
-              "underline",
-              direWon ? LoseStatusCell : WinStatusCell,
-            )}
-          >
-            {direWon ? "Lose" : "Win"}
-          </TableCell>
-          <TableCell
-            colSpan={2}
-            className={cn(
-              CellClass,
-              "underline",
-              direWon ? WinStatusCell : LoseStatusCell,
-            )}
-          >
-            {direWon ? "Win" : "Lose"}
-          </TableCell>
-        </TableRow>
-
         {[0, 1, 2, 3, 4].map((idx) => (
           <TableRow key={idx} className="">
             <HeroLine isDire={false} {...sentHeroes[idx]} />

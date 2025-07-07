@@ -2,7 +2,8 @@ import { usePageTypeContext } from "@/components/context/DataTypeChoiceProvider"
 import { Card } from "@/components/ui/card";
 import useCustomUseNavigate from "@/navigation/hooks/useCustomUseNavigate";
 import type { AllGamesItem } from "../types";
-import GameCardFrontTable from "./GameCard/GameCardHeroTable";
+import GameCardHeaderTable from "./GameCard/GameCardHeaderTable";
+import GameCardHeroTable from "./GameCard/GameCardHeroTable";
 import GameCardOtherTable from "./GameCard/GameCardOtherTable";
 import GameCardStatsTable from "./GameCard/GameCardStatsTable";
 
@@ -34,7 +35,8 @@ export default function GameCard({ ...data }: AllGamesItem) {
       {LoPType === "patch" && (
         <h1 className="text-center">{data.leagueName}</h1>
       )}
-      <GameCardFrontTable {...data} />
+      <GameCardHeaderTable {...data} />
+      <GameCardHeroTable {...data} />
       <GameCardStatsTable {...data} />
       <GameCardOtherTable {...data} />
     </Card>

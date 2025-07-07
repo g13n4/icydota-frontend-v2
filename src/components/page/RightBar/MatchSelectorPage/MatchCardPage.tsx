@@ -48,11 +48,6 @@ export default function MatchCardPage() {
     />,
   ]);
 
-  console.log(
-    typeof page[page.length - 1],
-    page[page.length - 1],
-    isValidElement(page[page.length - 1]),
-  );
   return (
     <div
       className={cn(
