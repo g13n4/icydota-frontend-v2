@@ -44,7 +44,7 @@ export default function MatchSelector() {
           variant="noShadow"
           role="combobox"
           aria-expanded={open}
-          className="xl:w-11/12 md:w-full"
+          className="xl:w-11/12 w-full"
         >
           {leagueGames
             ? leagueGames.find((item) => {

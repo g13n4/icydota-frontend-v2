@@ -19,7 +19,7 @@ import { steamLink } from "@/urls";
 import type { AllGamesHeroes, AllGamesItem } from "../../types";
 
 const HERO_MAP = HeroNameMap as HeroesMapType;
-const CellClass = "p-0.5 align-baseline";
+const CellClass = "p-0.25 align-baseline";
 const SentCellClass = `${CellClass} text-right pr-0.5`;
 const DireCellClass = `${CellClass} text-left  pl-0.5`;
 
@@ -32,11 +32,12 @@ function HeroLine({
   const { name: hero_name, icon_url } = HERO_MAP[hero_id];
 
   const IconCell = () => (
-    <TableCell className="min-w-[24px]">
+    <TableCell className="min-w-[24px] text-center">
       <TooltipProvider>
         <Tooltip>
           <TooltipTrigger asChild>
             <img
+              className="inline-block"
               src={steamLink(icon_url)}
               alt={hero_name}
               width={24}
@@ -94,12 +95,12 @@ export default function GameCardHeroTable({
     <Table className="w-full table-fixed border-0">
       <TableHeader>
         <TableRow className="bg-secondary-background text-l">
-          <TableHead className="text-center text-foreground w-6/24" />
-          <TableHead className="text-center text-foreground w-4/24" />
+          <TableHead className="text-center text-foreground w-5/24" />
+          <TableHead className="text-center text-foreground w-5/24" />
           <TableHead className="text-center text-foreground w-2/24" />
           <TableHead className="text-center text-foreground w-2/24" />
-          <TableHead className="text-center text-foreground w-4/24" />
-          <TableHead className="text-center text-foreground w-6/24" />
+          <TableHead className="text-center text-foreground w-5/24" />
+          <TableHead className="text-center text-foreground w-5/24" />
         </TableRow>
       </TableHeader>
       <TableBody>

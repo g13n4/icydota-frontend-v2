@@ -6,8 +6,9 @@ import LeaguePatchSelector from "../LeftBar/LeaguePatchSelector/LeaguePatchSelec
 import DataFormatSelector from "../MiddleBar/Selectors/DataFormatSelector";
 import DataFormatTypeSelector from "../MiddleBar/Selectors/DataFormatTypeSelector";
 import PlayerTeamSelector from "../MiddleBar/Selectors/PlayerTeamSelector";
+import { cn } from "@/lib/utils";
 
-export default function CombinedLeftBar() {
+export default function   CombinedLeftBar() {
   const isMobile = useIsMobile();
   const { isMatchAll } = usePageTypeContext();
   const isMatchAllMobile = isMatchAll && isMobile;
@@ -26,5 +27,5 @@ export default function CombinedLeftBar() {
 
   if (isMobile) return <>{selectors}</>;
 
-  return <div className="flex flex-col gap-4">{selectors}</div>;
+  return <div className={cn("flex flex-col gap-4", )}>{selectors}</div>;
 } 

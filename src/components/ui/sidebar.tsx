@@ -130,15 +130,8 @@ function SidebarProvider({
       <TooltipProvider delayDuration={0}>
         <div
           data-slot="sidebar-wrapper"
-          style={
-            {
-              "--sidebar-width": SIDEBAR_WIDTH,
-              "--sidebar-width-icon": SIDEBAR_WIDTH_ICON,
-              ...style,
-            } as React.CSSProperties
-          }
           className={cn(
-            "group/sidebar-wrapper has-data-[variant=inset]:bg-sidebar w-full",
+            "group/sidebar-wrapper has-data-[variant=inset]:bg-sidebar w-full dark:bg-gray-700/90 bg-gray-400/90",
             className,
           )}
           {...props}
