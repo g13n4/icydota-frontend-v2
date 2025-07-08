@@ -1,5 +1,5 @@
 #!/bin/bash
-bunx --bun vite build --mode production
+bunx --bun --env-file=.env.production vite build
 cd ./dist/
 tar czf index.tar.gz *
 cd ..
