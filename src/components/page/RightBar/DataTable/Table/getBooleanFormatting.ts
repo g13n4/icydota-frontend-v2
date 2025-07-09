@@ -1,4 +1,4 @@
-export default function getBooleanStyling(
+export default function getBooleanFormatting(
   value: number | null,
   toBoolean: boolean,
 ) {

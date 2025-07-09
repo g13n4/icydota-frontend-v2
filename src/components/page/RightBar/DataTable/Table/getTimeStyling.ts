@@ -5,7 +5,7 @@ function padTime(num: number) {
     return num < 10 ? `0${num}` : num;
 }
 
-export default function getBooleanStyling(
+export default function getTimeStyling(
   value: number | null,
 ) {
   if (value === null) return null;

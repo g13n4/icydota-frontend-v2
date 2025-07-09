@@ -48,7 +48,7 @@ function getTargetColor(
   }
   if ((min === max && value) || max === value) {
     return { color: textColour, backgroundColor: colours[9] };
-  } 
+  }
   if (min === value) {
     return { color: textColour, backgroundColor: colours[0] };
   }
@@ -57,4 +57,21 @@ function getTargetColor(
   return { color: textColour, backgroundColor: colours[colourIndex] };
 }
 
-export { getColours, getTargetColor };
+function getBooleanColor(value: number, isDarkTheme: boolean) {
+  if (value === null) return null;
+  const colours = getColours(isDarkTheme);
+  const textColour = isDarkTheme ? "white" : "black";
+
+  return value > 0
+    ? {
+        color: textColour,
+        backgroundColor: colours[9],
+      }
+    : {
+        color: textColour,
+        backgroundColor: colours[0],
+      };
+}
+
+export { getBooleanColor, getColours, getTargetColor };
+

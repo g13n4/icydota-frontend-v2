@@ -1,15 +1,16 @@
 import { useInitialDataContext } from "@/components/context/InitialDataProvider";
 import type { ReactNode } from "react";
-import getBooleanStyling from "./getBooleanStyling";
-import { getTargetColor } from "./helpers";
+import { getBooleanColor, getTargetColor } from "./helpers";
 import type { AgGridColumnsType, ValueMappingMapType } from "./types";
 import getTimeStyling from "./getTimeStyling";
+import getBooleanFormatting from "./getBooleanFormatting";
 
 interface CellOptionsType {
   // adds icons
   cellRenderer?: (params: any) => ReactNode | null;
   // adds formatting to totals
   valueFormatter?: (params: any) => string | null;
+  cellStyle?: (params: any) => { color: string; backgroundColor: string; } | null;
 }
 
 export default function setCellsOptions({
@@ -33,8 +34,11 @@ export default function setCellsOptions({
 
     if (isTotal && totalPercentFields.find((i) => i === item.field)) {
       cellOptions.valueFormatter = (params) =>
-        getBooleanStyling(params.value, useBoolean);
-    }
+        getBooleanFormatting(params.value, useBoolean);
+      if (useBoolean) {
+        cellOptions.cellStyle = (params) => getBooleanColor(params.value, useBoolean)
+      }
+    } 
 
     
     if ("duration" === item.field.toLowerCase() && item.field.endsWith("_time")) {
