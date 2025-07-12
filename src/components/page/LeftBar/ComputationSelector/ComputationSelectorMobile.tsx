@@ -37,8 +37,8 @@ export default function ComputationSelectorMobile() {
   const navigate = useCustomUseNavigate();
   const { selectedCalculationId } = usePageTypeContext();
   const { computations } = useInitialDataContext();
-  
-  if (computations?.length > 0) return null
+
+  if (!computations?.length || computations?.length === 0) return null
   
   const totalItem = computations[0];
   const windowsItems = computations.slice(1) as ItemCategoryType[];

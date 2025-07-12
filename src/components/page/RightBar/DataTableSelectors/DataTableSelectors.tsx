@@ -8,12 +8,17 @@ import WindowsTypeSelector from "./Selectors/WindowsTypeSelector";
 import MatchSelector from "./Selectors/Match/MatchSelector";
 import GoBackButton from "./GoBackButton";
 import CrossComparisonComparisonSelector from "./Selectors/CrossComparison/CrossComparisonComparisonSelector";
-
-const gridTheme =
-  "grid lg:grid-flow-col sm:grid-flow-row gap-2 content-baseline sm:*:border-l-1 sm:*:first:border-0 sm:*:px-2";
+import { useIsMobile } from "@/hooks/use-mobile";
+import { cn } from "@/lib/utils";
 
 export default function DataTableSelectors() {
   const { selectedDataFormat } = usePageTypeContext();
+  const isMobile = useIsMobile();
+
+  const gridTheme = cn(
+    "grid lg:grid-flow-col sm:grid-flow-row gap-2 content-baseline sm:*:px-2",
+    isMobile ? "" : "*:border-l-1 *:first:border-0 ",
+  );
 
   if (selectedDataFormat === selectedDataFormatEnum.MATCH) {
     return (
