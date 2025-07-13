@@ -67,6 +67,7 @@ interface InitialDataType {
   patch: ItemStringType[];
   league: ItemStringType[];
   totalPercentFields: string[]
+  totalLanes: string[]
 }
 
 export type {

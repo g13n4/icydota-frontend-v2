@@ -1,16 +1,19 @@
 import { useInitialDataContext } from "@/components/context/InitialDataProvider";
 import type { ReactNode } from "react";
+import getBooleanFormatting from "./getBooleanFormatting";
+import getLaneFormatting from "./getLaneFormatting";
+import getTimeStyling from "./getTimeStyling";
 import { getBooleanColor, getTargetColor } from "./helpers";
 import type { AgGridColumnsType, ValueMappingMapType } from "./types";
-import getTimeStyling from "./getTimeStyling";
-import getBooleanFormatting from "./getBooleanFormatting";
 
 interface CellOptionsType {
   // adds icons
   cellRenderer?: (params: any) => ReactNode | null;
   // adds formatting to totals
   valueFormatter?: (params: any) => string | null;
-  cellStyle?: (params: any) => { color: string; backgroundColor: string; } | null;
+  cellStyle?: (
+    params: any,
+  ) => { color: string; backgroundColor: string } | null;
 }
 
 export default function setCellsOptions({
@@ -18,30 +21,43 @@ export default function setCellsOptions({
   valueMap,
   isDarkTheme,
   isTotal,
-  useBoolean,
+  isMatch,
+  isPlayer,
 }: {
   columnData: AgGridColumnsType[];
   valueMap: ValueMappingMapType;
   isDarkTheme: boolean;
   isTotal: boolean;
-  useBoolean: boolean;
+  isMatch: boolean;
+  isPlayer: boolean;
 }) {
-  const { totalPercentFields } = useInitialDataContext();
+  const { totalPercentFields, totalLanes } = useInitialDataContext();
 
   return columnData.map((item) => {
     const rangeValues = valueMap[item.field];
     const cellOptions: CellOptionsType = {};
 
-    if (isTotal && totalPercentFields.find((i) => i === item.field)) {
-      cellOptions.valueFormatter = (params) =>
-        getBooleanFormatting(params.value, useBoolean);
-      if (useBoolean) {
-        cellOptions.cellStyle = (params) => getBooleanColor(params.value, useBoolean)
-      }
-    } 
+    if (isTotal) {
+      if (totalLanes.find((i) => i === item.field)) {
+        cellOptions.valueFormatter = (params) =>
+          getLaneFormatting(params.value);
 
-    
-    if ("duration" === item.field.toLowerCase() && item.field.endsWith("_time")) {
+        cellOptions.cellStyle = (params) => null;
+      } else if (totalPercentFields.find((i) => i === item.field)) {
+        cellOptions.valueFormatter = (params) =>
+          getBooleanFormatting(params.value, isMatch);
+
+        if (isMatch) {
+          cellOptions.cellStyle = (params) =>
+            getBooleanColor(params.value, isDarkTheme);
+        }
+      }
+    }
+
+    if (
+      "duration" === item.field.toLowerCase() &&
+      item.field.endsWith("_time")
+    ) {
       cellOptions.valueFormatter = (params) => getTimeStyling(params.value);
     }
 

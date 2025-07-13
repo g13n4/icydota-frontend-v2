@@ -22,7 +22,8 @@ export default function DataTable() {
         tableData={data}
         isDarkMode={isDarkMode}
         isTotal={selectedCalculationId === "0"}
-        useBoolean={selectedPT === "player" && selectedDataFormat === "match"}
+        isMatch={selectedDataFormat === "match"}
+        isPlayer={selectedPT === "player"}
       />
     );
   }

@@ -2,6 +2,7 @@ import { createContext, useContext } from "react";
 import type { InitialDataType } from "./types";
 
 const InitialData = {
+  totalLanes: [],
   totalPercentFields: [],
   computations: [],
   patch: [],

@@ -8,17 +8,16 @@ import { useRef } from "react";
 import TableHeader from "./TableHeader";
 import setCellsOptions from "./cellsStyling";
 import type { TableResponseType } from "./types";
-import type { selectedDataFormatType } from "@/types/types";
 
 type TableType = {
   tableData: TableResponseType;
   isDarkMode: boolean;
   isTotal: boolean;
-  useBoolean: boolean;
+  isMatch: boolean;
+  isPlayer: boolean;
 };
 
-export default function Table({ tableData, isDarkMode, isTotal, useBoolean }: TableType) {
-  const gridRef = useRef<AgGridReact<Record<string, number | string>>>(null);
+export default function Table({ tableData, isDarkMode, isTotal, isMatch, isPlayer }: TableType) {
   const theme = themeBalham.withPart(
     isDarkMode ? colorSchemeDark : colorSchemeLightCold,
   );
@@ -28,7 +27,8 @@ export default function Table({ tableData, isDarkMode, isTotal, useBoolean }: Ta
     valueMap: tableData.valueMapping,
     isDarkTheme: isDarkMode,
     isTotal: isTotal,
-    useBoolean: useBoolean,
+    isMatch: isMatch,
+    isPlayer: isPlayer,
   });
 
   return (
@@ -37,7 +37,6 @@ export default function Table({ tableData, isDarkMode, isTotal, useBoolean }: Ta
       <TableHeader tableHeaderData={tableData.matchName} />
       <div className="h-200">
         <AgGridReact
-          ref={gridRef}
           className="h-auto w-auto"
           columnDefs={updatedColumnData}
           rowData={tableData.data}
