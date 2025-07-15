@@ -90,9 +90,16 @@ function HeroLine({
 export default function GameCardHeroTable({
   sentHeroes,
   direHeroes,
-}: AllGamesItem & { direWon: boolean }) {
+  selectedPosition,
+  setSelectedPosition,
+  hasGraph,
+}: AllGamesItem & {
+  selectedPosition: number | null;
+  hasGraph: boolean;
+  setSelectedPosition: React.Dispatch<React.SetStateAction<null | number>>;
+}) {
   return (
-    <Table className="w-full table-fixed border-0">
+    <Table className="w-full table-fixed border-0 mb-0.5" >
       <TableHeader>
         <TableRow className="bg-secondary-background text-l">
           <TableHead className="text-center text-foreground w-5/24" />
@@ -104,12 +111,30 @@ export default function GameCardHeroTable({
         </TableRow>
       </TableHeader>
       <TableBody>
-        {[0, 1, 2, 3, 4].map((idx) => (
-          <TableRow key={idx} className="">
-            <HeroLine isDire={false} {...sentHeroes[idx]} />
-            <HeroLine isDire={true} {...direHeroes[idx]} />
-          </TableRow>
-        ))}
+        {[0, 1, 2, 3, 4].map((idx) => {
+          const position = idx + 1;
+
+          return (
+            <TableRow
+              key={idx}
+              className={cn(
+                hasGraph && "hover:bg-amber-500/50",
+                hasGraph && selectedPosition === position
+                  ? "outline-2 outline-amber-700/70"
+                  : "",
+              )}
+              onClick={(e) => {
+                e.stopPropagation();
+                setSelectedPosition((prevState) =>
+                  prevState === position ? null : position,
+                );
+              }}
+            >
+              <HeroLine isDire={false} {...sentHeroes[idx]} />
+              <HeroLine isDire={true} {...direHeroes[idx]} />
+            </TableRow>
+          );
+        })}
       </TableBody>
     </Table>
   );

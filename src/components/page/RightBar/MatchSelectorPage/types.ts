@@ -1,3 +1,5 @@
+import { graphDataType } from "./GameCard/GameCard/types";
+
 interface AllGameSideData {
   gold: string;
   xp: string;
@@ -49,6 +51,8 @@ interface AllGamesItem {
   compData: AllGameSideComparisonData;
 
   leagueName: string;
+
+  graphData?: graphDataType;
 }
 
 interface AllGamesResponse {

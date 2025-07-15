@@ -1,6 +1,7 @@
 import type { LoPTypeType } from "./types/types";
 
 const initialDataUrl = "initial";
+const graphDataUrl = (matchId: number | string, position: number) => `graph/${matchId}/${position}`;
 const crossComparisonFieldsUrl = "cross-comparison/fields";
 const leagueMatchesUrl = (leagueId: string | number | null) =>
   `league/${leagueId}`;
@@ -16,7 +17,7 @@ const steamLink = (link: string) =>
 
 export {
   allMatchesUrl, crossComparisonFieldsUrl,
-  initialDataUrl,
+  initialDataUrl,graphDataUrl,
   leagueMatchesUrl, steamLink
 };
 

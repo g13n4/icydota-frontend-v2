@@ -5,7 +5,7 @@ import useSWR from "swr";
 import GameCard from "./GameCard/GameCard";
 import type { AllGamesResponse } from "./types";
 
-const PAGE_SIZE = 48;
+const PAGE_SIZE = 20;
 const OFFSET = 0;
 
 interface InfiniteMatchSelectorPageType {
