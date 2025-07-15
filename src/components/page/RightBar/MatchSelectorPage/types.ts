@@ -1,4 +1,4 @@
-import { graphDataType } from "./GameCard/GameCard/types";
+import type { graphDataType } from "./GameCard/GameCard/types";
 
 interface AllGameSideData {
   gold: string;
