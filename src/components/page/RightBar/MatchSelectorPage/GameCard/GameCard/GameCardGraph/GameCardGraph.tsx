@@ -20,9 +20,10 @@ function getTooltipText(
     return `Teams' ${dataType} is equal at ${time}`;
   }
   const sideName = value > 0 ? "Sentinel" : "Dire";
+  const hasHave = position === null ? "have" : "has";
   const positionText = position === null ? " " : `'s position ${position}`;
 
-  return `${sideName}${positionText} has ${Math.abs(value)} ${dataType} advantage at ${time}`;
+  return `${sideName}${positionText} ${hasHave} ${Math.abs(value)} ${dataType} advantage at ${time}`;
 }
 
 interface GameCardGraphType {
@@ -56,7 +57,7 @@ export default function GameCardGraph({
   const CustomTooltip = ({ active, payload }) => {
     if (active && payload && payload.length) {
       return (
-        <div className="custom-tooltip">
+        <div className="custom-tooltip bg-gray-500 p-1">
           <p className="label">
             {getTooltipText(
               payload[0].value,
@@ -70,6 +71,15 @@ export default function GameCardGraph({
     }
   };
 
+  function setDataType(e: React.MouseEvent<HTMLSpanElement, MouseEvent> | React.KeyboardEvent<HTMLSpanElement>) {
+          e.stopPropagation();
+          setSelectedDataType((prevState) =>
+            prevState === GraphDataEnum.GOLD
+              ? GraphDataEnum.XP
+              : GraphDataEnum.GOLD,
+          );
+  }
+
   return (
     <div className="w-full h-12 flex flex-row">
       <span
@@ -80,22 +90,8 @@ export default function GameCardGraph({
             ? "bg-blue-500/70  text-shadow-white text-white border-blue-900/55"
             : "bg-yellow-300/70  text-shadow-black text-black border-yellow-300",
         )}
-        onClick={(e) => {
-          e.stopPropagation();
-          setSelectedDataType((prevState) =>
-            prevState === GraphDataEnum.GOLD
-              ? GraphDataEnum.XP
-              : GraphDataEnum.GOLD,
-          );
-        }}
-        onKeyDown={(e) => {
-          e.stopPropagation();
-          setSelectedDataType((prevState) =>
-            prevState === GraphDataEnum.GOLD
-              ? GraphDataEnum.XP
-              : GraphDataEnum.GOLD,
-          );
-        }}
+        onClick={(e) => setDataType(e)}
+        onKeyDown={(e) => setDataType(e)}
       >
         {selectedDataType}
       </span>
