@@ -5,12 +5,11 @@ import {
   type Dispatch,
   type ReactNode,
   type SetStateAction,
-  isValidElement,
   useState
 } from "react";
 import InfiniteMatchSelectorPage from "./InfiniteMatchCards";
 
-const PAGE_SIZE = 48;
+const PAGE_SIZE = 24;
 const OFFSET = 0;
 
 const mobileColSize = "";
