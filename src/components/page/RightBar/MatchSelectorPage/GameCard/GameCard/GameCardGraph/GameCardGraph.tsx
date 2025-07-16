@@ -57,7 +57,7 @@ export default function GameCardGraph({
   const CustomTooltip = ({ active, payload }) => {
     if (active && payload && payload.length) {
       return (
-        <div className="custom-tooltip bg-gray-500 p-1">
+        <div className={cn("custom-tooltip bg-gray-500 p-1")}>
           <p className="label">
             {getTooltipText(
               payload[0].value,
@@ -97,7 +97,7 @@ export default function GameCardGraph({
       </span>
       <ChartContainer config={chartConfig} className="w-full  h-full">
         <BarChart accessibilityLayer data={data}>
-          <ChartTooltip cursor={false} content={CustomTooltip} />
+          <ChartTooltip cursor={false} content={CustomTooltip} position={{y: -25}}/>
           <Bar dataKey={selectedDataType}>
             {data.map((item) => (
               <Cell
