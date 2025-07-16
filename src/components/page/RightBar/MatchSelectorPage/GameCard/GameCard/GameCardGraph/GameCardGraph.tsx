@@ -29,7 +29,7 @@ function getTooltipText(
 interface GameCardGraphType {
   selectedPosition: number | null;
   matchId: number | string;
-  gameGraphData: graphDataType;
+  gameGraphData: graphDataType | undefined;
 }
 
 export default function GameCardGraph({
@@ -38,15 +38,18 @@ export default function GameCardGraph({
   matchId,
 }: GameCardGraphType) {
   const { data, error, isLoading } = useGraphData({
+    defaultData: gameGraphData,
     position: selectedPosition,
     matchId,
-    defaultData: gameGraphData,
   });
+  
   const [selectedDataType, setSelectedDataType] = useState<
     GraphDataEnum.GOLD | GraphDataEnum.XP
   >(GraphDataEnum.GOLD);
 
-  if (data === undefined || error || isLoading) return null;
+  if (data === undefined || error || isLoading) {
+    return <div className="w-full h-12">&nbsp;</div>
+  };
 
   const chartConfig = {
     value: {

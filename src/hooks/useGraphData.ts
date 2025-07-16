@@ -18,7 +18,7 @@ interface useGetTableDataResultType {
 interface useGraphDataType {
   position: number | null;
   matchId: number | string;
-  defaultData: graphDataType;
+  defaultData: graphDataType | undefined;
 }
 
 function toChartData({ gold, xp }: graphDataType) {
@@ -45,9 +45,19 @@ export default function useGraphData({
   defaultData,
 }: useGraphDataType): useGetTableDataResultType {
   const { data, isLoading, error } = useSWR<graphDataType, Error>(
-    position ? graphDataUrl(matchId, position) : null,
+    position && defaultData ? graphDataUrl(matchId, position) : null,
   );
+  
+  // no graph data
+  if (defaultData === undefined) {
+    return {
+      data: undefined,
+      error: undefined,
+      isLoading: false,
+    };
+  }
 
+// graph data is set to game's data
   if (position === null) {
     return {
       data: toChartData(defaultData),

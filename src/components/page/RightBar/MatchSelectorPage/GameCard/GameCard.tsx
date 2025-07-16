@@ -46,15 +46,11 @@ export default function GameCard({ ...data }: AllGamesItem) {
         setSelectedPosition={setSelectedPosition}
         {...data}
       />
-      {hasGraph && data.graphData ? (
         <GameCardGraph
           gameGraphData={data.graphData}
           selectedPosition={selectedPosition}
           matchId={data.id}
         />
-      ) : (
-        <div className="w-full h-12">&nbsp;</div>
-      )}
       <GameCardStatsTable {...data} />
       <GameCardOtherTable {...data} />
     </Card>
