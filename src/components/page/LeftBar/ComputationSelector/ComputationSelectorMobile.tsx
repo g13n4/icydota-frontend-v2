@@ -2,17 +2,16 @@ import { usePageTypeContext } from "@/components/context/DataTypeChoiceProvider"
 import { useInitialDataContext } from "@/components/context/InitialDataProvider";
 import type { ItemCategoryType } from "@/components/context/types";
 import {
-    Select,
-    SelectContent,
-    SelectGroup,
-    SelectItem,
-    SelectLabel,
-    SelectTrigger,
-    SelectValue,
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectTrigger,
+  SelectValue,
 } from "@/components/ui/select";
 import useCustomUseNavigate from "@/navigation/hooks/useCustomUseNavigate";
 import type { ItemStringType } from "@/types/types";
-
 
 function ComputationSelectorMobileGroup({
   title,
@@ -38,8 +37,8 @@ export default function ComputationSelectorMobile() {
   const { selectedCalculationId } = usePageTypeContext();
   const { computations } = useInitialDataContext();
 
-  if (!computations?.length || computations?.length === 0) return null
-  
+  if (!computations?.length || computations?.length === 0) return null;
+
   const totalItem = computations[0];
   const windowsItems = computations.slice(1) as ItemCategoryType[];
 
@@ -48,7 +47,7 @@ export default function ComputationSelectorMobile() {
       defaultValue={selectedCalculationId}
       onValueChange={(value) => navigate({ selectedCalculationId: value })}
     >
-      <SelectTrigger className="w-full">
+      <SelectTrigger className="w-full rounded-base shadow-shadow border-2 border-border bg-background text-foreground font-base">
         <SelectValue placeholder="Select calculation type" />
       </SelectTrigger>
       <SelectContent>

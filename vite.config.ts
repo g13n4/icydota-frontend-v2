@@ -29,6 +29,7 @@ export default defineConfig({
           ],
           grid: ["ag-grid-react"],
           requests: ["axios", "swr"],
+          charts: ["recharts"]
         },
         hoistTransitiveImports: true,
       },
