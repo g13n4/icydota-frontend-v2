@@ -10,7 +10,7 @@ export default function getHeroStyling(value: string) {
   return (
     <span className="flex-col">
       {value}
-      <img src={steamLink(iconUrl)} alt={value} width={24} height={24} className="z-10"/>
+      <img src={steamLink(iconUrl)} loading="lazy" alt={value} width={24} height={24} className="z-10"/>
     </span>
   );
 }

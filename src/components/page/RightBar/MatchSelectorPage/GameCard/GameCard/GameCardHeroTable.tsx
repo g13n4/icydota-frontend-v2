@@ -38,6 +38,7 @@ function HeroLine({
           <TooltipTrigger asChild>
             <img
               className="inline-block"
+              loading="lazy"
               src={steamLink(icon_url)}
               alt={hero_name}
               width={24}
