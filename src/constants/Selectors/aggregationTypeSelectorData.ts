@@ -24,16 +24,16 @@ const aggregationTypeSelectorData = [
     label: "Hero + Player",
   },
   {
+    value: "8",
+    label: "Player + Hero + Facet",
+  },
+  {
     value: "6",
-    label: "Player + Hero",
+    label: "Position + Player + Hero",
   },
   {
     value: "7",
-    label: "Hero + Facet + Player",
-  },
-  {
-    value: "8",
-    label: "Player + Hero + Facet",
+    label: "Position + Hero + Facet + Player",
   },
 ];
 
