@@ -5,8 +5,9 @@ import {
   type Dispatch,
   type ReactNode,
   type SetStateAction,
-  useState
+  useState,
 } from "react";
+import DataLeaguePatchHeader from "../DataLeaguePatchHeader/DataLeaguePatchHeader";
 import InfiniteMatchSelectorPage from "./InfiniteMatchCards";
 
 const PAGE_SIZE = 24;
@@ -37,7 +38,7 @@ function addMatchCardPage(
 
 export default function MatchCardPage() {
   const isMobile = useIsMobile();
-  const [hasEnded, setHasEnded] = useState(false)
+  const [hasEnded, setHasEnded] = useState(false);
   const [page, setPage] = useState<ReactNode[]>([
     <InfiniteMatchSelectorPage
       key={`match-cards-page-${1}`}
@@ -54,6 +55,7 @@ export default function MatchCardPage() {
         isMobile ? mobileColSize : pcColSize,
       )}
     >
+      <DataLeaguePatchHeader key={`match-cards-header-${1}`} />
       <div className="grid xl:grid-cols-5 lg:grid-cols-4 md:grid-cols-3 gap-2 ">
         {...page}
       </div>
@@ -66,7 +68,9 @@ export default function MatchCardPage() {
           Load More
         </Button>
       ) : (
-        <Button disabled className={buttonClass}>No more games found!</Button>
+        <Button disabled className={buttonClass}>
+          No more games found!
+        </Button>
       )}
     </div>
   );

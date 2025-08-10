@@ -15,7 +15,7 @@ export default function GoBackButton() {
         onClick={() => navigate({ selectedMatchId: undefined })}
         onKeyDown={() => navigate({ selectedMatchId: undefined })}
       >
-        <ArrowBigLeft fill="black" className="!size-7 self-al" />
+        <ArrowBigLeft fill="black" className="!size-7" />
         <span>Back</span>
       </Button>
     </div>
