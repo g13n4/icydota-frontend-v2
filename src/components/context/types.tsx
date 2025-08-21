@@ -66,8 +66,8 @@ interface InitialDataType {
   computations: (ItemStringType | ItemCategoryType)[];
   patch: ItemStringType[];
   league: ItemStringType[];
-  totalPercentFields: string[]
-  totalLanes: string[]
+  totalRepresentation: Record<string, number[]>;
+  windowRepresentation: Record<string, number[]>;
 }
 
 export type {
@@ -78,6 +78,6 @@ export type {
   OptionalPageTypeType,
   PageTypeType,
   selectedDataFormatType,
-  selectedPTType
+  selectedPTType,
 };
 

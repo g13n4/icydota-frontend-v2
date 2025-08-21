@@ -2,12 +2,11 @@ import { createContext, useContext } from "react";
 import type { InitialDataType } from "./types";
 
 const InitialData = {
-  totalLanes: [],
-  totalPercentFields: [],
+  totalRepresentation: {},
+  windowRepresentation: {},
   computations: [],
   patch: [],
   league: [],
-
 };
 
 const InitialDataContext = createContext<InitialDataType>(InitialData);
