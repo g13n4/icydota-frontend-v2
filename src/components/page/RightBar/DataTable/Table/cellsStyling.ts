@@ -1,8 +1,10 @@
-import { useInitialDataContext } from "@/components/context/InitialDataProvider";
+import type { TableDataRepresentationType } from "@/hooks/types";
 import type { ReactNode } from "react";
-import getBooleanFormatting from "./getBooleanFormatting";
-import getLaneFormatting from "./getLaneFormatting";
-import getTimeStyling from "./getTimeStyling";
+import getBooleanFormatting from "./Formatting/getBooleanFormatting";
+import getLaneFormatting from "./Formatting/getLaneFormatting";
+import getLevelFormatting from "./Formatting/getLevelFormatting";
+import getPercentFormatting from "./Formatting/getPercentFormatting";
+import getTimeStyling from "./Formatting/getTimeStyling";
 import { getBooleanColor, getTargetColor } from "./helpers";
 import type { AgGridColumnsType, ValueMappingMapType } from "./types";
 
@@ -16,55 +18,74 @@ interface CellOptionsType {
   ) => { color: string; backgroundColor: string } | null;
 }
 
+function setFormatting(formattingId: number | undefined, isDarkTheme: boolean) {
+  const cellOptions: CellOptionsType = {};
+
+  if (formattingId === undefined || formattingId === null) {
+    return cellOptions;
+  }
+
+  switch (formattingId) {
+    case 0: // Lane
+      cellOptions.valueFormatter = (params) => getLaneFormatting(params.value);
+
+      cellOptions.cellStyle = (params) => null;
+      return cellOptions;
+    case 1: // Percent
+      cellOptions.valueFormatter = (params) =>
+        getPercentFormatting(params.value);
+      return cellOptions;
+    case 2: // Level
+      cellOptions.valueFormatter = (params) => getLevelFormatting(params.value);
+      return cellOptions;
+    case 3: // Time
+      cellOptions.valueFormatter = (params) => getTimeStyling(params.value);
+      return cellOptions;
+    case 4: // Boolean
+      cellOptions.valueFormatter = (params) =>
+        getBooleanFormatting(params.value);
+      cellOptions.cellStyle = (params) =>
+        getBooleanColor(params.value, isDarkTheme);
+      return cellOptions;
+  }
+}
+
 export default function setCellsOptions({
   columnData,
   valueMap,
   isDarkTheme,
-  isTotal,
-  isMatch,
-  isPlayer,
+  formatting,
 }: {
   columnData: AgGridColumnsType[];
   valueMap: ValueMappingMapType;
   isDarkTheme: boolean;
-  isTotal: boolean;
-  isMatch: boolean;
-  isPlayer: boolean;
+  formatting: TableDataRepresentationType;
 }) {
-  const { totalPercentFields, totalLanes } = useInitialDataContext();
-
   return columnData.map((item) => {
+    if (formatting?.manyFormat && item?.children) {
+      item.children = item.children.map((subItem) => {
+
+        const formattingId = formatting.manyFormat?.[subItem.field];
+        const rangeValues = valueMap[subItem.field];
+
+        return {
+          cellStyle: (params) => {
+            return getTargetColor(
+              params.value,
+              rangeValues?.min,
+              rangeValues?.max,
+              isDarkTheme,
+            );
+          },
+          ...setFormatting(formattingId, isDarkTheme),
+          ...subItem,
+        };
+      })
+      return item
+    };
+    
     const rangeValues = valueMap[item.field];
-    const cellOptions: CellOptionsType = {};
-
-    if (isTotal) {
-      if (totalLanes.find((i) => i === item.field)) {
-        cellOptions.valueFormatter = (params) =>
-          getLaneFormatting(params.value);
-
-        cellOptions.cellStyle = (params) => null;
-      } else if (totalPercentFields.find((i) => i === item.field)) {
-        cellOptions.valueFormatter = (params) =>
-          getBooleanFormatting(params.value, isMatch);
-
-        if (isMatch) {
-          cellOptions.cellStyle = (params) =>
-            getBooleanColor(params.value, isDarkTheme);
-        }
-      }
-    }
-
-    if (
-      "duration" === item.field.toLowerCase() &&
-      item.field.endsWith("_time")
-    ) {
-      cellOptions.valueFormatter = (params) => getTimeStyling(params.value);
-    }
-
-    // doesn't work for some reason
-    // if (["hero", "heroes"].includes(item.field.toLowerCase())) {
-    //   cellOptions.cellRenderer = (params) => getHeroStyling(params.value);
-    // }
+    const formattingId = formatting?.singleFormat;
 
     return {
       cellStyle: (params) => {
@@ -75,8 +96,15 @@ export default function setCellsOptions({
           isDarkTheme,
         );
       },
-      ...cellOptions,
+      ...setFormatting(formattingId, isDarkTheme),
       ...item,
     };
   });
 }
+
+
+
+  // doesn't work for some reason
+  // if (["hero", "heroes"].includes(item.field.toLowerCase())) {
+  //   cellOptions.cellRenderer = (params) => getHeroStyling(params.value);
+  // }

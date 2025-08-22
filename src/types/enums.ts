@@ -35,8 +35,16 @@ enum GameStateEnum {
   GAME = "game",
 }
 
+enum DataRepresentationEnum {
+  LANE = "lane",
+  PERCENT = "percent",
+  LEVEL = "level", 
+  TIME = "time", 
+  BOOLEAN = "boolean",
+}
+
 export {
-  comparisonEnum,
+  comparisonEnum, DataRepresentationEnum,
   comparisonTypeEnum, crossComparisonComparisonEnum, GameStateEnum, leaguePachTypeEnum, PlayerTeamEnum, selectedDataFormatEnum
 };
 

@@ -12,10 +12,12 @@ type ValueMappingMapType = Record<
   }
 >;
 
+
 interface AgGridColumnsType {
   field: string;
   headerName: string;
   pinned: string;
+  children?: AgGridColumnsType[];
 }
 
 interface MatchNamingDataType {

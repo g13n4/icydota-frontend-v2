@@ -66,8 +66,9 @@ interface InitialDataType {
   computations: (ItemStringType | ItemCategoryType)[];
   patch: ItemStringType[];
   league: ItemStringType[];
-  totalRepresentation: Record<string, number[]>;
-  windowRepresentation: Record<string, number[]>;
+  totalRepresentation: Record<string, Record<string, number>>;
+  windowRepresentation: Record<string, Record<string, number>>;
+  code: Record<string, number>;
 }
 
 export type {

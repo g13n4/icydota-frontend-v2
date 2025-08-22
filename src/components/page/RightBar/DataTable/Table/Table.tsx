@@ -4,20 +4,18 @@ import {
   themeBalham,
 } from "ag-grid-community";
 import { AgGridReact } from "ag-grid-react";
-import { useRef } from "react";
 import TableHeader from "./TableHeader";
 import setCellsOptions from "./cellsStyling";
 import type { TableResponseType } from "./types";
+import type { TableDataRepresentationType } from "@/hooks/types";
 
 type TableType = {
   tableData: TableResponseType;
   isDarkMode: boolean;
-  isTotal: boolean;
-  isMatch: boolean;
-  isPlayer: boolean;
+  formatting: TableDataRepresentationType;
 };
 
-export default function Table({ tableData, isDarkMode, isTotal, isMatch, isPlayer }: TableType) {
+export default function Table({ tableData, isDarkMode, formatting }: TableType) {
   const theme = themeBalham.withPart(
     isDarkMode ? colorSchemeDark : colorSchemeLightCold,
   );
@@ -26,9 +24,7 @@ export default function Table({ tableData, isDarkMode, isTotal, isMatch, isPlaye
     columnData: tableData.columns,
     valueMap: tableData.valueMapping,
     isDarkTheme: isDarkMode,
-    isTotal: isTotal,
-    isMatch: isMatch,
-    isPlayer: isPlayer,
+    formatting: formatting,
   });
 
   return (
@@ -43,12 +39,9 @@ export default function Table({ tableData, isDarkMode, isTotal, isMatch, isPlaye
           theme={theme}
           autoSizeStrategy={{
             type: "fitCellContents",
-            defaultMaxWidth: 120,
-            defaultMinWidth: 50,
           }}
         />
       </div>
     </div>
   );
 }
-

@@ -11,5 +11,9 @@ interface useDataFormatDataReturnType {
     dataFormatType: keyof PageTypeType | null;
   }
   
+  interface TableDataRepresentationType {
+    singleFormat?: number;
+    manyFormat?: Record<string, number>;
+}
 
-export type {useDataFormatDataType, useDataFormatDataReturnType}
+export type {useDataFormatDataType, useDataFormatDataReturnType, TableDataRepresentationType}
