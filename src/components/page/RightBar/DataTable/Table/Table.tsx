@@ -1,6 +1,7 @@
 import {
   colorSchemeDark,
   colorSchemeLightCold,
+  type GetRowIdParams,
   themeBalham,
 } from "ag-grid-community";
 import { AgGridReact } from "ag-grid-react";
@@ -27,6 +28,11 @@ export default function Table({ tableData, isDarkMode, formatting }: TableType) 
     formatting: formatting,
   });
 
+  // const getRowId = useCallback(
+  //   (params: GetRowIdParams) => console.log(params.data),
+  //   [],
+  // );
+
   return (
     // Data Grid will fill the size of the parent container
     <div className="flex flex-col">
@@ -37,6 +43,7 @@ export default function Table({ tableData, isDarkMode, formatting }: TableType) 
           columnDefs={updatedColumnData}
           rowData={tableData.data}
           theme={theme}
+          //getRowId={getRowId}
           autoSizeStrategy={{
             type: "fitCellContents",
           }}

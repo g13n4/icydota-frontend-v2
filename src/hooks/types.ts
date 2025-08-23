@@ -12,8 +12,10 @@ interface useDataFormatDataReturnType {
   }
   
   interface TableDataRepresentationType {
-    singleFormat?: number;
-    manyFormat?: Record<string, number>;
+    windowFormat?: number;
+    totalFormat?: Record<string, number>;
+    enforcePercentFormat?: boolean;
+    
 }
 
 export type {useDataFormatDataType, useDataFormatDataReturnType, TableDataRepresentationType}

@@ -7,6 +7,7 @@ import getPercentFormatting from "./Formatting/getPercentFormatting";
 import getTimeStyling from "./Formatting/getTimeStyling";
 import { getBooleanColor, getTargetColor } from "./helpers";
 import type { AgGridColumnsType, ValueMappingMapType } from "./types";
+import { DataRepresentationEnum } from "@/types/enums";
 
 interface CellOptionsType {
   // adds icons
@@ -26,22 +27,22 @@ function setFormatting(formattingId: number | undefined, isDarkTheme: boolean) {
   }
 
   switch (formattingId) {
-    case 0: // Lane
+    case DataRepresentationEnum.LANE: // Lane
       cellOptions.valueFormatter = (params) => getLaneFormatting(params.value);
 
       cellOptions.cellStyle = (params) => null;
       return cellOptions;
-    case 1: // Percent
+    case DataRepresentationEnum.PERCENT: // Percent
       cellOptions.valueFormatter = (params) =>
         getPercentFormatting(params.value);
       return cellOptions;
-    case 2: // Level
+    case DataRepresentationEnum.LEVEL: // Level
       cellOptions.valueFormatter = (params) => getLevelFormatting(params.value);
       return cellOptions;
-    case 3: // Time
+    case DataRepresentationEnum.TIME: // Time
       cellOptions.valueFormatter = (params) => getTimeStyling(params.value);
       return cellOptions;
-    case 4: // Boolean
+    case DataRepresentationEnum.BOOLEAN: // Boolean
       cellOptions.valueFormatter = (params) =>
         getBooleanFormatting(params.value);
       cellOptions.cellStyle = (params) =>
@@ -62,11 +63,12 @@ export default function setCellsOptions({
   formatting: TableDataRepresentationType;
 }) {
   return columnData.map((item) => {
-    if (formatting?.manyFormat && item?.children) {
+    if (formatting?.totalFormat && item?.children) {
       item.children = item.children.map((subItem) => {
 
-        const formattingId = formatting.manyFormat?.[subItem.field];
+        const formattingId = formatting.totalFormat?.[subItem.field];
         const rangeValues = valueMap[subItem.field];
+        const finalRepId = !item.pinned && formatting.enforcePercentFormat ? DataRepresentationEnum.PERCENT : formattingId
 
         return {
           cellStyle: (params) => {
@@ -77,7 +79,7 @@ export default function setCellsOptions({
               isDarkTheme,
             );
           },
-          ...setFormatting(formattingId, isDarkTheme),
+          ...setFormatting(finalRepId, isDarkTheme),
           ...subItem,
         };
       })
@@ -85,7 +87,8 @@ export default function setCellsOptions({
     };
     
     const rangeValues = valueMap[item.field];
-    const formattingId = formatting?.singleFormat;
+    const formattingId = formatting?.windowFormat;
+    const finalRepId = !item.pinned && formatting.enforcePercentFormat ? DataRepresentationEnum.PERCENT : formattingId
 
     return {
       cellStyle: (params) => {
@@ -96,7 +99,7 @@ export default function setCellsOptions({
           isDarkTheme,
         );
       },
-      ...setFormatting(formattingId, isDarkTheme),
+      ...setFormatting(finalRepId, isDarkTheme),
       ...item,
     };
   });

@@ -36,11 +36,11 @@ enum GameStateEnum {
 }
 
 enum DataRepresentationEnum {
-  LANE = "lane",
-  PERCENT = "percent",
-  LEVEL = "level", 
-  TIME = "time", 
-  BOOLEAN = "boolean",
+  LANE = 0,
+  PERCENT = 1,
+  LEVEL = 2, 
+  TIME = 3, 
+  BOOLEAN = 4,
 }
 
 export {

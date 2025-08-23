@@ -27,10 +27,7 @@ type comparisonType = `${comparisonEnum}`;
 
 type gameStateType = `${GameStateEnum}`;
 
-type DataRepresentationType = `${DataRepresentationEnum}`
-
 export type {
-  DataRepresentationType,
   gameStateType,
   comparisonType,
   comparisonTypeType,
