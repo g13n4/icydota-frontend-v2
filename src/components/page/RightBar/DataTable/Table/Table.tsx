@@ -28,11 +28,6 @@ export default function Table({ tableData, isDarkMode, formatting }: TableType) 
     formatting: formatting,
   });
 
-  // const getRowId = useCallback(
-  //   (params: GetRowIdParams) => console.log(params.data),
-  //   [],
-  // );
-
   return (
     // Data Grid will fill the size of the parent container
     <div className="flex flex-col">

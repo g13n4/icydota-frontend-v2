@@ -16,7 +16,7 @@ enum selectedDataFormatEnum {
 
 enum comparisonTypeEnum {
   BASIC = "basic",
-  COMPLEX = "complex",
+  PLAYER = "player",
 }
 
 enum crossComparisonComparisonEnum {

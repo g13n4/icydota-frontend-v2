@@ -10,8 +10,8 @@ const data = [
     label: "Basic",
   },
   {
-    value: comparisonTypeEnum.COMPLEX,
-    label: "Complex",
+    value: comparisonTypeEnum.PLAYER,
+    label: "Player",
   },
 ];
 
