@@ -13,13 +13,14 @@ export default function useTableDataRepresentation(): TableDataRepresentationTyp
     useInitialDataContext();
   const isTotal = selectedCalculationId === "0";
 
-  const formattingIndexId = code[selectedDataFormat] + code[selectedPT];
-  const windowFormattingId =
-    windowRepresentation?.[selectedCalculationId]?.[formattingIndexId];
-
   if (selectedComparison === "perc") {
     return { enforcePercentFormat: true };
   }
+
+  const formattingIndexId = code[selectedDataFormat] + code[selectedPT] + code[selectedComparison];
+  const windowFormattingId =
+    windowRepresentation?.[selectedCalculationId]?.[formattingIndexId];
+
 
   if (isTotal) {
     const output: { totalFormat: Record<string, number> } = { totalFormat: {} };
