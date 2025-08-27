@@ -1,7 +1,6 @@
 import {
   colorSchemeDark,
   colorSchemeLightCold,
-  type GetRowIdParams,
   themeBalham,
 } from "ag-grid-community";
 import { AgGridReact } from "ag-grid-react";

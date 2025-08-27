@@ -13,17 +13,20 @@ export default function useTableDataRepresentation(): TableDataRepresentationTyp
     useInitialDataContext();
   const isTotal = selectedCalculationId === "0";
 
-  if (selectedComparison === "perc") {
-    return { enforcePercentFormat: true };
-  }
-
-  const formattingIndexId = code[selectedDataFormat] + code[selectedPT] + code[selectedComparison];
+  const formattingIndexId =
+    code[selectedDataFormat] + code[selectedPT] + code[selectedComparison];
   const windowFormattingId =
     windowRepresentation?.[selectedCalculationId]?.[formattingIndexId];
 
-
   if (isTotal) {
-    const output: { totalFormat: Record<string, number> } = { totalFormat: {} };
+    if (selectedComparison === "perc") {
+      return { enforceTotalPercentFormat: true };
+    }
+
+    const output: { totalFormat: Record<string, number>; isTotal: boolean } = {
+      totalFormat: {},
+      isTotal,
+    };
 
     for (const [totalName, subDict] of Object.entries(totalRepresentation)) {
       const possibleFormattingId = subDict?.[formattingIndexId];
@@ -33,8 +36,13 @@ export default function useTableDataRepresentation(): TableDataRepresentationTyp
     }
     return output;
   }
-  if (!isTotal && windowFormattingId !== undefined) {
-    return { windowFormat: windowFormattingId };
+  if (!isTotal) {
+    if (selectedComparison === "perc") {
+      return { enforceTotalPercentFormat: true };
+    }
+    if (windowFormattingId !== undefined) {
+      return { windowFormat: windowFormattingId };
+    }
   }
 
   return {};

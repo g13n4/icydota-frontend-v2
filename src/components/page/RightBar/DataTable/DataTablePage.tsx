@@ -16,7 +16,7 @@ export default function DataTable() {
     return <EmptyTable isLoading={false} />;
   }
 
-  if (data !== undefined) {
+  if (data !== undefined && data !== null) {
     return (
       <Table
         tableData={data}

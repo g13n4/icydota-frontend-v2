@@ -63,12 +63,14 @@ export default function setCellsOptions({
   formatting: TableDataRepresentationType;
 }) {
   return columnData.map((item) => {
-    if (formatting?.totalFormat && item?.children) {
+    if (item)
+
+    if ((formatting.totalFormat || formatting.enforceTotalPercentFormat)  && item?.children) {
       item.children = item.children.map((subItem) => {
 
         const formattingId = formatting.totalFormat?.[subItem.field];
         const rangeValues = valueMap[subItem.field];
-        const finalRepId = !item.pinned && formatting.enforcePercentFormat ? DataRepresentationEnum.PERCENT : formattingId
+        const finalRepId = !subItem.pinned && formatting.enforceTotalPercentFormat ? DataRepresentationEnum.PERCENT : formattingId
 
         return {
           cellStyle: (params) => {
@@ -86,10 +88,11 @@ export default function setCellsOptions({
       return item
     };
     
+    if (formatting.windowFormat || formatting.enforceWindowPercentFormat) {
     const rangeValues = valueMap[item.field];
     const formattingId = formatting?.windowFormat;
-    const finalRepId = !item.pinned && formatting.enforcePercentFormat ? DataRepresentationEnum.PERCENT : formattingId
-
+    const finalRepId = !item.pinned && formatting.enforceWindowPercentFormat ? DataRepresentationEnum.PERCENT : formattingId
+    
     return {
       cellStyle: (params) => {
         return getTargetColor(
@@ -102,8 +105,10 @@ export default function setCellsOptions({
       ...setFormatting(finalRepId, isDarkTheme),
       ...item,
     };
-  });
-}
+  }
+
+  return item
+})}
 
 
 
