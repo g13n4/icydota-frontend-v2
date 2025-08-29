@@ -8,6 +8,7 @@ import TableHeader from "./TableHeader";
 import setCellsOptions from "./cellsStyling";
 import type { TableResponseType } from "./types";
 import type { TableDataRepresentationType } from "@/hooks/types";
+import { useEffect, useRef } from "react";
 
 type TableType = {
   tableData: TableResponseType;
@@ -16,6 +17,7 @@ type TableType = {
 };
 
 export default function Table({ tableData, isDarkMode, formatting }: TableType) {
+  const tableRef = useRef(null);
   const theme = themeBalham.withPart(
     isDarkMode ? colorSchemeDark : colorSchemeLightCold,
   );
@@ -33,11 +35,12 @@ export default function Table({ tableData, isDarkMode, formatting }: TableType) 
       <TableHeader tableHeaderData={tableData.matchName} />
       <div className="h-200">
         <AgGridReact
+          ref={tableRef}
           className="h-auto w-auto"
           columnDefs={updatedColumnData}
           rowData={tableData.data}
           theme={theme}
-          //getRowId={getRowId}
+          onRowDataUpdated={(e) => e.api.autoSizeAllColumns()}
           autoSizeStrategy={{
             type: "fitCellContents",
           }}
