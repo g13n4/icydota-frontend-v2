@@ -1,4 +1,5 @@
 import type { TableDataRepresentationType } from "@/hooks/types";
+import { DataRepresentationEnum } from "@/types/enums";
 import type { ReactNode } from "react";
 import getBooleanFormatting from "./Formatting/getBooleanFormatting";
 import getLaneFormatting from "./Formatting/getLaneFormatting";
@@ -7,7 +8,6 @@ import getPercentFormatting from "./Formatting/getPercentFormatting";
 import getTimeStyling from "./Formatting/getTimeStyling";
 import { getBooleanColor, getTargetColor } from "./helpers";
 import type { AgGridColumnsType, ValueMappingMapType } from "./types";
-import { DataRepresentationEnum } from "@/types/enums";
 
 interface CellOptionsType {
   // adds icons
@@ -64,51 +64,61 @@ export default function setCellsOptions({
 }) {
   return columnData.map((item) => {
     if (item)
+      if (
+        (formatting.totalFormat || formatting.enforceTotalPercentFormat) &&
+        item?.children
+      ) {
+        item.children = item.children.map((subItem) => {
+          const formattingId = formatting.totalFormat?.[subItem.field];
+          const rangeValues = valueMap[subItem.field];
+          const finalRepId =
+            !subItem.pinned && formatting.enforceTotalPercentFormat
+              ? DataRepresentationEnum.PERCENT
+              : formattingId;
 
-    if ((formatting.totalFormat || formatting.enforceTotalPercentFormat)  && item?.children) {
-      item.children = item.children.map((subItem) => {
+          console.log(subItem.field, formattingId, finalRepId)
 
-        const formattingId = formatting.totalFormat?.[subItem.field];
-        const rangeValues = valueMap[subItem.field];
-        const finalRepId = !subItem.pinned && formatting.enforceTotalPercentFormat ? DataRepresentationEnum.PERCENT : formattingId
+          return {
+            cellStyle: (params) => {
+              return getTargetColor(
+                params.value,
+                rangeValues?.min,
+                rangeValues?.max,
+                isDarkTheme,
+              );
+            },
+            ...setFormatting(finalRepId, isDarkTheme),
+            ...subItem,
+          };
+        });
+        return item;
+      }
 
-        return {
-          cellStyle: (params) => {
-            return getTargetColor(
-              params.value,
-              rangeValues?.min,
-              rangeValues?.max,
-              isDarkTheme,
-            );
-          },
-          ...setFormatting(finalRepId, isDarkTheme),
-          ...subItem,
-        };
-      })
-      return item
-    };
-    
     if (formatting.windowFormat || formatting.enforceWindowPercentFormat) {
-    const rangeValues = valueMap[item.field];
-    const formattingId = formatting?.windowFormat;
-    const finalRepId = !item.pinned && formatting.enforceWindowPercentFormat ? DataRepresentationEnum.PERCENT : formattingId
-    
-    return {
-      cellStyle: (params) => {
-        return getTargetColor(
-          params.value,
-          rangeValues?.min,
-          rangeValues?.max,
-          isDarkTheme,
-        );
-      },
-      ...setFormatting(finalRepId, isDarkTheme),
-      ...item,
-    };
-  }
+      const rangeValues = valueMap[item.field];
+      const formattingId = formatting?.windowFormat;
+      const finalRepId =
+        !item.pinned && formatting.enforceWindowPercentFormat
+          ? DataRepresentationEnum.PERCENT
+          : formattingId;
 
-  return item
-})}
+      return {
+        cellStyle: (params) => {
+          return getTargetColor(
+            params.value,
+            rangeValues?.min,
+            rangeValues?.max,
+            isDarkTheme,
+          );
+        },
+        ...setFormatting(finalRepId, isDarkTheme),
+        ...item,
+      };
+    }
+
+    return item;
+  });
+}
 
 
 

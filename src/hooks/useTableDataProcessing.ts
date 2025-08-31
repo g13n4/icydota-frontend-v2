@@ -30,7 +30,7 @@ export default function useTableDataRepresentation(): TableDataRepresentationTyp
 
     for (const [totalName, subDict] of Object.entries(totalRepresentation)) {
       const possibleFormattingId = subDict?.[formattingIndexId];
-      if (possibleFormattingId) {
+      if (possibleFormattingId !== undefined && possibleFormattingId !== null) {
         output.totalFormat[totalName] = possibleFormattingId;
       }
     }
