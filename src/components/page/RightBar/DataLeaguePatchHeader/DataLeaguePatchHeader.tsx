@@ -71,7 +71,7 @@ export default function DataLeaguePatchHeader() {
                 </Card>
               </TooltipTrigger>
               <TooltipContent>
-                {item?.cmp_value && (
+                {item?.cmp_value && data?.patch && (
                   <p>
                     Average value for patch (
                     {data.patch}) (this tournament patch(es)) is {item.cmp_value}
