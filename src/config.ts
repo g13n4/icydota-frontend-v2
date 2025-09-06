@@ -5,13 +5,17 @@ const DEBUG_MODE = import.meta.env.VITE_DEBUG === "true";
 
 const axiosInstance = axios.create({
   baseURL: API_URL,
+  headers: {
+    "Access-Control-Allow-Origin": `${API_URL}*`,
+    "Content-Type": "application/json",
+  },
+  withCredentials: true,
 });
 
-const axiosInfiniteFetcher = (url: string) =>
-  axiosInstance
-    .get(url)
-    .then((res) => res.data)
-    .then((data) => data.data);
+const axiosInfiniteFetcher = async (url: string) => {
+  const { data } = await axiosInstance.get(url);
+  return data.data;
+};
 
 function getSWRConfig(isDebugMode: boolean) {
   if (isDebugMode) {
@@ -21,7 +25,10 @@ function getSWRConfig(isDebugMode: boolean) {
       revalidateOnReconnect: true,
       refreshInterval: 0,
       dedupingInterval: 0,
-      fetcher: (url: string) => axiosInstance.get(url).then((res) => res.data),
+      fetcher: async (url: string) => {
+        const { data } = await axiosInstance.get(url);
+        return data;
+      },
     };
   }
 
@@ -34,7 +41,10 @@ function getSWRConfig(isDebugMode: boolean) {
     focusThrottleInterval: 86400000, // Prevent any focus rechecks
     dedupingInterval: 86400000, // Dedupe requests for 24h
     errorRetryInterval: 3600000, // Retry failed requests hourly
-    fetcher: (url: string) => axiosInstance.get(url).then((res) => res.data),
+    fetcher: async (url: string) => {
+        const { data } = await axiosInstance.get(url);
+        return data;
+      },
   };
 }
 

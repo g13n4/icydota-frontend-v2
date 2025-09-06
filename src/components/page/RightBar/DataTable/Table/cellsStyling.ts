@@ -76,8 +76,6 @@ export default function setCellsOptions({
               ? DataRepresentationEnum.PERCENT
               : formattingId;
 
-          console.log(subItem.field, formattingId, finalRepId)
-
           return {
             cellStyle: (params) => {
               return getTargetColor(
