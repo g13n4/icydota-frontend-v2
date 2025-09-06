@@ -5,7 +5,10 @@ import type { OptionalPageTypeType } from "src/components/context/types";
 import generateLink from "../generateNavigationLink";
 import generateState from "../generateState";
 
-export default function useCustomUseNavigate(newTab = false ) {
+export default function useCustomUseNavigate(
+  newTab = false,
+  toMatchAll = false,
+) {
   const navigate = useNavigate();
   const prevData = usePageTypeContext();
 
@@ -14,10 +17,13 @@ export default function useCustomUseNavigate(newTab = false ) {
     options?: NavigateOptions,
   ) {
     const newState = generateState({ data: { ...prevData, ...changedData } });
-    const navigateLink = generateLink({ data: newState });
+    const navigateLink = generateLink({
+      data: newState,
+      toMatchAll: toMatchAll,
+    });
     if (newTab) {
-//      window.open(navigateLink, "_blank", "rel=noopener noreferrer");
-      window.open(navigateLink, "_blank"  );
+      //      window.open(navigateLink, "_blank", "rel=noopener noreferrer");
+      window.open(navigateLink, "_blank");
     } else {
       navigate(navigateLink, { replace: false, ...options });
     }

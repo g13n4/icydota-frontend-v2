@@ -1,13 +1,13 @@
 import type { PageTypeType } from "src/components/context/types";
 
 export default function generateNavigationLink({
-  data,
-}: { data: PageTypeType }): string {
+  data, toMatchAll = false
+}: { data: PageTypeType, toMatchAll: boolean }): string {
   const LoPPart = `/${data.LoPType}/${data.LoPType === "patch" ? data.selectedPatchId : data.selectedLeagueId}`;
 
   const linkStart = `${LoPPart}/${data.selectedPT}/${data.selectedDataFormat}`;
 
-  if (data.isMatchAll) {
+  if (data.isMatchAll || toMatchAll) {
     return linkStart;
   }
   if (data.isMatchOne) {
