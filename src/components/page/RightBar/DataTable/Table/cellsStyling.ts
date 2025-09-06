@@ -93,6 +93,7 @@ export default function setCellsOptions({
       }
 
     if (formatting.windowFormat || formatting.enforceWindowPercentFormat) {
+      console.log(valueMap, item.field);
       const rangeValues = valueMap[item.field];
       const formattingId = formatting?.windowFormat;
       const finalRepId =
@@ -114,7 +115,19 @@ export default function setCellsOptions({
       };
     }
 
-    return item;
+    const rangeValues = valueMap[item.field];
+
+    return {
+      cellStyle: (params) => {
+        return getTargetColor(
+          params.value,
+          rangeValues?.min,
+          rangeValues?.max,
+          isDarkTheme,
+        );
+      },
+      ...item,
+    };
   });
 }
 
