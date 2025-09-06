@@ -70,14 +70,12 @@ export default function DataLeaguePatchHeader() {
                   <MomentumIcon momentum={item?.cmp_mom} />
                 </Card>
               </TooltipTrigger>
-              <TooltipContent>
-                {item?.cmp_value && data?.patch && (
+              {data?.patch && item?.cmp_value && <TooltipContent>
                   <p>
                     Average value for patch (
                     {data.patch}) (this tournament patch(es)) is {item.cmp_value}
                   </p>
-                )}
-              </TooltipContent>
+              </TooltipContent>}
             </Tooltip>
           </TooltipProvider>
         );
