@@ -51,7 +51,7 @@ export default function MatchCardPage() {
   return (
     <div
       className={cn(
-        "flex flex-col h-svh",
+        "flex flex-col h-svh px-1",
         isMobile ? mobileColSize : pcColSize,
       )}
     >
