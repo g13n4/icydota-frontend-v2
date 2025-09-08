@@ -19,7 +19,7 @@ const RightBar = memo(function RightBar() {
   }
 
   return (
-    <Card className={cn("flex flex-col", isMobile ? mobileColSize : pcColSize)}>
+    <Card className={cn("flex flex-col px-3 py-2", isMobile ? mobileColSize : pcColSize)}>
       <DataTableSelectors />
       <DataTable />
     </Card>
