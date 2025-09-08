@@ -1,5 +1,6 @@
 import { usePageTypeContext } from "@/components/context/DataTypeChoiceProvider";
 import CustomTabsSelector from "@/components/Templates/Selectors/CustomTabsSelector";
+import { PlayerTeamEnum } from "@/types/enums";
 import type { List } from "@radix-ui/react-tabs";
 import type { ComponentProps } from "react";
 
@@ -22,7 +23,7 @@ export default function CrossComparisonPositionSelector({
   className,
 }: ComponentProps<typeof List>) {
 const { selectedPT } = usePageTypeContext();
-  const isDisabled = selectedPT === "team"
+  const isDisabled = selectedPT === PlayerTeamEnum.TEAM
 
   return (
     <CustomTabsSelector

@@ -12,6 +12,7 @@ import {
 } from "@/components/ui/select";
 import useDataFormatData from "@/hooks/useDataFormatData";
 import useCustomUseNavigate from "@/navigation/hooks/useCustomUseNavigate";
+import { PlayerTeamEnum, selectedDataFormatEnum } from "@/types/enums";
 
 export default function DataFormatTypeSelector() {
   const navigate = useCustomUseNavigate();
@@ -19,7 +20,14 @@ export default function DataFormatTypeSelector() {
   const props = usePageTypeContext();
   const dataFormatValue = props[dataFormatType as keyof PageTypeType];
 
-  if (!isActive) {
+  const { selectedDataFormat, selectedPT } = usePageTypeContext();
+  const isDisabled = !(
+    (selectedDataFormat === selectedDataFormatEnum.AGGREGATION ||
+      selectedDataFormat === selectedDataFormatEnum.CROSS_COMPARISON) &&
+    selectedPT === PlayerTeamEnum.PLAYER
+  );
+
+  if (!isActive || isDisabled) {
     return (
       <Card className="h-fit">
         <Select disabled>
@@ -34,7 +42,7 @@ export default function DataFormatTypeSelector() {
   return (
     <Card className="h-fit">
       <Select
-      key={`data-format-type-selector-${props.selectedDataFormat}`}
+        key={`data-format-type-selector-${props.selectedDataFormat}`}
         defaultValue={dataFormatValue as string}
         onValueChange={(value) =>
           navigate({ [dataFormatType as string]: value })

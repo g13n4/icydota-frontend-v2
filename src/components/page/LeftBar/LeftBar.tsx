@@ -1,6 +1,5 @@
-import { Sidebar } from "@/components/ui/sidebar";
-import LeaguePatchSelector from "./LeaguePatchSelector/LeaguePatchSelector";
 import ComputationSelector from "./ComputationSelector/ComputationSelector";
+import LeaguePatchSelector from "./LeaguePatchSelector/LeaguePatchSelector";
 
 export default function LeftSidebar() {
   return (
