@@ -1,5 +1,5 @@
 export default function getLaneFormatting(
-  value: number | null,
+  value: number | null | undefined,
 ) {
           switch (value) {
             case 1:

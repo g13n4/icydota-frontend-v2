@@ -16,6 +16,7 @@ interface useDataFormatDataReturnType {
     totalFormat?: Record<string, number>;
     enforceWindowPercentFormat?: boolean;
     enforceTotalPercentFormat?: boolean;
+    enforcePercentFormat?: boolean;
 }
 
 export type {useDataFormatDataType, useDataFormatDataReturnType, TableDataRepresentationType}

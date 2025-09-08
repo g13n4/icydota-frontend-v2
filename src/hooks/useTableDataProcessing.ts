@@ -28,7 +28,7 @@ export default function useTableDataRepresentation(): TableDataRepresentationTyp
     selectedCrossComparisonComparison === crossComparisonComparisonEnum.PERCENT;
 
   if (isCrossComparisonPerc) {
-    return { enforceTotalPercentFormat: true };
+    return { enforcePercentFormat: true };
   }
 
   if (isTotal) {

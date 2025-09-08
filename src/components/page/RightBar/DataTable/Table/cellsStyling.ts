@@ -63,37 +63,37 @@ export default function setCellsOptions({
   formatting: TableDataRepresentationType;
 }) {
   return columnData.map((item) => {
-    if (item)
-      if (
-        (formatting.totalFormat || formatting.enforceTotalPercentFormat) &&
-        item?.children
-      ) {
-        item.children = item.children.map((subItem) => {
-          const formattingId = formatting.totalFormat?.[subItem.field];
-          const rangeValues = valueMap[subItem.field];
-          const finalRepId =
-            !subItem.pinned && formatting.enforceTotalPercentFormat
-              ? DataRepresentationEnum.PERCENT
-              : formattingId;
+    if (
+      (formatting.totalFormat || formatting.enforceTotalPercentFormat) &&
+      item?.children
+    ) {
+      console.log("first");
+      item.children = item.children.map((subItem) => {
+        const formattingId = formatting.totalFormat?.[subItem.field];
+        const rangeValues = valueMap[subItem.field];
+        const finalRepId =
+          !subItem.pinned && formatting.enforceTotalPercentFormat
+            ? DataRepresentationEnum.PERCENT
+            : formattingId;
 
-          return {
-            cellStyle: (params) => {
-              return getTargetColor(
-                params.value,
-                rangeValues?.min,
-                rangeValues?.max,
-                isDarkTheme,
-              );
-            },
-            ...setFormatting(finalRepId, isDarkTheme),
-            ...subItem,
-          };
-        });
-        return item;
-      }
+        return {
+          cellStyle: (params) => {
+            return getTargetColor(
+              params.value,
+              rangeValues?.min,
+              rangeValues?.max,
+              isDarkTheme,
+            );
+          },
+          ...setFormatting(finalRepId, isDarkTheme),
+          ...subItem,
+        };
+      });
+      return item;
+    }
 
     if (formatting.windowFormat || formatting.enforceWindowPercentFormat) {
-      console.log(valueMap, item.field);
+      console.log("second");
       const rangeValues = valueMap[item.field];
       const formattingId = formatting?.windowFormat;
       const finalRepId =
@@ -116,6 +116,10 @@ export default function setCellsOptions({
     }
 
     const rangeValues = valueMap[item.field];
+    const enforcePercentFormat =
+      formatting?.enforcePercentFormat && !item.pinned
+        ? DataRepresentationEnum.PERCENT
+        : undefined;
 
     return {
       cellStyle: (params) => {
@@ -126,6 +130,7 @@ export default function setCellsOptions({
           isDarkTheme,
         );
       },
+      ...setFormatting(enforcePercentFormat, isDarkTheme),
       ...item,
     };
   });
