@@ -1,6 +1,10 @@
 import { usePageTypeContext } from "@/components/context/DataTypeChoiceProvider";
 import { useInitialDataContext } from "@/components/context/InitialDataProvider";
 import type { TableDataRepresentationType } from "./types";
+import {
+  crossComparisonComparisonEnum,
+  selectedDataFormatEnum,
+} from "@/types/enums";
 
 export default function useTableDataRepresentation(): TableDataRepresentationType {
   const {
@@ -8,6 +12,7 @@ export default function useTableDataRepresentation(): TableDataRepresentationTyp
     selectedDataFormat,
     selectedPT,
     selectedComparison,
+    selectedCrossComparisonComparison,
   } = usePageTypeContext();
   const { code, windowRepresentation, totalRepresentation } =
     useInitialDataContext();
@@ -17,6 +22,14 @@ export default function useTableDataRepresentation(): TableDataRepresentationTyp
     code[selectedDataFormat] + code[selectedPT] + code[selectedComparison];
   const windowFormattingId =
     windowRepresentation?.[selectedCalculationId]?.[formattingIndexId];
+
+  const isCrossComparisonPerc =
+    selectedDataFormat === selectedDataFormatEnum.CROSS_COMPARISON &&
+    selectedCrossComparisonComparison === crossComparisonComparisonEnum.PERCENT;
+
+  if (isCrossComparisonPerc) {
+    return { enforceTotalPercentFormat: true };
+  }
 
   if (isTotal) {
     if (selectedComparison === "perc") {
