@@ -20,7 +20,7 @@ export default function LeaguePatchSelectorMenu({
   data,
   menuType,
 }: LeaguePatchSelectorMenuType) {
-  const navigate = useCustomUseNavigate(false, true);
+  const navigate = useCustomUseNavigate(false, false);
 
   const isLP = menuType === "league";
   const valueKey = isLP ? "selectedLeagueId" : "selectedPatchId";

@@ -65,8 +65,7 @@ export default function DataLeaguePatchHeader() {
                   key={`${lopValue}-${key}`}
                   className="flex flex-row items-center gap-0.5 justify-center"
                 >
-                  <p>{item.label}: </p>
-                  <p>{item.value}</p>
+                  <p>{item.label}: {item.value}</p>
                   <MomentumIcon momentum={item?.cmp_mom} />
                 </Card>
               </TooltipTrigger>
