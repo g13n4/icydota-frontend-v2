@@ -1,4 +1,5 @@
-const NANCOLOUR = "rgba(164,167,165, 0.25)";
+const NAN_COLOUR = "rgba(164,167,165, 0.25)";
+const NEUTRAL_COLOUR = "rgba(200, 200, 200, 0.3)"
 
 function getColours(isDarkTheme: boolean) {
   if (isDarkTheme) {
@@ -31,6 +32,7 @@ function getColours(isDarkTheme: boolean) {
   ];
 }
 
+
 function getTargetColor(
   value: number | string,
   min: number,
@@ -42,11 +44,15 @@ function getTargetColor(
   if (
     Number.isNaN(Number(value)) ||
     null === value ||
+    null === undefined ||
     typeof value === "string"
   ) {
-    return { color: textColour, backgroundColor: NANCOLOUR };
+    return { color: textColour, backgroundColor: NAN_COLOUR };
   }
-  if ((min === max && value) || max === value) {
+  if (min === max) {
+    return { color: textColour, backgroundColor: NEUTRAL_COLOUR };
+  }
+  if (max === value) {
     return { color: textColour, backgroundColor: colours[9] };
   }
   if (min === value) {
